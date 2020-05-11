@@ -6,7 +6,8 @@
   "scripts": {
     "run": "node index.js",
     "test": "jest",
-    "test:lint": "eslint ./src"
+    "test:lint": "eslint ./src",
+    "test:coverage": "jest --coverage --maxWorkers 1"
   },
   "author": "",
   "license": "Apache-2.0",
