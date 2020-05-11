@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/COVID19Tracking/covid-public-api-build.svg?style=svg)](https://circleci.com/gh/COVID19Tracking/covid-public-api-build)
+[![CircleCI](https://circleci.com/gh/COVID19Tracking/covid-public-api-build.svg?style=svg)](https://circleci.com/gh/COVID19Tracking/covid-public-api-build) [![Coverage Status](https://coveralls.io/repos/github/COVID19Tracking/covid-public-api-build/badge.svg?branch=master)](https://coveralls.io/github/COVID19Tracking/covid-public-api-build?branch=master)
 
 # Public API builder
 
