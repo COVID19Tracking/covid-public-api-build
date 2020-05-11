@@ -8,6 +8,11 @@ jobs:
   build-api:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout build repo
+        uses: actions/checkout@v2
+        with:
+          path: ./
+
       - name: Checkout data repo
         uses: actions/checkout@v2
         with:
@@ -15,11 +20,6 @@ jobs:
           repository: 'COVID19Tracking/covid-public-api'
           token: ${{ secrets.API_DEPLOY_TOKEN }}
           path: ./_api
-
-      - name: Checkout build repo
-        uses: actions/checkout@v2
-        with:
-          path: ./
 
       - name: Build API files
         env:
