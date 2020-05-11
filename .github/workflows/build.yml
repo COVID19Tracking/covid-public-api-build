@@ -1,5 +1,8 @@
 name: API build
-on: false
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build-api:
@@ -7,9 +10,9 @@ jobs:
     steps:
       - name: Checkout data repo
         uses: actions/checkout@v2
-        repository: 'https://${{ secrets.GITHUB_ACCESS_TOKEN }}github.com/COVID19Tracking/covid-public-api'
+        repository: 'https://${{ secrets.API_DEPLOY_TOKEN }}github.com/COVID19Tracking/covid-public-api'
         with:
-          path: ./_data
+          path: ./_api
 
       - name: Checkout build repo
         uses: actions/checkout@v2
@@ -28,6 +31,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
           commit_message: Update API data
-          repository: ./_data
+          repository: ./_api
           file_pattern: ./**
           commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>
