@@ -50,6 +50,13 @@ Once you have downloaded the repository, run `npm install` to install dependenci
 - `GOOGLE_API_KEY` - A Google API token with access to read Google spreadsheets
 - `SLACK_TOKEN` - A Slack token with access to `users.profile:read` and `users:read` scopes.
 
+### Running
+
+Just use `node index.js`. The following command line arguments are supported:
+
+- `--source [name]` - Only runs a single source name
+- `--clean` - Remove all files from the output directory
+
 ### Testing
 
 The project uses Jest and a lot of mocks for `node-fetch`. To run, use: `npm run test`
@@ -57,10 +64,3 @@ The project uses Jest and a lot of mocks for `node-fetch`. To run, use: `npm run
 ### Configuration
 
 All configuration options are stored in `config.js`.
-
-### Command line arguments
-
-To do a partial run, use the command line arguments:
-
-- `--source [name]` - Only runs a single source name
-- `--clean` - Remove all files from the output directory
