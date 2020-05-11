@@ -20,8 +20,8 @@ jobs:
       - run:
           name: test
           command: 'npm run test'
-      #- coveralls/upload:
-      #  path_to_lcov: './junit.xml'
+      - coveralls/upload:
+        path_to_lcov: './junit.xml'
   lint:
     executor: main-executor
     steps:
