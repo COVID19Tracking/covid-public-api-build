@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: Checkout data repo
         uses: actions/checkout@v2
-        repository: 'https://${{ secrets.API_DEPLOY_TOKEN }}github.com/COVID19Tracking/covid-public-api'
         with:
+          repository: 'https://${{ secrets.API_DEPLOY_TOKEN }}github.com/COVID19Tracking/covid-public-api'
           path: ./_api
 
       - name: Checkout build repo
