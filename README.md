@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/COVID19Tracking/covid-public-api-build.svg?style=svg)](https://circleci.com/gh/COVID19Tracking/covid-public-api-build)
+
 # Public API builder
 
 This is a Node.js application that builds the static files that powers the [COVID Tracking Project API](https://covidtracking.com/api/). It is build to be run on Github Actions, but can be run anywhere.
