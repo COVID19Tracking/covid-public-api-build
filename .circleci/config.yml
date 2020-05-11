@@ -1,0 +1,41 @@
+version: 2.1
+orbs:
+  coveralls: coveralls/coveralls@1.0.4
+
+executors:
+  main-executor:
+    docker:
+      - image: circleci/node:10.19.0
+        environment:
+          TZ: 'America/New_York'
+
+jobs:
+  test:
+    executor: main-executor
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: 'npm install'
+      - run:
+          name: test
+          command: 'npm run test'
+      - coveralls/upload:
+        path_to_lcov: './junit.xml'
+  lint:
+    executor: main-executor
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: 'npm install'
+      - run:
+          name: test
+          command: 'npm run test:lint'
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - lint
+      - test

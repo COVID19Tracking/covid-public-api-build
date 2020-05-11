@@ -1,0 +1,51 @@
+module.exports = {
+  schema: 'Screenshots',
+  path: 'states/screenshots.{format}',
+  tags: ['Internal Endpoints'],
+  description: 'State website screenshots.',
+  bucketDomain: 'covid-data-archive.s3.us-east-2.amazonaws.com',
+  urlPrefix: 'https://covidtracking.com/screenshots',
+  prefix: 'state_screenshots',
+  fieldDefinitions: [
+    {
+      target: 'state',
+      type: 'string',
+      graphQlType: 'String',
+      description: 'State abbreviation.',
+      nullable: false,
+      example: 'AK',
+    },
+    {
+      target: 'url',
+      type: 'string',
+      graphQlType: 'String',
+      description: 'URL of screenshot on covidtracking.com.',
+      nullable: false,
+    },
+    {
+      target: 'dateChecked',
+      type: 'string',
+      graphQlType: 'String',
+      nullable: false,
+    },
+    {
+      target: 'secondary',
+      type: 'boolean',
+      graphQlType: 'Boolean',
+      graphQlType: 'String',
+      nullable: false,
+    },
+    {
+      target: 'date',
+      type: 'string',
+      graphQlType: 'String',
+      nullable: false,
+    },
+    {
+      target: 'size',
+      type: 'number',
+      graphQlType: 'Int',
+      nullable: false,
+    },
+  ],
+}

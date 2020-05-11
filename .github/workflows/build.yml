@@ -1,0 +1,33 @@
+name: API build
+on: false
+
+jobs:
+  build-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout data repo
+        uses: actions/checkout@v2
+        repository: 'https://${{ secrets.GITHUB_ACCESS_TOKEN }}github.com/COVID19Tracking/covid-public-api'
+        with:
+          path: ./_data
+
+      - name: Checkout build repo
+        uses: actions/checkout@v2
+        with:
+          path: ./
+
+      - name: Build API files
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        run: |
+          npm install
+          node index.js
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.1.2
+        with:
+          commit_message: Update API data
+          repository: ./_data
+          file_pattern: ./**
+          commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>

@@ -1,0 +1,23 @@
+{
+  "primary": {
+    "Key": "state_screenshots/AK/AK-20200315-021315.png",
+    "LastModified": "2020-03-15T20:31:36.000Z",
+    "ETag": "53c5935e56e22a635e4b6cf4ebd563ea",
+    "Size": 563460,
+    "StorageClass": "STANDARD"
+  },
+  "secondary": {
+    "Key": "state_screenshots/AK/AK-secondary-20200315-021315.png",
+    "LastModified": "2020-03-15T20:31:36.000Z",
+    "ETag": "53c5935e56e22a635e4b6cf4ebd563ea",
+    "Size": 563460,
+    "StorageClass": "STANDARD"
+  },
+  "invalid": {
+    "Key": "state_screenshots/AK/AK-something-20200315-021315.png",
+    "LastModified": "2020-03-15T20:31:36.000Z",
+    "ETag": "53c5935e56e22a635e4b6cf4ebd563ea",
+    "Size": 563460,
+    "StorageClass": "STANDARD"
+  }
+}
