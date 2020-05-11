@@ -11,6 +11,7 @@ jobs:
       - name: Checkout data repo
         uses: actions/checkout@v2
         with:
+          ref: master
           repository: 'COVID19Tracking/covid-public-api'
           token: ${{ secrets.API_DEPLOY_TOKEN }}
           path: ./_api
@@ -28,9 +29,10 @@ jobs:
           npm install
           node index.js
 
-      - name: Commit
+      - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
+          ref: master
           commit_message: Update API data
           repository: ./_api
           file_pattern: ./**
