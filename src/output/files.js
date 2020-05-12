@@ -23,7 +23,7 @@ module.exports = ({ source, data, subDefinitionOutput }, outputPath) => {
     fs.outputJson(`${outputPath}${path.replace('.{format}', '.json')}`, data)
   }
 
-  if (!data.length) {
+  if (!data) {
     logger.error(`Source ${path} is missing data`)
     return
   }
