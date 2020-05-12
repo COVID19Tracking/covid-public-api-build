@@ -8,6 +8,7 @@ const sources = {
   us: require('./us'),
   statesInfo: require('./states-info'),
   states: require('./states'),
+  status: require('./status'),
 }
 
 module.exports = (options) => {

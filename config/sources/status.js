@@ -1,0 +1,35 @@
+module.exports = {
+  schema: 'Status',
+  path: 'status.{format}',
+  tags: ['Internal Endpoints'],
+  description: 'The current status of the API.',
+  fieldDefinitions: [
+    {
+      source: 'buildTime',
+      target: 'buildTime',
+      type: 'string',
+      graphQlType: 'String',
+      description: 'The last time the API was built.',
+      nullable: false,
+      example: '2020-05-01T19:00:00Z',
+    },
+    {
+      source: 'runNumber',
+      target: 'runNumber',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'The run ID. Set to zero if it is a non-production run.',
+      nullable: false,
+      example: true,
+    },
+    {
+      source: 'production',
+      target: 'production',
+      type: 'boolean',
+      graphQlType: 'Boolean',
+      description: 'Whether this is a production build of the API.',
+      nullable: false,
+      example: true,
+    },
+  ],
+}

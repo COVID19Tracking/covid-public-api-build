@@ -38,5 +38,6 @@ module.exports = {
     us: require('./config/sources/us'),
     statesInfo: require('./config/sources/states-info'),
     states: require('./config/sources/states'),
+    status: require('./config/sources/status'),
   },
 }
