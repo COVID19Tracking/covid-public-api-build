@@ -86,6 +86,9 @@ module.exports = (config) => {
     getData,
     formatData,
     statesCurrent,
+    statesIndividualCurrent,
+    statesIndividualDaily,
+    statesIndividualByDate,
     fetch: () => {
       return new Promise((resolve) => {
         logger.info('Fetching state totals from internal API')

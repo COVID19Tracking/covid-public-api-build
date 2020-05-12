@@ -20,4 +20,18 @@ describe('Sources: State information', () => {
     expect(formatData(sampleRecords).pop().name).toBe('American Samoa')
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
+
+  it('creates individual info pages', (done) => {
+    const { formatData, statesIndividualInfo } = statesInfoSource(config)
+    const formattedRecords = formatData([sampleRecords[0]])
+    statesIndividualInfo(
+      formattedRecords,
+      { path: 'test/{state}/info.{format}' },
+      (path, data) => {
+        expect(path).toBe('test/ak/info.{format}')
+        expect(data.state).toBe('AK')
+        done()
+      }
+    )
+  })
 })

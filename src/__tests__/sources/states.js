@@ -34,4 +34,56 @@ describe('Sources: US Data', () => {
       done()
     })
   })
+
+  it('creates individual current values', (done) => {
+    const { statesIndividualCurrent } = statesSource(config)
+    statesIndividualCurrent(
+      [{ state: 'AK', date: 20200501 }],
+      { path: 'test/{state}/current.{format}' },
+      (path, data) => {
+        expect(path).toBe('test/ak/current.{format}')
+        expect(data.state).toBe('AK')
+        done()
+      }
+    )
+  })
+
+  it('creates individual state current values', (done) => {
+    const { statesIndividualCurrent } = statesSource(config)
+    statesIndividualCurrent(
+      [{ state: 'AK', date: 20200501 }],
+      { path: 'test/{state}/current.{format}' },
+      (path, data) => {
+        expect(path).toBe('test/ak/current.{format}')
+        expect(data.state).toBe('AK')
+        done()
+      }
+    )
+  })
+
+  it('creates individual state daily values', (done) => {
+    const { statesIndividualDaily } = statesSource(config)
+    statesIndividualDaily(
+      [{ state: 'AK', date: 20200501 }],
+      { path: 'test/{state}/daily.{format}' },
+      (path, data) => {
+        expect(path).toBe('test/ak/daily.{format}')
+        expect(data[0].state).toBe('AK')
+        done()
+      }
+    )
+  })
+
+  it('creates individual state day files', (done) => {
+    const { statesIndividualByDate } = statesSource(config)
+    statesIndividualByDate(
+      [{ state: 'AK', date: 20200501 }],
+      { path: 'test/{state}/{date}.{format}' },
+      (path, data) => {
+        expect(path).toBe('test/ak/20200501.{format}')
+        expect(data.state).toBe('AK')
+        done()
+      }
+    )
+  })
 })

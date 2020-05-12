@@ -33,6 +33,7 @@ module.exports = (config) => {
   return {
     getData,
     formatData,
+    statesIndividualInfo,
     fetch: () => {
       return new Promise((resolve) => {
         logger.info('Fetching State info from internal API')
