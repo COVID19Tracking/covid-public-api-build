@@ -1,10 +1,31 @@
 const logger = require('../../utilities/logger')
-const mockConsole = require('jest-mock-console')
 
 describe('Utilities: Logger', () => {
   it('Logs info messages', () => {
-    process.stdout = mockConsole
+    const spy = jest.spyOn(console, 'log')
     logger.info('Test message')
-    expect(console.log).toHaveBeenCalled()
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('Logs debug messages', () => {
+    process.env.COVID_API_DEBUG = true
+    const spy = jest.spyOn(console, 'log')
+    logger.debug('Test message')
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('Logs success messages', () => {
+    const spy = jest.spyOn(console, 'log')
+    logger.success('Test message')
+    expect(spy).toHaveBeenCalled()
+  })
+
+  it('Logs error messages', () => {
+    const originalError = console.error
+    console.error = jest.fn()
+    const spy = jest.spyOn(console, 'error')
+    logger.error('Test message')
+    expect(spy).toHaveBeenCalled()
+    console.error = originalError
   })
 })
