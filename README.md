@@ -2,7 +2,7 @@
 
 # Public API builder
 
-This is a Node.js application that builds the static files that powers the [COVID Tracking Project API](https://covidtracking.com/api/). It is build to be run on Github Actions, but can be run anywhere.
+This is a Node.js application that builds the static files that powers the [COVID Tracking Project API](https://covidtracking.com/api/). It is built to run on Github Actions, but can be run anywhere.
 
 In production, it writes files to the [COVID Tracking public API repository](https://github.com/COVID19Tracking/covid-public-api).
 
