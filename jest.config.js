@@ -9,6 +9,9 @@ module.exports = {
     '<rootDir>/node_modules/',
     './post-build/__tests__/',
   ],
-  collectCoverageFrom: ['./src/**/*.js'],
-  testPathIgnorePatterns: ['./src/sources/index.js', './src/run/index.js'],
+  collectCoverageFrom: [
+    './src/**/*.js',
+    '!./src/sources/index.js',
+    '!./src/run/index.js',
+  ],
 }

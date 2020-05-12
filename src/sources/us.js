@@ -32,6 +32,7 @@ module.exports = (config) => {
   return {
     getData,
     formatData,
+    usDates,
     fetch: () => {
       return new Promise((resolve) => {
         logger.info('Fetching US totals from internal API')
