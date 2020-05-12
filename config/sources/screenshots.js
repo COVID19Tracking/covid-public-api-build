@@ -3,7 +3,7 @@ module.exports = {
   path: 'states/screenshots.{format}',
   tags: ['Internal Endpoints'],
   description: 'State website screenshots.',
-  bucketDomain: 'covid-data-archive.s3.us-east-2.amazonaws.com',
+  bucketDomain: 'covid-tracking-project-data.s3.us-east-1.amazonaws.com',
   urlPrefix: 'https://covidtracking.com/screenshots',
   prefix: 'state_screenshots',
   fieldDefinitions: [

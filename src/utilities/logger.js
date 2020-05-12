@@ -1,7 +1,7 @@
 const chalk = require('chalk')
 
 const { log, error } = console
-let spinner = false
+
 module.exports = {
   error: (message) => {
     error(`${chalk.red('Error:')} ${message}`)
