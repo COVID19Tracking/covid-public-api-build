@@ -5,7 +5,7 @@ module.exports = {
   openApiFrontmatter: {
     openapi: '3.0.0',
     info: {
-      title: 'COVID Tracking API Sandbox',
+      title: 'COVID Tracking Project API',
       version: '1.0',
     },
     servers: [
