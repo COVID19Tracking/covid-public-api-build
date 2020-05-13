@@ -41,9 +41,9 @@ const run = () => {
       reporter.addLine(
         `Total run time: ${
           buildTime.length('minutes') > 1
-            ? Math.floor(buildTime.length('minutes'))
+            ? Math.floor(buildTime.length('seconds') / 60)
             : 0
-        } minutes ${Math.round(buildTime.length('seconds'))} seconds`
+        } minutes ${Math.round(buildTime.length('seconds') % 60)} seconds`
       )
       reporter.report()
     }

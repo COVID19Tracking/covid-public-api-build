@@ -10,7 +10,7 @@ module.exports = (sources, sourceComplete, done) => {
       sourceComplete(source)
       api.addSource(source.source)
       sdl.addDefinition(source.source)
-      done(api, sdl)
     })
+    done(api, sdl)
   })
 }

@@ -41,7 +41,9 @@ module.exports = (config) => {
         return allVolunteers
       })
       .catch((error) => {
-        logger.error(`Slack API error ${error}`)
+        logger.error(`Slack API error when fetching profile ${error}`)
+        reporter.fail(`Slack API error ${error}`)
+        process.exit(1)
       })
   }
 
@@ -59,6 +61,10 @@ module.exports = (config) => {
           return getUsers(response.response_metadata.next_cursor)
         }
         return allUsers
+      })
+      .catch((error) => {
+        logger.error(`Slack API error ${error}`)
+        reporter.fail(`Slack API error when fetching user list ${error}`)
       })
   }
 

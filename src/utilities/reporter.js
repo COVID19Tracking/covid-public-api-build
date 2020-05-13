@@ -1,7 +1,10 @@
 const markdownTable = require('markdown-table')
 const { IncomingWebhook } = require('@slack/webhook')
 
-const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK)
+const webhook =
+  typeof process.env.SLACK_WEBHOOK !== 'undefined'
+    ? new IncomingWebhook(process.env.SLACK_WEBHOOK)
+    : false
 const lines = []
 const dataLines = [['Item', 'Count']]
 const totals = {}
@@ -38,9 +41,18 @@ module.exports = () => {
 
   const report = () => {
     console.log(get())
-    if (!process.env.COVID_API_DEBUG) {
+    if (webhook) {
       webhook.send({
         text: `\`\`\`${get()}\`\`\``,
+      })
+    }
+  }
+
+  const fail = (message) => {
+    console.log(`Build failed ${message}`)
+    if (webhook) {
+      webhook.send({
+        text: `Build failed ${message}`,
       })
     }
   }
@@ -52,5 +64,6 @@ module.exports = () => {
     getTotal,
     get,
     report,
+    fail,
   }
 }
