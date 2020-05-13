@@ -1,10 +1,13 @@
+require('dotenv').config()
 const commandLineArgs = require('command-line-args')
 const fs = require('fs-extra')
+const { DateTime, Interval } = require('luxon')
 const sources = require('./src/sources')
 const runner = require('./src/run')
 const writer = require('./src/output/files')
 const config = require('./config')
-require('dotenv').config()
+const reporter = require('./src/utilities/reporter')()
+const startTime = DateTime.local()
 
 const optionDefinitions = [
   { name: 'source', alias: 's', type: String },
@@ -33,6 +36,16 @@ const run = () => {
         }
       )
       fs.writeFileSync(`${config.outputPath}schema.graphql`, graphQl.getSdl())
+      reporter.addDataLine('Files written', reporter.getTotal('files'))
+      const buildTime = Interval.fromDateTimes(startTime, DateTime.local())
+      reporter.addLine(
+        `Total run time: ${
+          buildTime.length('minutes') > 1
+            ? Math.floor(buildTime.length('minutes'))
+            : 0
+        } minutes ${Math.round(buildTime.length('seconds'))} seconds`
+      )
+      reporter.report()
     }
   )
 }
