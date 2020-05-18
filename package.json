@@ -18,7 +18,7 @@
     "cli-spinners": "^2.3.0",
     "command-line-args": "^5.1.1",
     "csv-writer": "^1.6.0",
-    "fast-xml-parser": "^3.16.0",
+    "fast-xml-parser": "^3.17.0",
     "fs-extra": "^9.0.0",
     "google-spreadsheet": "^3.0.11",
     "graphql": "^15.0.0",
