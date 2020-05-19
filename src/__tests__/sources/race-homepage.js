@@ -9,6 +9,8 @@ const raceHomepageSource = require('../../sources/race-homepage')
 const sampleRecord = {
   blackLivesLost: 10,
   blackLivesExpectedMultiplier: 2,
+  blackPercentOfDeath: 0.2,
+  blackPercentOfPopulation: 0.3,
   statesReportingCases: 14,
   statesReportingDeaths: 15,
 }
@@ -28,7 +30,9 @@ jest.mock('google-spreadsheet', () => ({
             resolve([
               {
                 blackLivesLost: 10,
-                blackLivesExpectedMultiplier: 1.9,
+                blackLivesExpectedMultiplier: 2,
+                blackPercentOfDeath: 0.2,
+                blackPercentOfPopulation: 0.3,
                 statesReportingCases: 14,
                 statesReportingDeaths: 15,
               },
@@ -52,7 +56,7 @@ describe('Sources: Racial data tracker homepage', () => {
     const { fetch } = raceHomepageSource(config)
     fetch().then((response) => {
       expect(response.data).toHaveLength(1)
-      expect(response.data.pop().blackLivesExpectedMultiplier).toBe(1.9)
+      expect(response.data.pop().blackLivesExpectedMultiplier).toBe(2)
       done()
     })
   })
