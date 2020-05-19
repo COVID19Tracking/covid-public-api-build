@@ -36,6 +36,8 @@ module.exports = {
     screenshots: require('./config/sources/screenshots'),
     volunteers: require('./config/sources/volunteers'),
     us: require('./config/sources/us'),
+    raceCombined: require('./config/sources/race-combined'),
+    raceSeparate: require('./config/sources/race-separate'),
     raceHomepage: require('./config/sources/race-homepage'),
     statesInfo: require('./config/sources/states-info'),
     states: require('./config/sources/states'),

@@ -1,5 +1,3 @@
-const { DateTime } = require('luxon')
-
 module.exports = {
   schema: 'RaceHomepage',
   path: 'internal/race-homepage.{format}',

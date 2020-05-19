@@ -3,7 +3,7 @@ const mapFields = require('../utilities/map-fields')
 const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { sheetId, worksheetId, fieldDefinitions } = config.sources.raceHomepage
+  const { sheetId, worksheetId, fieldDefinitions } = config.sources.raceSeparate
 
   const client = new GoogleSpreadsheet(sheetId)
 
@@ -32,11 +32,13 @@ module.exports = (config) => {
     formatData,
     fetch: () => {
       return new Promise((resolve, reject) => {
-        logger.info('Fetching racial data tracker homepage')
+        logger.info(
+          'Fetching racial data tracker state information (separated race & ethnicity)'
+        )
         client.useApiKey(process.env.GOOGLE_API_KEY)
         getWorksheetData().then((response) => {
           resolve({
-            source: config.sources.raceHomepage,
+            source: config.sources.raceSeparate,
             data: formatData(response),
           })
         })
