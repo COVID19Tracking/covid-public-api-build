@@ -1,4 +1,5 @@
 const logger = require('../utilities/logger')
+const reporter = require('../utilities/reporter')()
 const mapFields = require('../utilities/map-fields')
 const { GoogleSpreadsheet } = require('google-spreadsheet')
 
@@ -35,6 +36,7 @@ module.exports = (config) => {
         logger.info('Fetching CDC tests')
         client.useApiKey(process.env.GOOGLE_API_KEY)
         getWorksheetData().then((response) => {
+          reporter.addDataLine('CDC tests', response.length)
           resolve({
             source: config.sources.cdcTests,
             data: formatData(response),

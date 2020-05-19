@@ -1,4 +1,5 @@
 const logger = require('../utilities/logger')
+const reporter = require('../utilities/reporter')()
 const fetch = require('node-fetch')
 const parser = require('fast-xml-parser')
 const { DateTime } = require('luxon')
@@ -139,6 +140,7 @@ module.exports = (config) => {
       return new Promise((resolve, reject) => {
         logger.info('Fetching screenshots')
         getScreenshots(bucketDomain).then((data) => {
+          reporter.addDataLine('Screenshots', data.length)
           logger.info(`Fetched ${data.length} screenshots`)
           resolve({
             source: config.sources.screenshots,

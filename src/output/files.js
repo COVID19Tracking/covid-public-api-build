@@ -1,6 +1,7 @@
 const fs = require('fs-extra')
 const { createObjectCsvStringifier } = require('csv-writer')
 const logger = require('../utilities/logger')
+const reporter = require('../utilities/reporter')()
 
 module.exports = ({ source, data, subDefinitionOutput }, outputPath) => {
   const writeFile = (path, data) => {
@@ -21,6 +22,7 @@ module.exports = ({ source, data, subDefinitionOutput }, outputPath) => {
 
     logger.debug(`Writing JSON file ${path}`)
     fs.outputJson(`${outputPath}${path.replace('.{format}', '.json')}`, data)
+    reporter.addTotal('files')
   }
 
   if (!data) {

@@ -1,6 +1,7 @@
 const { WebClient } = require('@slack/web-api')
 const mapFields = require('../utilities/map-fields')
 const logger = require('../utilities/logger')
+const reporter = require('../utilities/reporter')()
 
 module.exports = (config) => {
   const { listUserField, fieldDefinitions } = config.sources.volunteers
@@ -40,7 +41,9 @@ module.exports = (config) => {
         return allVolunteers
       })
       .catch((error) => {
-        logger.error(`Slack API error ${error}`)
+        logger.error(`Slack API error when fetching profile ${error}`)
+        reporter.fail(`Slack API error ${error}`)
+        process.exit(1)
       })
   }
 
@@ -59,6 +62,10 @@ module.exports = (config) => {
         }
         return allUsers
       })
+      .catch((error) => {
+        logger.error(`Slack API error ${error}`)
+        reporter.fail(`Slack API error when fetching user list ${error}`)
+      })
   }
 
   return {
@@ -70,6 +77,7 @@ module.exports = (config) => {
         getUsers()
           .then((users) => getUserProfiles(users))
           .then((volunteers) => {
+            reporter.addDataLine('Volunteers', volunteers.length)
             resolve({
               source: config.sources.volunteers,
               data: volunteers,
