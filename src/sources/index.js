@@ -6,6 +6,7 @@ const sources = {
   volunteers: require('./volunteers'),
   cdcTests: require('./cdc-tests'),
   us: require('./us'),
+  raceHomepage: require('./race-homepage'),
   statesInfo: require('./states-info'),
   states: require('./states'),
   status: require('./status'),
