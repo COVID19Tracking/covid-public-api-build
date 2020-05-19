@@ -37,6 +37,7 @@ module.exports = (config) => {
         )
         client.useApiKey(process.env.GOOGLE_API_KEY)
         getWorksheetData().then((response) => {
+          reporter.addDataLine('Race tracker combined', response.length)
           resolve({
             source: config.sources.raceCombined,
             data: formatData(response),
