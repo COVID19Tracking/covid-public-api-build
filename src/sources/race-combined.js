@@ -1,4 +1,5 @@
 const logger = require('../utilities/logger')
+const reporter = require('../utilities/reporter')
 const mapFields = require('../utilities/map-fields')
 const { GoogleSpreadsheet } = require('google-spreadsheet')
 
