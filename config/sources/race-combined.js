@@ -23,6 +23,23 @@ module.exports = {
       nullable: false,
     },
     {
+      source: 'anyPosData',
+      target: 'anyPosData',
+      type: 'boolean',
+      graphQlType: 'Boolean',
+      description:
+        'The state reports any positive case data by race/ethnicity.',
+      nullable: true,
+    },
+    {
+      source: 'anyDeathData',
+      target: 'anyDeathData',
+      type: 'boolean',
+      graphQlType: 'Boolean',
+      description: 'The state reports any death data by race/ethnicity.',
+      nullable: true,
+    },
+    {
       source: 'unknownRaceEthPos',
       target: 'unknownRaceEthPos',
       type: 'number',
