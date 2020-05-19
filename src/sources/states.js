@@ -1,4 +1,5 @@
 const logger = require('../utilities/logger')
+const reporter = require('../utilities/reporter')()
 const fetch = require('node-fetch')
 const mapFields = require('../utilities/map-fields')
 const hash = require('object-hash')
@@ -93,6 +94,7 @@ module.exports = (config) => {
       return new Promise((resolve) => {
         logger.info('Fetching state totals from internal API')
         getData().then((data) => {
+          reporter.addDataLine('State daily records', data.length)
           resolve({
             source: config.sources.states,
             data: formatData(data),

@@ -1,10 +1,9 @@
 const logger = require('../utilities/logger')
-const reporter = require('../utilities/reporter')()
 const mapFields = require('../utilities/map-fields')
 const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { sheetId, sheetIndex, fieldDefinitions } = config.sources.cdcTests
+  const { sheetId, worksheetId, fieldDefinitions } = config.sources.raceSeparate
 
   const client = new GoogleSpreadsheet(sheetId)
 
@@ -12,33 +11,34 @@ module.exports = (config) => {
     return client
       .loadInfo()
       .then(() => {
-        const sheet = client.sheetsByIndex[sheetIndex]
+        const sheet = client.sheetsById[worksheetId]
         return sheet.getRows()
       })
       .then((rows) => rows)
   }
 
   const formatData = (data) => {
-    const articles = []
+    const results = []
     data.forEach((row) => {
       const result = mapFields(fieldDefinitions, row)
       if (result) {
-        articles.push(result)
+        results.push(result)
       }
     })
-    return articles
+    return results
   }
 
   return {
     formatData,
     fetch: () => {
       return new Promise((resolve, reject) => {
-        logger.info('Fetching CDC tests')
+        logger.info(
+          'Fetching racial data tracker state information (separated race & ethnicity)'
+        )
         client.useApiKey(process.env.GOOGLE_API_KEY)
         getWorksheetData().then((response) => {
-          reporter.addDataLine('CDC tests', response.length)
           resolve({
-            source: config.sources.cdcTests,
+            source: config.sources.raceSeparate,
             data: formatData(response),
           })
         })
