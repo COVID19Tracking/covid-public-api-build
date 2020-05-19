@@ -1,8 +1,7 @@
 name: API build
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '1,16,31,46 * * * *'
 
 jobs:
   build-api:
