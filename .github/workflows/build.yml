@@ -32,7 +32,6 @@ jobs:
       - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
-          ref: master
           commit_message: Update API data
           repository: ./_api
           file_pattern: ./**
