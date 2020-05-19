@@ -4,6 +4,7 @@ const regularConfig = require('../../config')
 regularConfig.openApiPathPrefix = '/test-api/'
 regularConfig.sources.press.sheetIndex = 0
 regularConfig.sources.cdcTests.sheetIndex = 0
+regularConfig.sources.raceHomepage.worksheetId = 0
 regularConfig.openApiFrontmatter.openapi = '3.0.0'
 regularConfig.sources.us.endpoint = 'https://covidtracking.com/api/_test/us'
 regularConfig.sources.statesInfo.endpoint =

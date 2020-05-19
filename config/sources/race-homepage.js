@@ -1,7 +1,7 @@
 const { DateTime } = require('luxon')
 
 module.exports = {
-  schema: 'Race homepage',
+  schema: 'RaceHomepage',
   path: 'internal/race-homepage.{format}',
   tags: ['Internal Endpoints'],
   description: 'Top-line data for the COVID Racial Data Tracker homepage',
