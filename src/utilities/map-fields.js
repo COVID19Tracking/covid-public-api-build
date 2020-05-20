@@ -5,6 +5,12 @@ const formatValue = (item, value) => {
   if (item.type === 'integer') {
     return parseInt(value, 10)
   }
+  if (
+    typeof item.convertSheetBoolean !== 'undefined' &&
+    item.convertSheetBoolean
+  ) {
+    return value === 'TRUE'
+  }
   return value
 }
 
