@@ -33,7 +33,7 @@ module.exports = (spec, data) => {
     if (!item.nullable && !result[item.target]) {
       missingRequired = true
     }
-    if (item.nullable && !result[item.target]) {
+    if (item.nullable && typeof result[item.target] === 'undefined') {
       result[item.target] = null
     }
   })
