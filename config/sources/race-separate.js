@@ -1,5 +1,5 @@
 module.exports = {
-  schema: 'RaceStatesCombined',
+  schema: 'RaceStatesSeparate',
   path: 'race/states-separate.{format}',
   tags: ['Racial data'],
   description: 'Racial data on states who separate race and ethnicity',
