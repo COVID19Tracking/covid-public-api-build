@@ -39,7 +39,10 @@ describe('Sources: US Data', () => {
   it('maps fields', () => {
     const { formatData } = statesSource(config)
 
-    expect(formatData(sampleRecords).pop().dataQualityGrade).toBe('C')
+    expect(
+      formatData(sampleRecords).find((item) => item.state === 'AS')
+        .dataQualityGrade
+    ).toBe('D')
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
 
