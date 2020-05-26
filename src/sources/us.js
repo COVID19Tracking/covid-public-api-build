@@ -43,10 +43,12 @@ module.exports = (config) => {
             source: config.sources.us,
             data: formatData(data),
             subDefinitionOutput: {
-              usCurrent: (data, definition, writeFile) => {
-                writeFile(definition.path, [data.shift()])
-              },
               usDates,
+              usCurrent: (data, definition, writeFile) => {
+                writeFile(definition.path, [
+                  data.sort((a, b) => (a.date < b.date ? 1 : -1))[0],
+                ])
+              },
             },
           })
         })
