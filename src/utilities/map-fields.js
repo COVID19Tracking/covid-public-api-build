@@ -3,6 +3,9 @@ const formatValue = (item, value) => {
     return value
   }
   if (item.type === 'integer') {
+    if (typeof value === 'number' || !value) {
+      return value
+    }
     return parseInt(value.replace(/\D/g, ''), 10)
   }
   if (

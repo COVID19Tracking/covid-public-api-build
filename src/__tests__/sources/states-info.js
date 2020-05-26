@@ -1,14 +1,38 @@
 require('jest-fetch-mock').enableMocks()
 const config = require('../../__mocks__/config')
 const sampleRecords = require('../../__mocks__/sources/states-info/info.json')
+const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 const statesInfoSource = require('../../sources/states-info')
 
+jest.mock('google-spreadsheet', () => {
+  const samples = require('../../__mocks__/sources/states-info/info.json')
+  return {
+    GoogleSpreadsheet: jest.fn(() => ({
+      useApiKey: () => {},
+      loadInfo: () => {
+        return new Promise((resolve) => {
+          resolve([])
+        })
+      },
+      sheetsById: [
+        {
+          getRows: () => {
+            return new Promise((resolve) => {
+              resolve(samples)
+            })
+          },
+        },
+      ],
+    })),
+  }
+})
+
 describe('Sources: State information', () => {
   it('fetches data', (done) => {
-    const { getData } = statesInfoSource(config)
+    const { getWorksheetData } = statesInfoSource(config)
     fetch.mockOnce(JSON.stringify(sampleRecords))
-    getData().then((result) => {
+    getWorksheetData().then((result) => {
       expect(result).toHaveLength(4)
       done()
     })
