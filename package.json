@@ -20,7 +20,7 @@
     "command-line-args": "^5.1.1",
     "csv-parser": "^2.3.2",
     "csv-writer": "^1.6.0",
-    "fast-xml-parser": "^3.17.1",
+    "fast-xml-parser": "^3.17.2",
     "fs-extra": "^9.0.0",
     "google-spreadsheet": "^3.0.11",
     "graphql": "^15.0.0",
