@@ -1,7 +1,7 @@
 name: API build
 on:
   schedule:
-    - cron: '1,16,31,46 * * * *'
+    - cron: '*/15 * * * *'
 
 jobs:
   build-api:

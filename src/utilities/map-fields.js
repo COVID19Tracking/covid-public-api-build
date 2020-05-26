@@ -1,9 +1,9 @@
 const formatValue = (item, value) => {
-  if (typeof item.type === 'undefined') {
+  if (typeof item.type === 'undefined' || typeof value === 'undefined') {
     return value
   }
   if (item.type === 'integer') {
-    return parseInt(value, 10)
+    return parseInt(value.replace(/\D/g, ''), 10)
   }
   if (
     typeof item.convertSheetBoolean !== 'undefined' &&

@@ -1,14 +1,21 @@
 const logger = require('../utilities/logger')
 const reporter = require('../utilities/reporter')()
-const fetch = require('node-fetch')
 const mapFields = require('../utilities/map-fields')
-const hash = require('object-hash')
+const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { endpoint, fieldDefinitions } = config.sources.us
+  const { sheetId, worksheetId, fieldDefinitions } = config.sources.us
 
-  const getData = () => {
-    return fetch(endpoint).then((result) => result.json())
+  const client = new GoogleSpreadsheet(sheetId)
+
+  const getWorksheetData = () => {
+    return client
+      .loadInfo()
+      .then(() => {
+        const sheet = client.sheetsById[worksheetId]
+        return sheet.getRows()
+      })
+      .then((rows) => rows)
   }
 
   const formatData = (data, writeFile) => {
@@ -16,12 +23,32 @@ module.exports = (config) => {
     data.forEach((row) => {
       const result = mapFields(fieldDefinitions, row)
       if (result) {
-        delete result.hash
-        result.hash = hash(result)
         records.push(result)
       }
     })
-    return records
+    return addIncrease(records)
+  }
+
+  const addIncrease = (data) => {
+    let lastItem = false
+    return data
+      .sort((a, b) => (a.date > b.date ? 1 : -1))
+      .map((row) => {
+        if (!lastItem) {
+          lastItem = row
+          return row
+        }
+        row.hospitalizedIncrease =
+          row.hospitalizedCumulative - lastItem.hospitalizedCumulative
+        row.deathIncrease = row.death - lastItem.death
+        row.negativeIncrease = row.negative - lastItem.negative
+        row.positiveIncrease = row.positive - lastItem.positive
+        row.totalTestResultsIncrease =
+          row.totalTestResults - lastItem.totalTestResults
+
+        lastItem = row
+        return row
+      })
   }
 
   const usDates = (data, definition, writeFile) => {
@@ -31,13 +58,15 @@ module.exports = (config) => {
   }
 
   return {
-    getData,
+    getWorksheetData,
     formatData,
     usDates,
     fetch: () => {
       return new Promise((resolve) => {
-        logger.info('Fetching US totals from internal API')
-        getData().then((data) => {
+        logger.info('Fetching US totals from sheets')
+        client.useApiKey(process.env.GOOGLE_API_KEY)
+
+        getWorksheetData().then((data) => {
           reporter.addDataLine('US totals', data.length)
           resolve({
             source: config.sources.us,
