@@ -13,7 +13,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@slack/web-api": "^5.8.1",
+    "@slack/web-api": "^5.9.0",
     "@slack/webhook": "^5.0.3",
     "chalk": "^4.0.0",
     "cli-spinners": "^2.3.0",
