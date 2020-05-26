@@ -274,7 +274,9 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm').toISO(),
+        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
+          .setZone('UTC')
+          .toFormat(`yyyy-LL-dd'T'TT'Z'`),
     },
 
     {
@@ -286,7 +288,9 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm').toISO(),
+        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
+          .setZone('UTC')
+          .toFormat(`yyyy-LL-dd'T'TT'Z'`),
     },
     {
       source: 'Deaths',

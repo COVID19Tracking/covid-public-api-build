@@ -159,7 +159,10 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
-      format: (date) => DateTime.fromISO(date).toISO(),
+      format: (date) =>
+        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
+          .setZone('UTC')
+          .toFormat(`yyyy-LL-dd'T'TT'Z'`),
     },
     {
       source: 'Deaths',
