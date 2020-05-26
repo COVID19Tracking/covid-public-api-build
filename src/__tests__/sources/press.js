@@ -22,7 +22,7 @@ jest.mock('google-spreadsheet', () => ({
         resolve([])
       })
     },
-    sheetsByIndex: [
+    sheetsById: [
       {
         getRows: () => {
           return new Promise((resolve) => {

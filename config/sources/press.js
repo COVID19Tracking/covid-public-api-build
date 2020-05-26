@@ -7,7 +7,7 @@ module.exports = {
   description:
     'A list of news articles the COVID Tracking Project has appeared in.',
   sheetId: '17KJTUTRwh-2og9Kx0OIZ4Ix5dm_51TL330wwgYSfTBs',
-  sheetIndex: 1,
+  worksheetId: 0,
   fieldDefinitions: [
     {
       source: 'Title',
