@@ -24,7 +24,7 @@
     "fs-extra": "^9.0.0",
     "google-spreadsheet": "^3.0.11",
     "graphql": "^15.0.0",
-    "graphql-compose": "^7.15.0",
+    "graphql-compose": "^7.16.1",
     "luxon": "^1.24.1",
     "markdown-table": "^2.0.0",
     "node-fetch": "^2.6.0",
