@@ -1,49 +1,33 @@
 [
   {
-    "state": "AK",
+    "State": "AK",
     "covid19SiteOld": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx",
-    "covid19Site": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/monitoring.aspx",
-    "covid19SiteSecondary": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx",
-    "twitter": "@Alaska_DHSS",
-    "pui": "All data",
-    "pum": false,
-    "notes": "Total tests are taken from the annotations on the charts on the page. \nNegatives = (Totals – Positives)\nPositives occasionally update before totals do; do not revise negatives down, keep the last calculated negative.\nLast Updated (Local Time) = (today's date + time = 00:00)",
-    "fips": "02",
-    "name": "Alaska"
+    "COVID-19 site": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/monitoring.aspx",
+    "COVID-19 site (secondary)": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx",
+    "Twitter": "@Alaska_DHSS",
+    "Notes": "Total tests are taken from the annotations on the charts on the page. \nNegatives = (Totals – Positives)\nPositives occasionally update before totals do; do not revise negatives down, keep the last calculated negative.\nLast Updated (Local Time) = (today's date + time = 00:00)"
   },
   {
-    "state": "AL",
+    "State": "AL",
     "covid19SiteOld": "http://www.alabamapublichealth.gov/infectiousdiseases/2019-coronavirus.html",
-    "covid19Site": "https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7",
-    "covid19SiteSecondary": "https://dph1.adph.state.al.us/covid-19/",
-    "twitter": "@alpublichealth",
-    "pui": "No data",
-    "pum": false,
-    "notes": "Negatives = (Totals - Positives) \nPositives occasionally update before totals do; do not revise negatives down, keep the last calculated negative.\nLast Updated (Local Time) = (current date + time = 00:00)",
-    "fips": "01",
-    "name": "Alabama"
+    "COVID-19 site": "https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7",
+    "COVID-19 site (secondary)": "https://dph1.adph.state.al.us/covid-19/",
+    "Twitter": "@alpublichealth",
+    "Notes": "Negatives = (Totals - Positives) \nPositives occasionally update before totals do; do not revise negatives down, keep the last calculated negative.\nLast Updated (Local Time) = (current date + time = 00:00)"
   },
   {
-    "state": "AR",
+    "State": "AR",
     "covid19SiteOld": "https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus",
-    "covid19Site": "https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus",
-    "covid19SiteSecondary": "https://adem.maps.arcgis.com/apps/opsdashboard/index.html#/f533ac8a8b6040e5896b05b47b17a647",
-    "twitter": "@adhpio",
-    "pui": "All data",
-    "pum": true,
-    "fips": "05",
-    "name": "Arkansas"
+    "COVID-19 site": "https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus",
+    "COVID-19 site (secondary)": "https://adem.maps.arcgis.com/apps/opsdashboard/index.html#/f533ac8a8b6040e5896b05b47b17a647",
+    "Twitter": "@adhpio"
   },
   {
-    "state": "AS",
+    "State": "AS",
     "covid19SiteOld": "http://www.samoagovt.ws/2020/03/ministry-of-health-coronavirus-covid-19-update-14-march-2020/",
-    "covid19Site": "https://www.americansamoa.gov/covid-19-advisories",
-    "covid19SiteSecondary": "https://www.facebook.com/amsamgov/",
-    "twitter": null,
-    "pui": "No Data",
-    "pum": false,
-    "notes": "Our data comes from a press release [from 5/1](https://6fe16cc8-c42f-411f-9950-4abb1763c703.filesusr.com/ugd/4bfff9_54e0ecfd113444029f54b7ebbcc92972.pdf)",
-    "fips": "60",
-    "name": "American Samoa"
+    "COVID-19 site": "https://www.americansamoa.gov/covid-19-advisories",
+    "COVID-19 site (secondary)": "https://www.facebook.com/amsamgov/",
+    "Twitter": null,
+    "Notes": "Our data comes from a press release [from 5/1](https://6fe16cc8-c42f-411f-9950-4abb1763c703.filesusr.com/ugd/4bfff9_54e0ecfd113444029f54b7ebbcc92972.pdf)"
   }
 ]

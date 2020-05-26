@@ -61,6 +61,12 @@ describe('Field mapping', () => {
         'Just number': '1034',
       }).justNumber
     ).toBe(1034)
+    expect(
+      mapFields(fieldDefinition, {
+        'Letter A': 'a',
+        'Just number': 1034,
+      }).justNumber
+    ).toBe(1034)
   })
 
   it('formats source inport functions', () => {

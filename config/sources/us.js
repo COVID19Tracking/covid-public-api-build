@@ -1,10 +1,14 @@
+const { DateTime } = require('luxon')
+const objectHash = require('object-hash')
+
 module.exports = {
   schema: 'Us',
   formats: ['json', 'csv'],
   path: 'us/daily.{format}',
   tags: ['US Current and Historical Data'],
   description: 'US historic values.',
-  endpoint: 'https://covidtracking.com/api/v1/us/daily.json',
+  sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
+  worksheetId: '964640830',
   subDefinitions: [
     {
       key: 'usCurrent',
@@ -38,7 +42,7 @@ module.exports = {
   ],
   fieldDefinitions: [
     {
-      source: 'date',
+      source: 'Date',
       target: 'date',
       type: 'integer',
       graphQlType: 'Int',
@@ -47,7 +51,7 @@ module.exports = {
       example: 20200501,
     },
     {
-      source: 'states',
+      source: 'States',
       target: 'states',
       type: 'integer',
       graphQlType: 'Int',
@@ -56,7 +60,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'positive',
+      source: 'Positive',
       target: 'positive',
       type: 'integer',
       graphQlType: 'Int',
@@ -66,7 +70,7 @@ module.exports = {
     },
 
     {
-      source: 'negative',
+      source: 'Negative',
       target: 'negative',
       type: 'integer',
       graphQlType: 'Int',
@@ -75,7 +79,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'pending',
+      source: 'Pending',
       target: 'pending',
       type: 'integer',
       graphQlType: 'Int',
@@ -84,7 +88,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'hospitalizedCurrently',
+      source: 'Hospitalized – Currently',
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -93,7 +97,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'hospitalizedCumulative',
+      source: 'Hospitalized – Cumulative',
       target: 'hospitalizedCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -102,7 +106,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'inIcuCurrently',
+      source: 'In ICU – Currently',
       target: 'inIcuCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -111,7 +115,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'inIcuCumulative',
+      source: 'In ICU – Cumulative',
       target: 'inIcuCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -120,7 +124,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'onVentilatorCurrently',
+      source: 'On Ventilator – Currently',
       target: 'onVentilatorCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -129,7 +133,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'onVentilatorCumulative',
+      source: 'On Ventilator – Cumulative',
       target: 'onVentilatorCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -139,7 +143,7 @@ module.exports = {
     },
 
     {
-      source: 'recovered',
+      source: 'Recovered',
       target: 'recovered',
       type: 'integer',
       graphQlType: 'Int',
@@ -148,16 +152,20 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'dateChecked',
+      source: 'Date',
       target: 'dateChecked',
       type: 'string',
       graphQlType: 'String',
       description: '',
       nullable: true,
       example: 50,
+      format: (date) =>
+        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
+          .setZone('UTC')
+          .toFormat(`yyyy-LL-dd'T'TT'Z'`),
     },
     {
-      source: 'death',
+      source: 'Deaths',
       target: 'death',
       type: 'integer',
       graphQlType: 'Int',
@@ -166,7 +174,7 @@ module.exports = {
       example: 50,
     },
     {
-      source: 'hospitalized',
+      source: 'Hospitalized – Cumulative',
       target: 'hospitalized',
       type: 'integer',
       graphQlType: 'Int',
@@ -182,7 +190,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
-      sourceFuntion: (item) => item.posNeg,
+      sourceFunction: (item) => item.positive + item.negative + item.pending,
     },
     {
       source: 'totalTestResults',
@@ -192,6 +200,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
+      sourceFunction: (item) => item.positive + item.negative,
     },
     {
       source: 'posNeg',
@@ -201,6 +210,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
+      sourceFunction: (item) => item.positive + item.negative,
     },
     {
       source: 'deathIncrease',
@@ -210,6 +220,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
+      sourceFunction: (item) => 0,
     },
     {
       source: 'hospitalizedIncrease',
@@ -219,6 +230,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
+      sourceFunction: (item) => 0,
     },
     {
       source: 'negativeIncrease',
@@ -228,6 +240,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
+      sourceFunction: (item) => 0,
     },
     {
       source: 'positiveIncrease',
@@ -237,6 +250,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
+      sourceFunction: (item) => 0,
     },
     {
       source: 'totalTestResultsIncrease',
@@ -246,6 +260,7 @@ module.exports = {
       description: '',
       nullable: true,
       example: 50,
+      sourceFunction: (item) => 0,
     },
     {
       source: 'hash',
@@ -255,6 +270,7 @@ module.exports = {
       description: 'A hash for this record',
       nullable: false,
       example: 50,
+      sourceFunction: (item) => objectHash(item),
     },
   ],
 }

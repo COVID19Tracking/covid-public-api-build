@@ -1,14 +1,44 @@
 const logger = require('../utilities/logger')
 const reporter = require('../utilities/reporter')()
-const fetch = require('node-fetch')
 const mapFields = require('../utilities/map-fields')
-const hash = require('object-hash')
+const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { endpoint, fieldDefinitions } = config.sources.states
+  const { sheetId, worksheetId, fieldDefinitions } = config.sources.states
 
-  const getData = () => {
-    return fetch(endpoint).then((result) => result.json())
+  const client = new GoogleSpreadsheet(sheetId)
+
+  const getWorksheetData = () => {
+    return client
+      .loadInfo()
+      .then(() => {
+        const sheet = client.sheetsById[worksheetId]
+        return sheet.getRows()
+      })
+      .then((rows) => rows)
+  }
+
+  const addIncrease = (data) => {
+    let lastItems = {}
+    return data
+      .sort((a, b) => (a.date > b.date ? 1 : -1))
+      .map((row) => {
+        if (typeof lastItems[row.state] === 'undefined') {
+          lastItems[row.state] = row
+          return row
+        }
+        row.hospitalizedIncrease =
+          row.hospitalizedCumulative -
+          lastItems[row.state].hospitalizedCumulative
+        row.deathIncrease = row.death - lastItems[row.state].death
+        row.negativeIncrease = row.negative - lastItems[row.state].negative
+        row.positiveIncrease = row.positive - lastItems[row.state].positive
+        row.totalTestResultsIncrease =
+          row.totalTestResults - lastItems[row.state].totalTestResults
+
+        lastItems[row.state] = row
+        return row
+      })
   }
 
   const formatData = (data) => {
@@ -16,12 +46,10 @@ module.exports = (config) => {
     data.forEach((row) => {
       const result = mapFields(fieldDefinitions, row)
       if (result) {
-        delete result.hash
-        result.hash = hash(result)
         records.push(result)
       }
     })
-    return records
+    return addIncrease(records)
   }
 
   const statesCurrent = (data, definition, writeFile) => {
@@ -84,7 +112,7 @@ module.exports = (config) => {
   }
 
   return {
-    getData,
+    getWorksheetData,
     formatData,
     statesCurrent,
     statesIndividualCurrent,
@@ -92,8 +120,10 @@ module.exports = (config) => {
     statesIndividualByDate,
     fetch: () => {
       return new Promise((resolve) => {
-        logger.info('Fetching state totals from internal API')
-        getData().then((data) => {
+        logger.info('Fetching state totals from sheets')
+
+        client.useApiKey(process.env.GOOGLE_API_KEY)
+        getWorksheetData().then((data) => {
           reporter.addDataLine('State daily records', data.length)
           resolve({
             source: config.sources.states,

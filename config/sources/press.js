@@ -45,7 +45,7 @@ module.exports = {
     },
     {
       source: 'Publish date',
-      target: 'publicationDate',
+      target: 'publishDate',
       required: true,
       format: (value) =>
         DateTime.fromFormat(value, 'yyyy-mm-dd').toFormat('yyyy-mm-dd'),

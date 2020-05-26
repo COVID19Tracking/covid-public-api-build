@@ -1,14 +1,21 @@
 const logger = require('../utilities/logger')
 const reporter = require('../utilities/reporter')()
-const fetch = require('node-fetch')
 const mapFields = require('../utilities/map-fields')
-const hash = require('object-hash')
+const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { endpoint, fieldDefinitions } = config.sources.statesInfo
+  const { sheetId, worksheetId, fieldDefinitions } = config.sources.statesInfo
 
-  const getData = () => {
-    return fetch(endpoint).then((result) => result.json())
+  const client = new GoogleSpreadsheet(sheetId)
+
+  const getWorksheetData = () => {
+    return client
+      .loadInfo()
+      .then(() => {
+        const sheet = client.sheetsById[worksheetId]
+        return sheet.getRows()
+      })
+      .then((rows) => rows)
   }
 
   const formatData = (data) => {
@@ -32,13 +39,15 @@ module.exports = (config) => {
   }
 
   return {
-    getData,
+    getWorksheetData,
     formatData,
     statesIndividualInfo,
     fetch: () => {
       return new Promise((resolve) => {
         logger.info('Fetching State info from internal API')
-        getData().then((data) => {
+
+        client.useApiKey(process.env.GOOGLE_API_KEY)
+        getWorksheetData().then((data) => {
           reporter.addDataLine('State info', data.length)
           resolve({
             source: config.sources.statesInfo,
