@@ -27,7 +27,8 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         run: |
           npm install
-          node index.js
+          npm run build
+          npm run test:post-build
 
       - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
