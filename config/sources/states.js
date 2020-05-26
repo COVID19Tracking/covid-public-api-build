@@ -273,7 +273,20 @@ module.exports = {
       description: '',
       nullable: true,
       example: '',
-      format: (date) => DateTime.fromISO(date).toISO(),
+      format: (date) =>
+        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm').toISO(),
+    },
+
+    {
+      source: 'Last Update ET',
+      target: 'dateModified',
+      type: 'string',
+      graphQlType: 'String',
+      description: '',
+      nullable: true,
+      example: '',
+      format: (date) =>
+        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm').toISO(),
     },
     {
       source: 'Deaths',
