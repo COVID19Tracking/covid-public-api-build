@@ -1,5 +1,6 @@
 const { DateTime } = require('luxon')
 const objectHash = require('object-hash')
+const stateNames = require('../state-names')
 
 const stateParameter = {
   name: 'state',
@@ -97,7 +98,10 @@ module.exports = {
       description: '',
       nullable: true,
       example: '',
-      sourceFunction: (item) => 0,
+      sourceFunction: (item) =>
+        typeof stateNames[item.state] !== 'undefined'
+          ? stateNames[item.state].fips
+          : 0,
     },
     {
       source: 'Positive',
@@ -156,7 +160,8 @@ module.exports = {
       description: '',
       nullable: true,
       example: '',
-      sourceFunction: (item) => item.positive + item.negative + item.pending,
+      sourceFunction: (item) =>
+        (item.positive || 0) + (item.negative || 0) + (item.pending || 0),
     },
     {
       source: 'totalTestResults',
@@ -254,15 +259,6 @@ module.exports = {
     {
       source: 'Data Quality Grade',
       target: 'dataQualityGrade',
-      type: 'string',
-      graphQlType: 'String',
-      description: '',
-      nullable: true,
-      example: '',
-    },
-    {
-      source: 'Data Quality Grade',
-      target: 'grade',
       type: 'string',
       graphQlType: 'String',
       description: '',
