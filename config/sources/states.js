@@ -268,15 +268,11 @@ module.exports = {
     {
       source: 'Last Update ET',
       target: 'lastUpdateEt',
-      type: 'integer',
-      graphQlType: 'Int',
+      type: 'string',
+      graphQlType: 'String',
       description: '',
       nullable: true,
       example: '',
-      format: (date) =>
-        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
-          .setZone('UTC')
-          .toFormat(`yyyy-LL-dd'T'TT'Z'`),
     },
 
     {
