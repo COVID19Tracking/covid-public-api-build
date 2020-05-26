@@ -27,7 +27,6 @@ module.exports = (config) => {
   const usDates = (data, definition, writeFile) => {
     data.forEach((row) => {
       writeFile(definition.path.replace('{date}', row.date), row)
-      console.log(row.date)
     })
   }
 
