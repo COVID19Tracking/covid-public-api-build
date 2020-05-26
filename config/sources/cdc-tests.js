@@ -6,7 +6,7 @@ module.exports = {
   tags: ['Internal Endpoints'],
   description: "Data on the CDC's public testing initiatives.",
   sheetId: '16gBHQ7dCJK1psqEMasmLKiFlzoNKcfNujVpmHLHldSY',
-  sheetIndex: 0,
+  worksheetId: 0,
   fieldDefinitions: [
     {
       source: 'dateCollected',

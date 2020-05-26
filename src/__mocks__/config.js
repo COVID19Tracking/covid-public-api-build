@@ -2,8 +2,8 @@ const { DateTime } = require('luxon')
 const regularConfig = require('../../config')
 
 regularConfig.openApiPathPrefix = '/test-api/'
-regularConfig.sources.press.sheetIndex = 0
-regularConfig.sources.cdcTests.sheetIndex = 0
+regularConfig.sources.press.worksheetId = 0
+regularConfig.sources.cdcTests.worksheetId = 0
 regularConfig.sources.raceHomepage.worksheetId = 0
 regularConfig.sources.raceCombined.worksheetId = 0
 regularConfig.sources.raceSeparate.worksheetId = 0

@@ -4,7 +4,7 @@ const mapFields = require('../utilities/map-fields')
 const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { sheetId, sheetIndex, fieldDefinitions } = config.sources.cdcTests
+  const { sheetId, worksheetId, fieldDefinitions } = config.sources.cdcTests
 
   const client = new GoogleSpreadsheet(sheetId)
 
@@ -12,7 +12,7 @@ module.exports = (config) => {
     return client
       .loadInfo()
       .then(() => {
-        const sheet = client.sheetsByIndex[sheetIndex]
+        const sheet = client.sheetsById[worksheetId]
         return sheet.getRows()
       })
       .then((rows) => rows)
