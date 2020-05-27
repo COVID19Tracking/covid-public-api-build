@@ -274,7 +274,6 @@ module.exports = {
       nullable: true,
       example: '',
     },
-
     {
       source: 'Last Update ET',
       target: 'dateModified',
@@ -287,6 +286,19 @@ module.exports = {
         DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
           .setZone('UTC')
           .toFormat(`yyyy-LL-dd'T'TT'Z'`),
+    },
+    {
+      source: 'Last Update ET',
+      target: 'checkTimeEt',
+      type: 'string',
+      graphQlType: 'String',
+      description: '',
+      nullable: true,
+      example: '',
+      format: (date) =>
+        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
+          .setZone('America/New_York')
+          .toFormat(`LL/dd HH:mm`),
     },
     {
       source: 'Deaths',
@@ -335,7 +347,9 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        DateTime.fromFormat('5/26/2020 00:00', 'M/d/yyyy HH:mm').toISO(),
+        DateTime.fromFormat('5/26/2020 00:00', 'M/d/yyyy HH:mm').toFormat(
+          `yyyy-LL-dd'T'TT'Z'`
+        ),
     },
     {
       source: 'hash',
@@ -346,6 +360,66 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: (item) => objectHash(item),
+    },
+    {
+      source: 'commercialScore',
+      target: 'commercialScore',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Deprecated',
+      nullable: true,
+      example: '',
+      sourceFunction: () => 0,
+    },
+    {
+      source: 'negativeRegularScore',
+      target: 'negativeRegularScore',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Deprecated',
+      nullable: true,
+      example: '',
+      sourceFunction: () => 0,
+    },
+    {
+      source: 'negativeScore',
+      target: 'negativeScore',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Deprecated',
+      nullable: true,
+      example: '',
+      sourceFunction: () => 0,
+    },
+    {
+      source: 'positiveScore',
+      target: 'positiveScore',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Deprecated',
+      nullable: true,
+      example: '',
+      sourceFunction: () => 0,
+    },
+    {
+      source: 'score',
+      target: 'score',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Deprecated',
+      nullable: true,
+      example: '',
+      sourceFunction: () => 0,
+    },
+    {
+      source: 'grade',
+      target: 'grade',
+      type: 'string',
+      graphQlType: 'String',
+      description: 'Deprecated',
+      nullable: true,
+      example: '',
+      sourceFunction: () => '',
     },
   ],
 }
