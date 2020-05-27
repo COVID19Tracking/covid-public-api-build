@@ -45,8 +45,11 @@ jobs:
       - run:
           name: compare
           command: 'npm run test:compare'
+      - run:
+          name: compress api files
+          command: 'tar -czvf api-files.tar.gz ./_api'
       - store_artifacts:
-          path: _api
+          path: api-files.tar.gz
           destination: api-files
 workflows:
   version: 2
