@@ -73,7 +73,7 @@ module.exports = {
       type: 'string',
       graphQlType: 'String',
       description: 'Notes about the state',
-      nullable: false,
+      nullable: true,
       example: 'This state reports data correctly.',
     },
     {

@@ -8,7 +8,8 @@
     "test": "jest",
     "test:lint": "eslint ./src",
     "test:coverage": "jest --coverage --maxWorkers 1",
-    "test:post-build": "jest  --config=\"{}\" --testPathPattern=./post-build/v1 --testMatch=**/*.js"
+    "test:post-build": "jest  --config=\"{}\" --testPathPattern=./post-build/v1 --testMatch=**/*.js",
+    "test:compare": "jest  --config=\"{}\" --testPathPattern=./post-build/compare --testMatch=**/*.js"
   },
   "author": "",
   "license": "Apache-2.0",
