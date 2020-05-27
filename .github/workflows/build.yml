@@ -45,11 +45,6 @@ jobs:
           npm run build
           npm run test:post-build
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: api-filex
-          path: ./_api
-
       - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
@@ -57,3 +52,9 @@ jobs:
           repository: ./_api
           file_pattern: ./**
           commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>
+
+      - name: Upload API artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: api-files
+          path: ./_api
