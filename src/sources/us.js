@@ -70,7 +70,7 @@ module.exports = (config) => {
           reporter.addDataLine('US totals', data.length)
           resolve({
             source: config.sources.us,
-            data: formatData(data),
+            data: formatData(data).sort((a, b) => (a.date > b.date ? -1 : 1)),
             subDefinitionOutput: {
               usDates,
               usCurrent: (data, definition, writeFile) => {
