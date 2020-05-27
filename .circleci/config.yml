@@ -32,7 +32,22 @@ jobs:
       - run:
           name: test
           command: 'npm run test:lint'
-
+  build:
+    executor: main-executor
+    steps:
+      - checkout
+      - run:
+          name: install
+          command: 'npm install'
+      - run:
+          name: build
+          command: 'npm run build'
+      - run:
+          name: compare
+          command: 'npm run test:compare'
+      - store_artifacts:
+          path: /_api
+          destination: api-files
 workflows:
   version: 2
   build_and_test:
