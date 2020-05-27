@@ -48,6 +48,8 @@ module.exports = (config) => {
 
         client.useApiKey(process.env.GOOGLE_API_KEY)
         getWorksheetData().then((data) => {
+          console.log(data)
+          process.exit()
           reporter.addDataLine('State info', data.length)
           resolve({
             source: config.sources.statesInfo,
