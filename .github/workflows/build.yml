@@ -16,7 +16,7 @@ jobs:
       - name: Checkout data repo
         uses: actions/checkout@v2
         with:
-          ref: internal-endpoints
+          ref: test/internal-endpoints
           repository: 'COVID19Tracking/covid-public-api'
           token: ${{ secrets.API_DEPLOY_TOKEN }}
           path: ./_api
