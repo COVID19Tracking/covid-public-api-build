@@ -35,9 +35,9 @@ module.exports = (config) => {
       logger.debug(`Time format was wrong for ${name}`)
       return false
     }
-    const date = DateTime.fromFormat(day + time, 'yyyyLLddHHmmss').setZone(
-      'America/New_York'
-    )
+    const date = DateTime.fromFormat(day + time, 'yyyyLLddHHmmss', {
+      zone: 'America/New_York',
+    })
 
     return date
   }
