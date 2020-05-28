@@ -74,11 +74,12 @@ module.exports = (config) => {
       return false
     }
     const date = formatScreenshotDate(nameSplit)
+    const state = formatScreenshotState(nameSplit)
     const result = {
-      state: formatScreenshotState(nameSplit),
-      url: `${urlPrefix}/${fileName}`,
+      state,
+      url: `${urlPrefix}/${state}/${fileName}`,
       secondary: isSecondary,
-      dateChecked: date.setZone('UTC').toFormat(`yyyy-LL-dd'T'HH:mm:ss'Z'`),
+      dateChecked: date.toISO(),
       date: date.toFormat('yyyyLLdd'),
       size: screenshot.Size,
     }
