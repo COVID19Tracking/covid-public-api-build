@@ -54,10 +54,12 @@ jobs:
           commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>
 
       - name: Prepare artifacts
-        run: rm -rf ./_api/.git
+        run: |
+          rm -rf ./_api/.git
+          tar -czvf api-files.tar.gz ./_api
 
       - name: Upload API artifacts
         uses: actions/upload-artifact@v2
         with:
           name: api-files
-          path: ./_api
+          path: ./api-files.tar.gz
