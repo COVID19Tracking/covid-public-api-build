@@ -39,7 +39,7 @@ module.exports = (config) => {
       zone: 'America/New_York',
     })
 
-    return date
+    return date.setZone('UTC')
   }
 
   const formatScreenshotState = (nameSplit) => {
