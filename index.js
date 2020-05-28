@@ -5,6 +5,7 @@ const { DateTime, Interval } = require('luxon')
 const sources = require('./src/sources')
 const runner = require('./src/run')
 const writer = require('./src/output/files')
+const git = require('./src/output/git')
 const config = require('./config')
 const reporter = require('./src/utilities/reporter')()
 const startTime = DateTime.local()
@@ -46,6 +47,7 @@ const run = () => {
         } minutes ${Math.round(buildTime.length('seconds') % 60)} seconds`
       )
       reporter.report()
+      git()
     }
   )
 }
