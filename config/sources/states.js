@@ -283,9 +283,11 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
-          .setZone('UTC')
-          .toFormat(`yyyy-LL-dd'T'TT'Z'`),
+        date
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
+              .setZone('UTC')
+              .toFormat(`yyyy-LL-dd'T'TT'Z'`)
+          : null,
     },
     {
       source: 'Last Update ET',
@@ -296,9 +298,11 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        DateTime.fromFormat(date || 'now', 'M/d/yyyy HH:mm')
-          .setZone('America/New_York')
-          .toFormat(`LL/dd HH:mm`),
+        date
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
+              .setZone('America/New_York')
+              .toFormat(`LL/dd HH:mm`)
+          : null,
     },
     {
       source: 'Deaths',
@@ -347,9 +351,11 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        DateTime.fromFormat('5/26/2020 00:00', 'M/d/yyyy HH:mm').toFormat(
-          `yyyy-LL-dd'T'TT'Z'`
-        ),
+        date
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm').toFormat(
+              `yyyy-LL-dd'T'TT'Z'`
+            )
+          : null,
     },
     {
       source: 'hash',

@@ -1,7 +1,9 @@
 name: API build
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '15 * * * *'
+  repository_dispatch:
+    types: [api-build]
 
 jobs:
   build-api:
@@ -45,6 +47,11 @@ jobs:
           npm run build
           npm run test:post-build
 
+      - name: Send webhook
+        env:
+          SITE_BUILD_WEBHOOK: ${{ secrets.SITE_BUILD_WEBHOOK }}
+        run: npm run webhook
+
       - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
@@ -54,10 +61,12 @@ jobs:
           commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>
 
       - name: Prepare artifacts
-        run: rm -rf ./_api/.git
+        run: |
+          rm -rf ./_api/.git
+          tar -czvf api-files.tar.gz ./_api
 
       - name: Upload API artifacts
         uses: actions/upload-artifact@v2
         with:
           name: api-files
-          path: ./_api
+          path: ./api-files.tar.gz

@@ -4,7 +4,6 @@ const sources = {
   press: require('./press'),
   screenshots: require('./screenshots'),
   volunteers: require('./volunteers'),
-  cdcTests: require('./cdc-tests'),
   us: require('./us'),
   raceCombined: require('./race-combined'),
   raceSeparate: require('./race-separate'),

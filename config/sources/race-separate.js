@@ -1,7 +1,7 @@
 module.exports = {
   schema: 'RaceStatesSeparate',
   path: 'race/states-separate.{format}',
-  tags: ['Racial data'],
+  tags: ['Racial data tracker'],
   description: 'Racial data on states who separate race and ethnicity',
   sheetId: '1FnrtpGkm9tuWg8FLavkIHhJSx0Z-X5QJUfbkPhgL3JQ',
   worksheetId: '1837531601',
