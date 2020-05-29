@@ -2,6 +2,8 @@ name: API build
 on:
   schedule:
     - cron: '*/15 * * * *'
+  repository_dispatch:
+    types: [api-build]
 
 jobs:
   build-api:
