@@ -3,7 +3,7 @@ const stateNames = require('../state-names')
 module.exports = {
   schema: 'StatesInfo',
   path: 'states/info.{format}',
-  tags: ['Additional Endpoints'],
+  tags: ['States Current and Historical Data'],
   description: 'States information.',
   sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
   worksheetId: '1983833656',
@@ -12,7 +12,7 @@ module.exports = {
       key: 'statesIndividualInfo',
       schema: 'StatesInfo',
       path: 'states/{state}/info.{format}',
-      tags: ['Additional Endpoints'],
+      tags: ['States Current and Historical Data'],
       description: 'The metadata about the specified state',
       parameters: [
         {

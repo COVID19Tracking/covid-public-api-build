@@ -46,6 +46,8 @@ jobs:
           npm run test:post-build
 
       - name: Send webhook
+        env:
+          SITE_BUILD_WEBHOOK: ${{ secrets.SITE_BUILD_WEBHOOK }}
         run: npm run webhook
 
       - name: Commit API files
