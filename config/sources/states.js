@@ -21,8 +21,8 @@ module.exports = {
   path: 'states/daily.{format}',
   tags: ['States Current and Historical Data'],
   description: 'States historical data.',
-  sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
-  worksheetId: '916628299',
+  endpoint:
+    'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/states/daily',
   subDefinitions: [
     {
       key: 'statesCurrent',
@@ -73,16 +73,17 @@ module.exports = {
   ],
   fieldDefinitions: [
     {
-      source: 'Date',
+      source: 'date',
       target: 'date',
       type: 'integer',
       graphQlType: 'Int',
       description: '',
       nullable: false,
       example: 20200501,
+      format: (date) => DateTime.fromISO(date).toFormat('yyyyLLdd'),
     },
     {
-      source: 'State',
+      source: 'state',
       target: 'state',
       type: 'string',
       graphQlType: 'String',
@@ -104,7 +105,7 @@ module.exports = {
           : 0,
     },
     {
-      source: 'Positive',
+      source: 'positive',
       target: 'positive',
       type: 'integer',
       graphQlType: 'Int',
@@ -124,7 +125,7 @@ module.exports = {
       sourceFunction: (item) => 0,
     },
     {
-      source: 'Negative',
+      source: 'negative',
       target: 'negative',
       type: 'integer',
       graphQlType: 'Int',
@@ -144,7 +145,7 @@ module.exports = {
       sourceFunction: (item) => 0,
     },
     {
-      source: 'Pending',
+      source: 'pending',
       target: 'pending',
       type: 'integer',
       graphQlType: 'Int',
@@ -194,7 +195,7 @@ module.exports = {
       sourceFunction: (item) => item.positive + item.negative,
     },
     {
-      source: 'Hospitalized – Currently',
+      source: 'hospitalizedCurrently',
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -203,7 +204,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'Hospitalized – Cumulative',
+      source: 'hospitalizedCumulative',
       target: 'hospitalizedCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -212,7 +213,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'In ICU – Currently',
+      source: 'inIcuCurrently',
       target: 'inIcuCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -221,7 +222,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'In ICU – Cumulative',
+      source: 'inIcuCumulative',
       target: 'inIcuCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -230,7 +231,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'On Ventilator – Currently',
+      source: 'onVentilatorCurrently',
       target: 'onVentilatorCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -239,7 +240,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'On Ventilator – Cumulative',
+      source: 'onVentilatorCumulative',
       target: 'onVentilatorCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -248,7 +249,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'Recovered',
+      source: 'recovered',
       target: 'recovered',
       type: 'integer',
       graphQlType: 'Int',
@@ -257,7 +258,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'Data Quality Grade',
+      source: 'dataQualityGrade',
       target: 'dataQualityGrade',
       type: 'string',
       graphQlType: 'String',
@@ -266,7 +267,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'lastUpdateEt',
       type: 'string',
       graphQlType: 'String',
@@ -275,7 +276,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'dateModified',
       type: 'string',
       graphQlType: 'String',
@@ -290,7 +291,7 @@ module.exports = {
           : null,
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'checkTimeEt',
       type: 'string',
       graphQlType: 'String',
@@ -305,7 +306,7 @@ module.exports = {
           : null,
     },
     {
-      source: 'Deaths',
+      source: 'death',
       target: 'death',
       type: 'integer',
       graphQlType: 'Int',
@@ -324,7 +325,7 @@ module.exports = {
       sourceFunction: (item) => 0,
     },
     {
-      source: 'Hospitalized – Cumulative',
+      source: 'hospitalizedCumulative',
       target: 'hospitalized',
       type: 'integer',
       graphQlType: 'Int',
@@ -343,7 +344,7 @@ module.exports = {
       sourceFunction: (item) => 0,
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'dateChecked',
       type: 'string',
       graphQlType: 'String',
