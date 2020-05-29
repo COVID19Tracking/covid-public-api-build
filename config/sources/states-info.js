@@ -3,7 +3,7 @@ const stateNames = require('../state-names')
 module.exports = {
   schema: 'StatesInfo',
   path: 'states/info.{format}',
-  tags: ['Additional Endpoints'],
+  tags: ['States Current and Historical Data'],
   description: 'States information.',
   endpoint:
     'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/states/info',
@@ -12,7 +12,7 @@ module.exports = {
       key: 'statesIndividualInfo',
       schema: 'StatesInfo',
       path: 'states/{state}/info.{format}',
-      tags: ['Additional Endpoints'],
+      tags: ['States Current and Historical Data'],
       description: 'The metadata about the specified state',
       parameters: [
         {
