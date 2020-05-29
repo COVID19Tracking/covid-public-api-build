@@ -80,7 +80,8 @@ module.exports = {
       description: '',
       nullable: false,
       example: 20200501,
-      format: (date) => DateTime.fromISO(date).toFormat('yyyyLLdd'),
+      format: (date) =>
+        parseInt(DateTime.fromRFC2822(date).toFormat('yyyyLLdd'), 10),
     },
     {
       source: 'state',
@@ -285,7 +286,7 @@ module.exports = {
       example: '',
       format: (date) =>
         date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
+          ? DateTime.fromRFC2822(date)
               .setZone('UTC')
               .toFormat(`yyyy-LL-dd'T'TT'Z'`)
           : null,
@@ -300,7 +301,7 @@ module.exports = {
       example: '',
       format: (date) =>
         date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
+          ? DateTime.fromRFC2822(date)
               .setZone('America/New_York')
               .toFormat(`LL/dd HH:mm`)
           : null,
@@ -352,11 +353,7 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm').toFormat(
-              `yyyy-LL-dd'T'TT'Z'`
-            )
-          : null,
+        date ? DateTime.fromRFC2822(date).toFormat(`yyyy-LL-dd'T'TT'Z'`) : null,
     },
     {
       source: 'hash',

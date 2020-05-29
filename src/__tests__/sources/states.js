@@ -15,7 +15,9 @@ describe('Sources: US Data', () => {
   })
   it('maps fields', () => {
     const { formatData } = statesSource(config)
-
+    expect(
+      formatData(sampleRecords).find((item) => item.state === 'AR').date
+    ).toBe(20200518)
     expect(
       formatData(sampleRecords).find((item) => item.state === 'AR').recovered
     ).toBe(3277)
