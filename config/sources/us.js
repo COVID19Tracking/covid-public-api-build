@@ -261,14 +261,15 @@ module.exports = {
       sourceFunction: (item) => 0,
     },
     {
-      source: 'lastModified',
+      source: 'Date',
       target: 'lastModified',
       type: 'string',
       graphQlType: 'String',
       description: '',
       nullable: false,
       example: '2020-05-27T12:18:23.392Z',
-      sourceFunction: () => DateTime.fromObject({ zone: 'UTC' }).toISO(),
+      format: (date) =>
+        DateTime.fromISO(date).setZone('UTC').toFormat(`yyyy-LL-dd'T'TT'Z'`),
     },
     {
       source: 'hash',

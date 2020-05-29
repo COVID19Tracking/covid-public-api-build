@@ -35,9 +35,11 @@ module.exports = (config) => {
       logger.debug(`Time format was wrong for ${name}`)
       return false
     }
-    const date = DateTime.fromFormat(day + time, 'yyyyLLddHHmmss')
+    const date = DateTime.fromFormat(day + time, 'yyyyLLddHHmmss', {
+      zone: 'America/New_York',
+    })
 
-    return date
+    return date.setZone('UTC')
   }
 
   const formatScreenshotState = (nameSplit) => {
@@ -72,11 +74,12 @@ module.exports = (config) => {
       return false
     }
     const date = formatScreenshotDate(nameSplit)
+    const state = formatScreenshotState(nameSplit)
     const result = {
-      state: formatScreenshotState(nameSplit),
-      url: `${urlPrefix}/${fileName}`,
+      state,
+      url: `${urlPrefix}/${state}/${fileName}`,
       secondary: isSecondary,
-      dateChecked: date.toFormat(`yyyy-LL-dd'T'HH:mm:ss'Z'`),
+      dateChecked: date.toISO(),
       date: date.toFormat('yyyyLLdd'),
       size: screenshot.Size,
     }
