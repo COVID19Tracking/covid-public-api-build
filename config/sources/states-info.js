@@ -5,8 +5,8 @@ module.exports = {
   path: 'states/info.{format}',
   tags: ['Additional Endpoints'],
   description: 'States information.',
-  sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
-  worksheetId: '1983833656',
+  endpoint:
+    'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/states/info',
   subDefinitions: [
     {
       key: 'statesIndividualInfo',
@@ -33,7 +33,7 @@ module.exports = {
   ],
   fieldDefinitions: [
     {
-      source: 'State',
+      source: 'state',
       target: 'state',
       type: 'string',
       graphQlType: 'String',
@@ -68,7 +68,7 @@ module.exports = {
           : 0,
     },
     {
-      source: 'Notes',
+      source: 'notes',
       target: 'notes',
       type: 'string',
       graphQlType: 'String',
@@ -77,7 +77,7 @@ module.exports = {
       example: 'This state reports data correctly.',
     },
     {
-      source: 'COVID-19 site',
+      source: 'covid19Site',
       target: 'covid19Site',
       type: 'string',
       graphQlType: 'String',
@@ -86,7 +86,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID-19 site (secondary)',
+      source: 'covid19SiteSecondary',
       target: 'covid19SiteSecondary',
       type: 'string',
       graphQlType: 'String',
@@ -95,7 +95,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'Twitter',
+      source: 'twitter',
       target: 'twitter',
       type: 'string',
       graphQlType: 'String',
@@ -104,7 +104,7 @@ module.exports = {
       example: '@Alaska_DHSS',
     },
     {
-      source: 'COVID-19 site (OLD)',
+      source: 'covid19SiteOld',
       target: 'covid19SiteOld',
       type: 'string',
       graphQlType: 'String',
@@ -120,7 +120,6 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      sourceFunction: () => '',
     },
     {
       source: 'pum',
@@ -130,7 +129,6 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      sourceFunction: () => false,
     },
   ],
 }
