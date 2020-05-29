@@ -1,7 +1,7 @@
 module.exports = {
   schema: 'RaceHomepage',
   path: 'internal/race-homepage.{format}',
-  tags: ['Internal Endpoints'],
+  tags: ['Racial data tracker'],
   description: 'Top-line data for the COVID Racial Data Tracker homepage',
   sheetId: '1FnrtpGkm9tuWg8FLavkIHhJSx0Z-X5QJUfbkPhgL3JQ',
   worksheetId: '1451105708',
