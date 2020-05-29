@@ -1,7 +1,7 @@
 module.exports = {
   schema: 'Status',
   path: 'status.{format}',
-  tags: ['Internal Endpoints'],
+  tags: ['Status'],
   description: 'The current status of the API.',
   fieldDefinitions: [
     {

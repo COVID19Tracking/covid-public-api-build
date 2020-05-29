@@ -113,12 +113,14 @@ describe('Sources : Screenshots', () => {
     const { formatScreenshotDate } = screenshotSource(config)
 
     expect(
-      formatScreenshotDate(
-        splitName('AK-secondary-20200315-021315.png')
-      ).toFormat('D T')
+      formatScreenshotDate(splitName('AK-secondary-20200315-021315.png'))
+        .setZone('America/New_York')
+        .toFormat('D T')
     ).toBe('3/15/2020 02:13')
     expect(
-      formatScreenshotDate(splitName('AK-20200315-021315.png')).toFormat('D T')
+      formatScreenshotDate(splitName('AK-20200315-021315.png'))
+        .setZone('America/New_York')
+        .toFormat('D T')
     ).toBe('3/15/2020 02:13')
     expect(
       formatScreenshotDate(splitName('AK-secondary-20200315-02.png')).isValid
