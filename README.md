@@ -49,6 +49,7 @@ Once you have downloaded the repository, run `npm install` to install dependenci
 - `COVID_API_DEBUG` - Set to true to log all debug-level items to the console
 - `GOOGLE_API_KEY` - A Google API token with access to read Google spreadsheets
 - `SLACK_TOKEN` - A Slack token with access to `users.profile:read` and `users:read` scopes.
+- `SITE_BUILD_WEBHOOK` - A Netlify webhook to call if any API files changed to trigger a new site build.
 
 ### Running
 
@@ -61,6 +62,6 @@ Just use `node index.js`. The following command line arguments are supported:
 
 The project uses Jest and a lot of mocks for `node-fetch`. To run, use: `npm run test`
 
-### Configuration
+## Documentation
 
-All configuration options are stored in `config.js`.
+Checkout the doc pages in `/docs`
