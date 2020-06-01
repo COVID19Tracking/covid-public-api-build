@@ -6,7 +6,7 @@ module.exports = {
   formats: ['json', 'csv'],
   path: 'us/daily.{format}',
   tags: ['US Current and Historical Data'],
-  description: 'US historic values.',
+  description: 'Historic US values',
   sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
   worksheetId: '964640830',
   subDefinitions: [
@@ -15,14 +15,14 @@ module.exports = {
       schema: 'Us',
       path: 'us/current.{format}',
       tags: ['US Current and Historical Data'],
-      description: 'US current values.',
+      description: 'Current US values',
     },
     {
       key: 'usDates',
       schema: 'Us',
       path: 'us/{date}.{format}',
       tags: ['US Current and Historical Data'],
-      description: 'US current values.',
+      description: 'US historic values for a date',
       parameters: [
         {
           name: 'date',

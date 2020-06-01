@@ -2,7 +2,7 @@ module.exports = {
   schema: 'Status',
   path: 'status.{format}',
   tags: ['Status'],
-  description: 'The current status of the API.',
+  description: 'API status',
   fieldDefinitions: [
     {
       source: 'buildTime',

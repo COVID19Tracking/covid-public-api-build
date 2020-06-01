@@ -20,7 +20,7 @@ module.exports = {
   schema: 'States',
   path: 'states/daily.{format}',
   tags: ['States Current and Historical Data'],
-  description: 'States historical data.',
+  description: 'Historic values for all states',
   sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
   worksheetId: '916628299',
   subDefinitions: [
@@ -29,14 +29,14 @@ module.exports = {
       schema: 'States',
       path: 'states/current.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State current values.',
+      description: 'Current values for all states',
     },
     {
       key: 'statesIndividualCurrent',
       schema: 'States',
       path: 'states/{state}/current.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State current values.',
+      description: 'Current values for a single state',
       parameters: [stateParameter],
     },
     {
@@ -44,7 +44,7 @@ module.exports = {
       schema: 'States',
       path: 'states/{state}/daily.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State daily values.',
+      description: 'Historic values for a single state',
       parameters: [stateParameter],
     },
     {
@@ -52,7 +52,7 @@ module.exports = {
       schema: 'States',
       path: 'states/{state}/{date}.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State date values',
+      description: 'Values for a single state on a specific date',
       parameters: [
         stateParameter,
         {
