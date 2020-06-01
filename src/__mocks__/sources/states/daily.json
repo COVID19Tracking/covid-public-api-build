@@ -66,5 +66,22 @@
     "Deaths": 4444,
     "Data Quality Grade": "D",
     "Last Update ET": "5/3/2020 00:00"
+  },
+  {
+    "Date": 20200511,
+    "State": "AS",
+    "Positive": 0,
+    "Negative": 90,
+    "Pending": null,
+    "Hospitalized – Currently": null,
+    "Hospitalized – Cumulative": null,
+    "In ICU – Currently": null,
+    "In ICU – Cumulative": null,
+    "On Ventilator – Currently": null,
+    "On Ventilator – Cumulative": null,
+    "Recovered": null,
+    "Deaths": 4444,
+    "Data Quality Grade": "D",
+    "Last Update ET": "5/3/2020 00:00"
   }
 ]

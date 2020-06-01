@@ -115,6 +115,7 @@ module.exports = (config) => {
     getWorksheetData,
     formatData,
     statesCurrent,
+    addIncrease,
     statesIndividualCurrent,
     statesIndividualDaily,
     statesIndividualByDate,

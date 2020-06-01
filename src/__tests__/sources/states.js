@@ -32,10 +32,11 @@ describe('Sources: US Data', () => {
     fetchMock.mockOnce(JSON.stringify(sampleRecords))
     const { getWorksheetData } = statesSource(config)
     getWorksheetData().then((result) => {
-      expect(result).toHaveLength(4)
+      expect(result).toHaveLength(5)
       done()
     })
   })
+
   it('maps fields', () => {
     const { formatData } = statesSource(config)
 
@@ -43,6 +44,11 @@ describe('Sources: US Data', () => {
       formatData(sampleRecords).find((item) => item.state === 'AS')
         .dataQualityGrade
     ).toBe('D')
+    expect(
+      formatData(sampleRecords).find(
+        (item) => item.state === 'AS' && item.date === 20200511
+      ).negativeIncrease
+    ).toBe(7)
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
 
