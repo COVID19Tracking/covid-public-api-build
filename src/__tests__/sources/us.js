@@ -41,6 +41,9 @@ describe('Sources: US Data', () => {
     const { formatData } = usSource(config)
 
     expect(formatData(sampleRecords).pop().date).toBe(20200509)
+    expect(
+      formatData(sampleRecords).find((a) => a.date === 20200509).deathIncrease
+    ).toBe(1529)
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
 
