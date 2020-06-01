@@ -4,7 +4,7 @@ module.exports = {
   schema: 'StatesInfo',
   path: 'states/info.{format}',
   tags: ['States Current and Historical Data'],
-  description: 'States information.',
+  description: 'State metadata',
   sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
   worksheetId: '1983833656',
   subDefinitions: [
@@ -13,7 +13,7 @@ module.exports = {
       schema: 'StatesInfo',
       path: 'states/{state}/info.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'The metadata about the specified state',
+      description: 'Metadata about a specific state',
       parameters: [
         {
           name: 'state',
