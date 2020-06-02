@@ -128,7 +128,12 @@ module.exports = (config) => {
           reporter.addDataLine('State daily records', data.length)
           resolve({
             source: config.sources.states,
-            data: formatData(data).sort((a, b) => (a.date > b.date ? -1 : 1)),
+            data: formatData(data).sort((a, b) => {
+              if (a.date === b.date) {
+                return a.state < b.state ? -1 : 1
+              }
+              return a.date > b.date ? -1 : 1
+            }),
             subDefinitionOutput: {
               statesCurrent,
               statesIndividualCurrent,
