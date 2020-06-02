@@ -1,6 +1,6 @@
 # Build process
 
-The entire API build process is outlined in the Github Actions workflow in `.github/workflows/build.yml`
+The entire API build process is outlined in the Github Actions workflow in `.github/workflows/build.yml`. [View a diagram of how this relates to website builds](https://docs.google.com/drawings/d/1E4xRA08c2d5eYcBQbvm-vfuAryqlm5fJiN11DXQbOYc/edit?usp=sharing)
 
 1. Checkout this build repo
 2. Checkout the current [public API repo](https://github.com/COVID19Tracking/covid-public-api)
