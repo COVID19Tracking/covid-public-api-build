@@ -65,3 +65,10 @@ The project uses Jest and a lot of mocks for `node-fetch`. To run, use: `npm run
 ## Documentation
 
 Checkout the doc pages in `/docs`
+
+### Important links
+
+- [Latest builds of the API](https://github.com/COVID19Tracking/covid-public-api-build/actions)
+- [Publishing of API files](https://github.com/COVID19Tracking/covid-public-api/deployments)
+- API build status also posts to `#public-api-status`
+- Website builds are posted to `#website-status`
