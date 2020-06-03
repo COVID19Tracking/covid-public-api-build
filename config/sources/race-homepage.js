@@ -3,7 +3,7 @@ module.exports = {
   path: 'internal/race-homepage.{format}',
   tags: ['Racial data tracker'],
   description: 'Top-line data for the COVID Racial Data Tracker homepage',
-  sheetId: '1FnrtpGkm9tuWg8FLavkIHhJSx0Z-X5QJUfbkPhgL3JQ',
+  sheetId: '1aPxG_isDWFMbxgnBqx5h8r04YkLn2lsaNiC5U9VfhOw',
   worksheetId: '1451105708',
   fieldDefinitions: [
     {
