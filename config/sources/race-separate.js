@@ -3,7 +3,7 @@ module.exports = {
   path: 'race/states-separate.{format}',
   tags: ['Racial data tracker'],
   description: 'Racial data on states who separate race and ethnicity',
-  sheetId: '1FnrtpGkm9tuWg8FLavkIHhJSx0Z-X5QJUfbkPhgL3JQ',
+  sheetId: '1aPxG_isDWFMbxgnBqx5h8r04YkLn2lsaNiC5U9VfhOw',
   worksheetId: '1837531601',
   fieldDefinitions: [
     {
