@@ -2,6 +2,9 @@ const { DateTime } = require('luxon')
 const objectHash = require('object-hash')
 const stateNames = require('../state-names')
 
+const xPublicSourceUrl =
+  'https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vRwAqp96T9sYYq2-i7Tj0pvTf6XVHjDSMIKBdZHXiCGGdNC0ypEU9NbngS8mxea55JuCFuua1MUeOj5/pubhtml#'
+
 const stateParameter = {
   name: 'state',
   in: 'path',
@@ -13,14 +16,17 @@ const stateParameter = {
     example: 'ca',
   },
   description:
-    'Use the two-letter state code to select the current value for a single state.',
+    'Use the lower-case two-letter state code to select the current value for a single state.',
 }
 
 module.exports = {
   schema: 'States',
   path: 'states/daily.{format}',
   tags: ['States Current and Historical Data'],
-  description: 'Historic values for all states',
+  summary: 'Historic values for all states',
+  description:
+    'Lists all COVID data available for every state since tracking started.',
+  xPublicSourceUrl,
   sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
   worksheetId: '916628299',
   subDefinitions: [
@@ -29,14 +35,20 @@ module.exports = {
       schema: 'States',
       path: 'states/current.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'Current values for all states',
+      summary: 'Current values for all states',
+      description:
+        'The most recent COVID data for every state. The current value may be different than today.',
+      xPublicSourceUrl,
     },
     {
       key: 'statesIndividualCurrent',
       schema: 'States',
       path: 'states/{state}/current.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'Current values for a single state',
+      summary: 'Current values for a single state',
+      description:
+        'The most recent COVID data for a single state. The current value may be different than today. Use lower-case state codes in the URL.',
+      xPublicSourceUrl,
       parameters: [stateParameter],
     },
     {
@@ -44,7 +56,10 @@ module.exports = {
       schema: 'States',
       path: 'states/{state}/daily.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'Historic values for a single state',
+      summary: 'Historic values for a single state',
+      description:
+        'All COVID data for a single state. Use lower-case state codes in the URL.',
+      xPublicSourceUrl,
       parameters: [stateParameter],
     },
     {
@@ -52,7 +67,10 @@ module.exports = {
       schema: 'States',
       path: 'states/{state}/{date}.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'Values for a single state on a specific date',
+      summary: 'Values for a single state on a specific date',
+      description:
+        'All COVID values for a single state on a specific date. Use lower-case state codes in the URL.',
+      xPublicSourceUrl,
       parameters: [
         stateParameter,
         {
