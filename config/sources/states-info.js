@@ -98,6 +98,15 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
+      source: 'COVID-19 site (tertiary)',
+      target: 'covid19SiteTertiary',
+      type: 'string',
+      graphQlType: 'String',
+      description: "URL to the state's third COVID website",
+      nullable: true,
+      example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default-3.asp',
+    },
+    {
       source: 'Twitter',
       target: 'twitter',
       type: 'string',
