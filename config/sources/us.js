@@ -1,12 +1,17 @@
 const { DateTime } = require('luxon')
 const objectHash = require('object-hash')
 
+const xPublicSourceUrl =
+  'https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vRwAqp96T9sYYq2-i7Tj0pvTf6XVHjDSMIKBdZHXiCGGdNC0ypEU9NbngS8mxea55JuCFuua1MUeOj5/pubhtml#'
+
 module.exports = {
   schema: 'Us',
   formats: ['json', 'csv'],
   path: 'us/daily.{format}',
   tags: ['US Current and Historical Data'],
-  description: 'Historic US values',
+  summary: 'Historic US values',
+  description: 'All COVID data for the US.',
+  xPublicSourceUrl,
   sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
   worksheetId: '964640830',
   subDefinitions: [
@@ -15,14 +20,19 @@ module.exports = {
       schema: 'Us',
       path: 'us/current.{format}',
       tags: ['US Current and Historical Data'],
-      description: 'Current US values',
+      summary: 'Current US values',
+      description:
+        'The most recent COVID data for the US. The most recent data may not be from today.',
+      xPublicSourceUrl,
     },
     {
       key: 'usDates',
       schema: 'Us',
       path: 'us/{date}.{format}',
       tags: ['US Current and Historical Data'],
-      description: 'US historic values for a date',
+      summary: 'US historic values for a date',
+      description: 'All COVID data for the US on a specific date.',
+      xPublicSourceUrl,
       parameters: [
         {
           name: 'date',
