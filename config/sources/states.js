@@ -288,9 +288,9 @@ module.exports = {
       target: 'dateModified',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: 'Deprecated, use lastUpdateEt instead',
       nullable: true,
-      example: 'Deprecated',
+      example: '',
       format: (date) =>
         date
           ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
