@@ -36,6 +36,13 @@ module.exports = {
       nullable: false,
     },
     {
+      target: 'tertiary',
+      type: 'boolean',
+      graphQlType: 'Boolean',
+      graphQlType: 'String',
+      nullable: false,
+    },
+    {
       target: 'date',
       type: 'string',
       graphQlType: 'String',
