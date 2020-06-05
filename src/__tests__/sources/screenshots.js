@@ -29,6 +29,7 @@ const screenshotFormat = {
   state: expect.any(String),
   url: expect.any(String),
   secondary: expect.any(Boolean),
+  tertiary: expect.any(Boolean),
   dateChecked: expect.any(String),
   date: expect.any(String),
   size: expect.any(Number),
@@ -104,6 +105,10 @@ describe('Sources : Screenshots', () => {
     expect(
       formatScreenshotState(splitName('AK-secondary-20200315-021315.png'))
     ).toBe('AK')
+
+    expect(
+      formatScreenshotState(splitName('AK-tertiary-20200315-021315.png'))
+    ).toBe('AK')
     expect(
       formatScreenshotState(splitName('AKsomething-20200315-021315.png'))
     ).toBe(false)
@@ -114,6 +119,11 @@ describe('Sources : Screenshots', () => {
 
     expect(
       formatScreenshotDate(splitName('AK-secondary-20200315-021315.png'))
+        .setZone('America/New_York')
+        .toFormat('D T')
+    ).toBe('3/15/2020 02:13')
+    expect(
+      formatScreenshotDate(splitName('AK-tertiary-20200315-021315.png'))
         .setZone('America/New_York')
         .toFormat('D T')
     ).toBe('3/15/2020 02:13')
@@ -141,6 +151,7 @@ describe('Sources : Screenshots', () => {
 
     expect(formatScreenshot(sampleScreenshot.primary).secondary).toBe(false)
     expect(formatScreenshot(sampleScreenshot.secondary).secondary).toBe(true)
+    expect(formatScreenshot(sampleScreenshot.tertiary).tertiary).toBe(true)
   })
 
   it('adds only screenshots that meet expected values', () => {
