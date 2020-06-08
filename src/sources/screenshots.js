@@ -56,9 +56,14 @@ module.exports = (config) => {
       logger.debug(`File name invalid ${nameSplit.join('-')}`)
       return false
     }
-    if (nameSplit.length === 4 && nameSplit[1] !== 'secondary') {
+    if (
+      nameSplit.length === 4 &&
+      ['secondary', 'tertiary'].indexOf(nameSplit[1]) === -1
+    ) {
       logger.debug(
-        `File second position not secondary label in ${nameSplit.join('-')}`
+        `File second position not secondary or tertiary label in ${nameSplit.join(
+          '-'
+        )}`
       )
       return false
     }
@@ -70,6 +75,7 @@ module.exports = (config) => {
     const fileName = url.pop()
     const nameSplit = fileName.split('.').shift().split('-')
     const isSecondary = nameSplit[1] === 'secondary'
+    const isTertiary = nameSplit[1] === 'tertiary'
     if (!isValidScreenshotName(nameSplit)) {
       return false
     }
@@ -79,6 +85,7 @@ module.exports = (config) => {
       state,
       url: `${urlPrefix}/${state}/${fileName}`,
       secondary: isSecondary,
+      tertiary: isTertiary,
       dateChecked: date.toISO(),
       date: date.toFormat('yyyyLLdd'),
       size: screenshot.Size,

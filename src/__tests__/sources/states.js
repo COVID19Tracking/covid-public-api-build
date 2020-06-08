@@ -13,6 +13,7 @@ describe('Sources: US Data', () => {
       done()
     })
   })
+
   it('maps fields', () => {
     const { formatData } = statesSource(config)
     expect(

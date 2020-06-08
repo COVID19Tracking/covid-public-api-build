@@ -2,6 +2,9 @@ const { DateTime } = require('luxon')
 const objectHash = require('object-hash')
 const stateNames = require('../state-names')
 
+const xPublicSourceUrl =
+  'https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vRwAqp96T9sYYq2-i7Tj0pvTf6XVHjDSMIKBdZHXiCGGdNC0ypEU9NbngS8mxea55JuCFuua1MUeOj5/pubhtml#'
+
 const stateParameter = {
   name: 'state',
   in: 'path',
@@ -13,30 +16,39 @@ const stateParameter = {
     example: 'ca',
   },
   description:
-    'Use the two-letter state code to select the current value for a single state.',
+    'Use the lower-case two-letter state code to select the current value for a single state.',
 }
 
 module.exports = {
   schema: 'States',
   path: 'states/daily.{format}',
   tags: ['States Current and Historical Data'],
-  description: 'States historical data.',
   endpoint:
     'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/states/daily',
+  summary: 'Historic values for all states',
+  description:
+    'Lists all COVID data available for every state since tracking started.',
+  xPublicSourceUrl,
   subDefinitions: [
     {
       key: 'statesCurrent',
       schema: 'States',
       path: 'states/current.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State current values.',
+      summary: 'Current values for all states',
+      description:
+        'The most recent COVID data for every state. The current value may be different than today.',
+      xPublicSourceUrl,
     },
     {
       key: 'statesIndividualCurrent',
       schema: 'States',
       path: 'states/{state}/current.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State current values.',
+      summary: 'Current values for a single state',
+      description:
+        'The most recent COVID data for a single state. The current value may be different than today. Use lower-case state codes in the URL.',
+      xPublicSourceUrl,
       parameters: [stateParameter],
     },
     {
@@ -44,7 +56,10 @@ module.exports = {
       schema: 'States',
       path: 'states/{state}/daily.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State daily values.',
+      summary: 'Historic values for a single state',
+      description:
+        'All COVID data for a single state. Use lower-case state codes in the URL.',
+      xPublicSourceUrl,
       parameters: [stateParameter],
     },
     {
@@ -52,7 +67,10 @@ module.exports = {
       schema: 'States',
       path: 'states/{state}/{date}.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'State date values',
+      summary: 'Values for a single state on a specific date',
+      description:
+        'All COVID values for a single state on a specific date. Use lower-case state codes in the URL.',
+      xPublicSourceUrl,
       parameters: [
         stateParameter,
         {
@@ -77,7 +95,7 @@ module.exports = {
       target: 'date',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Date for which the daily totals were collected.',
       nullable: false,
       example: 20200501,
       format: (date) =>
@@ -88,7 +106,7 @@ module.exports = {
       target: 'state',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: 'Two-letter code for the state.',
       nullable: false,
       example: '',
     },
@@ -97,7 +115,7 @@ module.exports = {
       target: 'fips',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: 'Census FIPS code for the state.',
       nullable: true,
       example: '',
       sourceFunction: (item) =>
@@ -110,7 +128,8 @@ module.exports = {
       target: 'positive',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people who have tested positive for COVID-19 so far.',
       nullable: true,
       example: '',
     },
@@ -120,7 +139,7 @@ module.exports = {
       target: 'positiveIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
@@ -130,7 +149,8 @@ module.exports = {
       target: 'negative',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people who have tested negative for COVID-19 so far.',
       nullable: true,
       example: '',
     },
@@ -140,7 +160,7 @@ module.exports = {
       target: 'negativeIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
@@ -150,7 +170,7 @@ module.exports = {
       target: 'pending',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Number of tests whose results have yet to be determined.',
       nullable: true,
       example: '',
     },
@@ -159,7 +179,7 @@ module.exports = {
       target: 'total',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) =>
@@ -170,7 +190,7 @@ module.exports = {
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
@@ -180,7 +200,7 @@ module.exports = {
       target: 'totalTestResultsIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
@@ -190,7 +210,7 @@ module.exports = {
       target: 'posNeg',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
@@ -200,7 +220,7 @@ module.exports = {
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Number of people in hospital for COVID-19 on this day.',
       nullable: true,
       example: '',
     },
@@ -209,7 +229,8 @@ module.exports = {
       target: 'hospitalizedCumulative',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people who have gone to the hospital for COVID-19 so far, including those who have since recovered or died.',
       nullable: true,
       example: '',
     },
@@ -218,7 +239,8 @@ module.exports = {
       target: 'inIcuCurrently',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people in the ICU for COVID-19 on this day.',
       nullable: true,
       example: '',
     },
@@ -227,7 +249,8 @@ module.exports = {
       target: 'inIcuCumulative',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people who have gone to the ICU for COVID-19 so far, including those who have since recovered or died.',
       nullable: true,
       example: '',
     },
@@ -236,7 +259,8 @@ module.exports = {
       target: 'onVentilatorCurrently',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Number of people using a ventilator for COVID-19 on this day.',
       nullable: true,
       example: '',
     },
@@ -245,7 +269,8 @@ module.exports = {
       target: 'onVentilatorCumulative',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people who have used a ventilator for COVID-19 so far, including those who have since recovered or died.',
       nullable: true,
       example: '',
     },
@@ -254,7 +279,8 @@ module.exports = {
       target: 'recovered',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people who have recovered from COVID-19 so far.',
       nullable: true,
       example: '',
     },
@@ -263,7 +289,8 @@ module.exports = {
       target: 'dataQualityGrade',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description:
+        'Grade assigned to the state based on the quality of their data reporting.',
       nullable: true,
       example: '',
     },
@@ -272,7 +299,7 @@ module.exports = {
       target: 'lastUpdateEt',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: "Last time the day's data was updated.",
       nullable: true,
       example: '',
     },
@@ -281,7 +308,7 @@ module.exports = {
       target: 'dateModified',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: 'Deprecated, use lastUpdateEt instead',
       nullable: true,
       example: '',
       format: (date) =>
@@ -296,7 +323,7 @@ module.exports = {
       target: 'checkTimeEt',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       format: (date) =>
@@ -311,7 +338,8 @@ module.exports = {
       target: 'death',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description:
+        'Total number of people who have died as a result of COVID-19 so far.',
       nullable: true,
       example: '',
     },
@@ -320,7 +348,7 @@ module.exports = {
       target: 'deathIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
@@ -330,7 +358,7 @@ module.exports = {
       target: 'hospitalized',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
     },
@@ -339,7 +367,7 @@ module.exports = {
       target: 'hospitalizedIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
@@ -349,7 +377,7 @@ module.exports = {
       target: 'dateChecked',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: 'Deprecated',
       nullable: true,
       example: '',
       format: (date) =>
@@ -360,7 +388,7 @@ module.exports = {
       target: 'hash',
       type: 'string',
       graphQlType: 'String',
-      description: '',
+      description: 'A hash of the current record.',
       nullable: true,
       example: '',
       sourceFunction: (item) => objectHash(item),

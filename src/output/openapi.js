@@ -23,7 +23,9 @@ module.exports = (config) => {
     return {
       get: {
         tags: source.tags,
+        summary: source.summary || source.description,
         description: source.description,
+        'x-public-source-url': source.xPublicSourceUrl || false,
         responses: {
           '200': {
             description: 'OK',

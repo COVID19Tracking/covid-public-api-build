@@ -31,7 +31,6 @@ module.exports = {
     },
   ],
   sources: {
-    cdcTests: require('./config/sources/cdc-tests'),
     press: require('./config/sources/press'),
     screenshots: require('./config/sources/screenshots'),
     volunteers: require('./config/sources/volunteers'),

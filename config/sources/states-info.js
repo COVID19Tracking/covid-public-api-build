@@ -4,16 +4,19 @@ module.exports = {
   schema: 'StatesInfo',
   path: 'states/info.{format}',
   tags: ['States Current and Historical Data'],
-  description: 'States information.',
   endpoint:
     'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/states/info',
+  summary: 'State metadata',
+  description: `Basic information about states, including notes about our methodology and the websites we use to check for data.`,
+  xPublicSourceUrl:
+    'https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vRwAqp96T9sYYq2-i7Tj0pvTf6XVHjDSMIKBdZHXiCGGdNC0ypEU9NbngS8mxea55JuCFuua1MUeOj5/pubhtml#',
   subDefinitions: [
     {
       key: 'statesIndividualInfo',
       schema: 'StatesInfo',
       path: 'states/{state}/info.{format}',
       tags: ['States Current and Historical Data'],
-      description: 'The metadata about the specified state',
+      description: 'Metadata about a specific state',
       parameters: [
         {
           name: 'state',
@@ -91,6 +94,15 @@ module.exports = {
       type: 'string',
       graphQlType: 'String',
       description: "URL to the state's secondary COVID website",
+      nullable: true,
+      example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
+    },
+    {
+      source: 'covid19SiteTertiary',
+      target: 'covid19SiteTertiary',
+      type: 'string',
+      graphQlType: 'String',
+      description: "URL to the state's tertiary COVID website",
       nullable: true,
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
