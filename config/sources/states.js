@@ -188,7 +188,7 @@ module.exports = {
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated',
+      description: 'Total Test Results Provided by the State',
       nullable: true,
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
