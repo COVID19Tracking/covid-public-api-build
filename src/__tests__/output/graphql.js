@@ -19,7 +19,7 @@ describe('GraphQL output', () => {
     const spec = graphQl(config)
     spec.addDefinition(sampleSource)
     const result = spec.getSdl()
-    expect(result.search('Type Test {')).toBeGreaterThan(-1)
+    expect(result.search('type Test {')).toBeGreaterThan(-1)
     expect(result.search('url: String')).toBeGreaterThan(-1)
     expect(result.search('total: Int')).toBeGreaterThan(-1)
   })

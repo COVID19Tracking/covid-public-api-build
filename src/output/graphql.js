@@ -5,7 +5,7 @@ module.exports = (config) => {
   const addDefinition = (spec) => {
     const fields = {}
 
-    specs.push(`Type ${spec.schema} {`)
+    specs.push(`type ${spec.schema} {`)
 
     spec.fieldDefinitions.forEach((field) => {
       fields[field.target] = field.graphQlType
