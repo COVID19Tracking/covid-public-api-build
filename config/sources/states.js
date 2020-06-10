@@ -191,7 +191,10 @@ module.exports = {
       description: 'Total Test Results Provided by the State',
       nullable: true,
       example: '',
-      sourceFunction: (item) => item.positive + item.negative,
+      sourceFunction: (item) =>
+        item.totalPcrTestsPeople
+          ? item.totalPcrTestsPeople
+          : item.totalTestsPcr,
     },
     {
       source: 'totalTestResultsIncrease',
