@@ -192,9 +192,9 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: (item) =>
-        item.totalPcrTestsPeople
-          ? item.totalPcrTestsPeople
-          : item.totalTestsPcr,
+        item.totalViralTestsPeople
+          ? item.totalViralTestsPeople
+          : item.totalTestsViral,
     },
     {
       source: 'totalTestResultsIncrease',
@@ -491,7 +491,16 @@ module.exports = {
       target: 'positiveCasesViral',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Total number of positive cases measured with PCR tests.',
+      description: 'Total number of positive cases confirmed with PCR tests.',
+      nullable: true,
+      example: '',
+    },
+    {
+      source: 'Total Tests (People)',
+      target: 'totalViralTestsPeople',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Total number of people tested by PCR tests',
       nullable: true,
       example: '',
     },
