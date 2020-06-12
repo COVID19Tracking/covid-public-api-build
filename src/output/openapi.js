@@ -50,6 +50,7 @@ module.exports = (config) => {
         description: field.description,
         nullable: field.nullable,
         example: field.example ? field.example : '',
+        'x-source-field': field.source,
       }
     })
     return schema
