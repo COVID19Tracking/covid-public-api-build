@@ -4,8 +4,7 @@ module.exports = {
   schema: 'StatesInfo',
   path: 'states/info.{format}',
   tags: ['States Current and Historical Data'],
-  endpoint:
-    'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/states/info',
+  endpoint: 'http://internalapi.covidtracking.com/api/v1/public/states/info',
   summary: 'State metadata',
   description: `Basic information about states, including notes about our methodology and the websites we use to check for data.`,
   xPublicSourceUrl:

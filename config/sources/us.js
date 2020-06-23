@@ -12,8 +12,7 @@ module.exports = {
   summary: 'Historic US values',
   description: 'All COVID data for the US.',
   xPublicSourceUrl,
-  endpoint:
-    'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/us/daily',
+  endpoint: 'http://internalapi.covidtracking.com/api/v1/public/us/daily',
   subDefinitions: [
     {
       key: 'usCurrent',
