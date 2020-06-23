@@ -99,7 +99,7 @@ module.exports = {
       nullable: false,
       example: 20200501,
       format: (date) =>
-        parseInt(DateTime.fromRFC2822(date).toFormat('yyyyLLdd'), 10),
+        parseInt(DateTime.fromISO(date).toFormat('yyyyLLdd'), 10),
     },
     {
       source: 'state',
