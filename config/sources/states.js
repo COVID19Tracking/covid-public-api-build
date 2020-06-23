@@ -156,6 +156,7 @@ module.exports = {
       example: '',
       sourceFunction: (item) => 0,
       metadata: {
+        sheetColumn: 'Positive',
         internalNote:
           "This field is computed by subtracting the proir date's value for positive from the current date",
       },
@@ -185,6 +186,7 @@ module.exports = {
       example: '',
       sourceFunction: (item) => 0,
       metadata: {
+        sheetColumn: 'Negative',
         internalNote:
           "This field is computed by subtracting the proir date's value for negative from the current date",
       },
@@ -212,6 +214,7 @@ module.exports = {
       sourceFunction: (item) =>
         (item.positive || 0) + (item.negative || 0) + (item.pending || 0),
       metadata: {
+        sheetColumn: '"Positive", "Negative" & "Pending"',
         deprecated: true,
         internalNote:
           'This is a deprecated that adds up Positive, Negative, and Pending spreadsheet fields.',
@@ -227,6 +230,7 @@ module.exports = {
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
       metadata: {
+        sheetColumn: '"Positive" & "Negative"',
         internalNote: 'Adds up Positive and Negative spreadsheet fields.',
       },
     },
@@ -240,6 +244,7 @@ module.exports = {
       example: '',
       sourceFunction: (item) => 0,
       metadata: {
+        sheetColumn: '"Positive" & "Negative"',
         internalNote:
           "This field is computed by subtracting the proir date's value for `totalTestResults` from the current date",
       },
@@ -254,6 +259,7 @@ module.exports = {
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
       metadata: {
+        sheetColumn: '"Positive" & "Negative"',
         deprecated: true,
         internalNote: 'Adds up Positive and Negative spreadsheet fields.',
       },
@@ -359,7 +365,7 @@ module.exports = {
       nullable: true,
       example: '',
       metadata: {
-        sheetColumn: 'RecovData Quality Gradeered',
+        sheetColumn: 'Data Quality Grade',
       },
     },
     {
@@ -390,6 +396,7 @@ module.exports = {
           : null,
       metadata: {
         deprecated: true,
+        sheetColumn: 'Last Update ET',
         internalNote:
           'This is a re-formatted value of "Last Update ET" forced into UTC format for historic reasons.',
       },
@@ -410,6 +417,7 @@ module.exports = {
           : null,
       metadata: {
         deprecated: true,
+        sheetColumn: 'Last Update ET',
         internalNote:
           'This is a re-formatted value of "Last Update ET" forced into LL/dd HH:mm America/New_York format for historic reasons.',
       },
@@ -437,6 +445,7 @@ module.exports = {
       example: '',
       sourceFunction: (item) => 0,
       metadata: {
+        sheetColumn: 'Deaths',
         internalNote:
           "This field is computed by subtracting the proir date's value for `death` from the current date",
       },
@@ -451,7 +460,7 @@ module.exports = {
       example: '',
       metadata: {
         deprecated: true,
-        internalNote: 'This is an old label for hospitalized.',
+        internalNote: 'Old label for `hospitalizedCumulative`.',
       },
     },
     {
@@ -465,7 +474,8 @@ module.exports = {
       sourceFunction: (item) => 0,
       metadata: {
         deprecated: true,
-        internalNote: 'This is an old label for hospitalized.',
+        internalNote:
+          'An increase compuation for the old label for hospitalized.',
       },
     },
     {
@@ -485,6 +495,7 @@ module.exports = {
       metadata: {
         deprecated: true,
         internalNote: 'This is an old label for "Last Update ET".',
+        sheetColumn: 'Last Update ET',
       },
     },
     {
