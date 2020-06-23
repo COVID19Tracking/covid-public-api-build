@@ -23,8 +23,7 @@ module.exports = {
   schema: 'States',
   path: 'states/daily.{format}',
   tags: ['States Current and Historical Data'],
-  endpoint:
-    'http://covid-publishing-api-stage.us-east-1.elasticbeanstalk.com/api/v1/public/states/daily',
+  endpoint: 'http://internalapi.covidtracking.com/api/v1/public/states/daily',
   summary: 'Historic values for all states',
   description:
     'Lists all COVID data available for every state since tracking started.',
@@ -591,7 +590,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Tests (PCR)',
+      source: 'totalTestsViral',
       target: 'totalTestsViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -603,7 +602,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Tests (PCR)',
+      source: 'positiveTestsViral',
       target: 'positiveTestsViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -615,7 +614,7 @@ module.exports = {
       },
     },
     {
-      source: 'Negative Tests (PCR)',
+      source: 'negativeTestsViral',
       target: 'negativeTestsViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -627,7 +626,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Cases (PCR)',
+      source: 'positiveCasesViral',
       target: 'positiveCasesViral',
       type: 'integer',
       graphQlType: 'Int',
