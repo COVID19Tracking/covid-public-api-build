@@ -133,6 +133,22 @@ module.exports = (config) => {
       })
   }
 
+  const stateScreenshots = (data, definition, writeFile) => {
+    const states = {}
+    data.forEach((row) => {
+      if (typeof states[row.state] === 'undefined') {
+        states[row.state] = []
+      }
+      states[row.state].push(row)
+    })
+    Object.keys(states).forEach((state) => {
+      writeFile(
+        definition.path.replace('{state}', state.toLowerCase()),
+        states[state]
+      )
+    })
+  }
+
   return {
     parseXml,
     isScreenshot,
@@ -141,7 +157,7 @@ module.exports = (config) => {
     formatScreenshotDate,
     formatScreenshotState,
     getScreenshots,
-
+    stateScreenshots,
     getScreenshots: () => {
       return screenshots
     },
@@ -155,6 +171,7 @@ module.exports = (config) => {
           resolve({
             source: config.sources.screenshots,
             data: data,
+            subDefinitionOutput: { stateScreenshots },
           })
         })
       })

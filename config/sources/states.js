@@ -100,6 +100,9 @@ module.exports = {
       example: 20200501,
       format: (date) =>
         parseInt(DateTime.fromISO(date).toFormat('yyyyLLdd'), 10),
+      metadata: {
+        sheetColumn: 'Date',
+      },
     },
     {
       source: 'state',
@@ -109,6 +112,9 @@ module.exports = {
       description: 'Two-letter code for the state.',
       nullable: false,
       example: '',
+      metadata: {
+        sheetColumn: 'State',
+      },
     },
     {
       source: 'fips',
@@ -118,6 +124,10 @@ module.exports = {
       description: 'Census FIPS code for the state.',
       nullable: true,
       example: '',
+      metadata: {
+        internalNote:
+          'This is computed from [this static list of FIPS codes](https://github.com/COVID19Tracking/covid-public-api-build/blob/master/config/state-names.js)',
+      },
       sourceFunction: (item) =>
         typeof stateNames[item.state] !== 'undefined'
           ? stateNames[item.state].fips
@@ -132,6 +142,10 @@ module.exports = {
         'Total number of people who have tested positive for COVID-19 so far.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Positive',
+        websiteLabel: 'Cases',
+      },
     },
 
     {
@@ -139,10 +153,15 @@ module.exports = {
       target: 'positiveIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated',
+      description: 'Daily Difference in positive',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
+      metadata: {
+        sheetColumn: 'Positive',
+        internalNote:
+          "This field is computed by subtracting the proir date's value for positive from the current date",
+      },
     },
     {
       source: 'negative',
@@ -153,6 +172,10 @@ module.exports = {
         'Total number of people who have tested negative for COVID-19 so far.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Negative',
+        websiteLabel: 'Test: Negative or "negative test results"',
+      },
     },
 
     {
@@ -164,6 +187,11 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
+      metadata: {
+        sheetColumn: 'Negative',
+        internalNote:
+          "This field is computed by subtracting the proir date's value for negative from the current date",
+      },
     },
     {
       source: 'pending',
@@ -173,6 +201,9 @@ module.exports = {
       description: 'Number of tests whose results have yet to be determined.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Pending',
+      },
     },
     {
       source: 'total',
@@ -184,26 +215,41 @@ module.exports = {
       example: '',
       sourceFunction: (item) =>
         (item.positive || 0) + (item.negative || 0) + (item.pending || 0),
+      metadata: {
+        sheetColumn: '"Positive", "Negative" & "Pending"',
+        deprecated: true,
+        internalNote:
+          'This is a deprecated that adds up Positive, Negative, and Pending spreadsheet fields.',
+      },
     },
     {
       source: 'totalTestResults',
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated',
+      description: 'Total Test Results Provided by the State',
       nullable: true,
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
+      metadata: {
+        sheetColumn: '"Positive" & "Negative"',
+        internalNote: 'Adds up Positive and Negative spreadsheet fields.',
+      },
     },
     {
       source: 'totalTestResultsIncrease',
       target: 'totalTestResultsIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated',
+      description: 'Daily Difference in totalTestResults',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
+      metadata: {
+        sheetColumn: '"Positive" & "Negative"',
+        internalNote:
+          "This field is computed by subtracting the proir date's value for `totalTestResults` from the current date",
+      },
     },
     {
       source: 'posNeg',
@@ -214,7 +260,13 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
+      metadata: {
+        sheetColumn: '"Positive" & "Negative"',
+        deprecated: true,
+        internalNote: 'Adds up Positive and Negative spreadsheet fields.',
+      },
     },
+
     {
       source: 'hospitalizedCurrently',
       target: 'hospitalizedCurrently',
@@ -223,6 +275,9 @@ module.exports = {
       description: 'Number of people in hospital for COVID-19 on this day.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Hospitalized – Currently',
+      },
     },
     {
       source: 'hospitalizedCumulative',
@@ -233,6 +288,9 @@ module.exports = {
         'Total number of people who have gone to the hospital for COVID-19 so far, including those who have since recovered or died.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Hospitalized – Cumulative',
+      },
     },
     {
       source: 'inIcuCurrently',
@@ -243,6 +301,9 @@ module.exports = {
         'Total number of people in the ICU for COVID-19 on this day.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'In ICU – Currently',
+      },
     },
     {
       source: 'inIcuCumulative',
@@ -253,6 +314,9 @@ module.exports = {
         'Total number of people who have gone to the ICU for COVID-19 so far, including those who have since recovered or died.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'In ICU – Cumulative',
+      },
     },
     {
       source: 'onVentilatorCurrently',
@@ -263,6 +327,9 @@ module.exports = {
         'Number of people using a ventilator for COVID-19 on this day.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'On Ventilator – Currently',
+      },
     },
     {
       source: 'onVentilatorCumulative',
@@ -273,6 +340,9 @@ module.exports = {
         'Total number of people who have used a ventilator for COVID-19 so far, including those who have since recovered or died.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'On Ventilator – Cumulative',
+      },
     },
     {
       source: 'recovered',
@@ -283,6 +353,9 @@ module.exports = {
         'Total number of people who have recovered from COVID-19 so far.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Recovered',
+      },
     },
     {
       source: 'dataQualityGrade',
@@ -293,6 +366,9 @@ module.exports = {
         'Grade assigned to the state based on the quality of their data reporting.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Data Quality Grade',
+      },
     },
     {
       source: 'lastUpdateEt',
@@ -302,6 +378,9 @@ module.exports = {
       description: "Last time the day's data was updated.",
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Last Update ET',
+      },
     },
     {
       source: 'lastUpdateEt',
@@ -317,6 +396,12 @@ module.exports = {
               .setZone('UTC')
               .toFormat(`yyyy-LL-dd'T'TT'Z'`)
           : null,
+      metadata: {
+        deprecated: true,
+        sheetColumn: 'Last Update ET',
+        internalNote:
+          'This is a re-formatted value of "Last Update ET" forced into UTC format for historic reasons.',
+      },
     },
     {
       source: 'lastUpdateEt',
@@ -332,6 +417,12 @@ module.exports = {
               .setZone('America/New_York')
               .toFormat(`LL/dd HH:mm`)
           : null,
+      metadata: {
+        deprecated: true,
+        sheetColumn: 'Last Update ET',
+        internalNote:
+          'This is a re-formatted value of "Last Update ET" forced into LL/dd HH:mm America/New_York format for historic reasons.',
+      },
     },
     {
       source: 'death',
@@ -342,16 +433,24 @@ module.exports = {
         'Total number of people who have died as a result of COVID-19 so far.',
       nullable: true,
       example: '',
+      metadata: {
+        sheetColumn: 'Deaths',
+      },
     },
     {
       source: 'deathIncrease',
       target: 'deathIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated',
+      description: 'Daily difference in death',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
+      metadata: {
+        sheetColumn: 'Deaths',
+        internalNote:
+          "This field is computed by subtracting the proir date's value for `death` from the current date",
+      },
     },
     {
       source: 'hospitalizedCumulative',
@@ -361,16 +460,25 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
+      metadata: {
+        deprecated: true,
+        internalNote: 'Old label for `hospitalizedCumulative`.',
+      },
     },
     {
       source: 'hospitalizedIncrease',
       target: 'hospitalizedIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated',
+      description: 'Daily difference in hospitalized',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
+      metadata: {
+        deprecated: true,
+        internalNote:
+          'An increase compuation for the old label for hospitalized.',
+      },
     },
     {
       source: 'lastUpdateEt',
@@ -382,16 +490,27 @@ module.exports = {
       example: '',
       format: (date) =>
         date ? DateTime.fromRFC2822(date).toFormat(`yyyy-LL-dd'T'TT'Z'`) : null,
+
+      metadata: {
+        deprecated: true,
+        internalNote: 'This is an old label for "Last Update ET".',
+        sheetColumn: 'Last Update ET',
+      },
     },
     {
       source: 'hash',
       target: 'hash',
       type: 'string',
       graphQlType: 'String',
-      description: 'A hash of the current record.',
+      description: 'Deprecated - A hash of the current record.',
       nullable: true,
       example: '',
       sourceFunction: (item) => objectHash(item),
+      metadata: {
+        deprecated: true,
+        internalNote:
+          'A hash we provide for consumers so they can invalidate their cache if the values of this row has changed.',
+      },
     },
     {
       source: 'commercialScore',
@@ -402,6 +521,9 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: () => 0,
+      metadata: {
+        deprecated: true,
+      },
     },
     {
       source: 'negativeRegularScore',
@@ -412,6 +534,9 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: () => 0,
+      metadata: {
+        deprecated: true,
+      },
     },
     {
       source: 'negativeScore',
@@ -422,6 +547,9 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: () => 0,
+      metadata: {
+        deprecated: true,
+      },
     },
     {
       source: 'positiveScore',
@@ -432,6 +560,9 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: () => 0,
+      metadata: {
+        deprecated: true,
+      },
     },
     {
       source: 'score',
@@ -442,6 +573,9 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: () => 0,
+      metadata: {
+        deprecated: true,
+      },
     },
     {
       source: 'grade',
@@ -452,6 +586,57 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: () => '',
+      metadata: {
+        deprecated: true,
+      },
+    },
+    {
+      source: 'Total Tests (PCR)',
+      target: 'totalTestsViral',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Total number of PCR tests performed.',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total Tests (PCR)',
+      },
+    },
+    {
+      source: 'Positive Tests (PCR)',
+      target: 'positiveTestsViral',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Total number of positive PCR tests.',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Positive Tests (PCR)',
+      },
+    },
+    {
+      source: 'Negative Tests (PCR)',
+      target: 'negativeTestsViral',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Total number of negative PCR tests.',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Negative Tests (PCR)',
+      },
+    },
+    {
+      source: 'Positive Cases (PCR)',
+      target: 'positiveCasesViral',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Total number of positive cases measured with PCR tests.',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Positive Cases (PCR)',
+      },
     },
   ],
 }
