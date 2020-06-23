@@ -51,6 +51,12 @@ module.exports = (config) => {
         nullable: field.nullable,
         example: field.example ? field.example : '',
       }
+      if (typeof field.metadata !== 'undefined') {
+        Object.keys(field.metadata).forEach((metadataField) => {
+          schema.properties[field.target][`x-${metadataField}`] =
+            field.metadata[metadataField]
+        })
+      }
     })
     return schema
   }
