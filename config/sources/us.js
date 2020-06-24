@@ -60,6 +60,15 @@ module.exports = {
       example: 20200501,
     },
     {
+      source: 'states',
+      target: 'states',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Number of states included in the data for this day.',
+      nullable: false,
+      example: 50,
+    },
+    {
       source: 'positive',
       target: 'positive',
       type: 'integer',
