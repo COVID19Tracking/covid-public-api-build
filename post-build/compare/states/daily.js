@@ -4,7 +4,7 @@ const ignoredFields = ['notes']
 
 expect.extend({
   toMatchField(field, v1, v2) {
-    if (v1[field] === v2[field]) {
+    if (v1[field] === v2[field] || (!v1[field] && !v2[field])) {
       return {
         message: () =>
           `${field} matches:: State: ${v2.state}, Date: ${v2.date}`,
