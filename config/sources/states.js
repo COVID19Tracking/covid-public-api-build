@@ -392,7 +392,7 @@ module.exports = {
       format: (date) =>
         date
           ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
-              .setZone('UTC')
+              .setZone('UTC', { keepLocalTime: true })
               .toFormat(`yyyy-LL-dd'T'TT'Z'`)
           : null,
       metadata: {
@@ -413,7 +413,7 @@ module.exports = {
       format: (date) =>
         date
           ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
-              .setZone('America/New_York')
+              .setZone('America/New_York', { keepLocalTime: true })
               .toFormat(`LL/dd HH:mm`)
           : null,
       metadata: {
