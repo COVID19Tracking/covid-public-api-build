@@ -391,7 +391,7 @@ module.exports = {
       example: '',
       format: (date) =>
         date
-          ? DateTime.fromRFC2822(date)
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
               .setZone('UTC')
               .toFormat(`yyyy-LL-dd'T'TT'Z'`)
           : null,
@@ -412,7 +412,7 @@ module.exports = {
       example: '',
       format: (date) =>
         date
-          ? DateTime.fromRFC2822(date)
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
               .setZone('America/New_York')
               .toFormat(`LL/dd HH:mm`)
           : null,
@@ -488,7 +488,7 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        date ? DateTime.fromRFC2822(date).toFormat(`yyyy-LL-dd'T'TT'Z'`) : null,
+        date ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm').toFormat(`yyyy-LL-dd'T'TT'Z'`) : null,
 
       metadata: {
         deprecated: true,
