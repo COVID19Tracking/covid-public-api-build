@@ -4,6 +4,12 @@ const ignoredFields = ['notes']
 
 expect.extend({
   toMatchField(field, v1, v2) {
+    if (field === 'hash') {
+      return {
+        message: () => `Skipping hash`,
+        pass: true,
+      }
+    }
     if (v1[field] === v2[field] || (!v1[field] && !v2[field])) {
       return {
         message: () =>
