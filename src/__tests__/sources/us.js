@@ -23,7 +23,7 @@ describe('Sources: US Data', () => {
     expect(
       formatData(sampleRecords).find((record) => record.date === 20200520)
         .deathIncrease
-    ).toBe(10)
+    ).toBe(88125 - 86743)
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
 

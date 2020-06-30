@@ -9,7 +9,7 @@ describe('Sources: US Data', () => {
     const { getData } = statesSource(config)
     fetch.mockOnce(JSON.stringify(sampleRecords))
     getData().then((result) => {
-      expect(result).toHaveLength(9)
+      expect(result).toHaveLength(4)
       done()
     })
   })
@@ -18,7 +18,7 @@ describe('Sources: US Data', () => {
     const { formatData } = statesSource(config)
     expect(
       formatData(sampleRecords).find((item) => item.state === 'AR').date
-    ).toBe(20200518)
+    ).toBe(20200514)
     expect(
       formatData(sampleRecords).find((item) => item.state === 'AR').recovered
     ).toBe(3277)
