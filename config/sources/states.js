@@ -645,7 +645,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of deaths of individuals with COVID-19 infection confirmed by a laboratory test',
+        'Total number deaths of individuals with COVID-19 infection confirmed by a laboratory test. In states where the information is available, it tracks only those laboratory-confirmed deaths where COVID also contributed to the death according to the death certificate.',
       nullable: true,
       example: '',
       metadata: {
