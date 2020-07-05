@@ -228,7 +228,10 @@ module.exports = {
       description: 'Total Test Results Provided by the State',
       nullable: true,
       example: '',
-      sourceFunction: (item) => item.positive + item.negative,
+      sourceFunction: (item) =>
+        item.positiveCasesViral
+          ? item.positiveCasesViral + item.negative
+          : item.positive + item.negative,
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote: 'Adds up Positive and Negative spreadsheet fields.',
