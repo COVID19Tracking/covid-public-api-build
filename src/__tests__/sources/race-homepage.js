@@ -15,6 +15,7 @@ const mockSampleRecord = {
   statesReportingDeaths: 15,
   blackMortalityRate: 5,
   aianMortalityRate: 5,
+  asianMortalityRate: 5,
   nhpiMortalityRate: 5,
   twoMortalityRate: 5,
   whiteMortalityRate: 5,
