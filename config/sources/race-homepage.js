@@ -74,6 +74,14 @@ module.exports = {
       nullable: false,
     },
     {
+      source: 'asianMortalityRate',
+      target: 'asianMortalityRate',
+      type: 'number',
+      graphQlType: 'Float',
+      description: '',
+      nullable: false,
+    },
+    {
       source: 'nhpiMortalityRate',
       target: 'nhpiMortalityRate',
       type: 'number',
