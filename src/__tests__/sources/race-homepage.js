@@ -6,13 +6,21 @@ const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 const raceHomepageSource = require('../../sources/race-homepage')
 
-const sampleRecord = {
+const mockSampleRecord = {
   blackLivesLost: 10,
   blackLivesExpectedMultiplier: 2,
   blackPercentOfDeath: 0.2,
   blackPercentOfPopulation: 0.3,
   statesReportingCases: 14,
   statesReportingDeaths: 15,
+  blackMortalityRate: 5,
+  aianMortalityRate: 5,
+  nhpiMortalityRate: 5,
+  twoMortalityRate: 5,
+  whiteMortalityRate: 5,
+  otherMortalityRate: 5,
+  latinXMortalityRate: 5,
+  blackwhiteRateRatio: 5,
 }
 
 jest.mock('google-spreadsheet', () => ({
@@ -27,16 +35,7 @@ jest.mock('google-spreadsheet', () => ({
       {
         getRows: () => {
           return new Promise((resolve) => {
-            resolve([
-              {
-                blackLivesLost: 10,
-                blackLivesExpectedMultiplier: 2,
-                blackPercentOfDeath: 0.2,
-                blackPercentOfPopulation: 0.3,
-                statesReportingCases: 14,
-                statesReportingDeaths: 15,
-              },
-            ])
+            resolve([mockSampleRecord])
           })
         },
       },
@@ -48,7 +47,7 @@ describe('Sources: Racial data tracker homepage', () => {
   it('maps fields', () => {
     const { formatData } = raceHomepageSource(config)
 
-    expect(formatData([sampleRecord]).pop().blackLivesLost).toBe(10)
+    expect(formatData([mockSampleRecord]).pop().blackLivesLost).toBe(10)
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
 
