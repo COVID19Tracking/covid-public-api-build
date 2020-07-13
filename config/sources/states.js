@@ -642,5 +642,31 @@ module.exports = {
         sheetColumn: 'Positive Cases (PCR)',
       },
     },
+    {
+      source: 'Deaths (confirmed)',
+      target: 'deathConfirmed',
+      type: 'integer',
+      graphQlType: 'Int',
+      description:
+        'Total number deaths of individuals with COVID-19 infection confirmed by a laboratory test. In states where the information is available, it tracks only those laboratory-confirmed deaths where COVID also contributed to the death according to the death certificate.',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Deaths (confirmed)',
+      },
+    },
+    {
+      source: 'Deaths (probable)',
+      target: 'deathProbable',
+      type: 'integer',
+      graphQlType: 'Int',
+      description:
+        'Total number of deaths where COVID was listed as a cause of death and there is not a laboratory test confirming COVID-19 infection',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Deaths (probable)',
+      },
+    },
   ],
 }
