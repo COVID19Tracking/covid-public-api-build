@@ -65,7 +65,7 @@ module.exports = {
       target: 'states',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Number of states and territories included in the data for this day.',
+      description: 'Number of states and territories included in the US dataset for this day.',
       nullable: false,
       example: 50,
     },
