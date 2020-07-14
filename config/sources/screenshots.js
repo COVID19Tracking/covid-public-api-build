@@ -11,7 +11,7 @@ module.exports = {
       key: 'stateScreenshots',
       schema: 'Screenshots',
       path: 'states/{state}/screenshots.{format}',
-      tags: ['Internal endpoints'],
+      tags: ['Internal Endpoints'],
       summary: 'Screenshot values for a single state',
       description: 'Single state website screenshots.',
       parameters: [
