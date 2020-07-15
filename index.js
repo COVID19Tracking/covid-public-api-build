@@ -40,14 +40,16 @@ const run = () => {
       writer(result, config.outputPath)
     },
     (api, graphQl) => {
-      fs.writeJsonSync(
-        `${config.outputPath}openapi.json`,
-        api.getDefinition(),
-        {
-          spaces: 2,
-        }
-      )
-      fs.writeFileSync(`${config.outputPath}schema.graphql`, graphQl.getSdl())
+      if (!options.volunteers) {
+        fs.writeJsonSync(
+          `${config.outputPath}openapi.json`,
+          api.getDefinition(),
+          {
+            spaces: 2,
+          }
+        )
+        fs.writeFileSync(`${config.outputPath}schema.graphql`, graphQl.getSdl())
+      }
       reporter.addDataLine('Files written', reporter.getTotal('files'))
       const buildTime = Interval.fromDateTimes(startTime, DateTime.local())
       reporter.addLine(
