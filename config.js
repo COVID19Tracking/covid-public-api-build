@@ -30,6 +30,9 @@ module.exports = {
         "Use 'json' to return JSON arrays or object. Use 'csv' to return a CSV file.",
     },
   ],
+  bigQuery: {
+    dataset: 'covid_api_export',
+  },
   sources: {
     press: require('./config/sources/press'),
     screenshots: require('./config/sources/screenshots'),
