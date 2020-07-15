@@ -4,14 +4,18 @@ const fs = require('fs-extra')
 const { DateTime, Interval } = require('luxon')
 const sources = require('./src/sources')
 const runner = require('./src/run')
+const bigQueryRunner = require('./src/run/bigquery')
 const writer = require('./src/output/files')
 const config = require('./config')
+const bigquery = require('./src/run/bigquery')
 const reporter = require('./src/utilities/reporter')()
 const startTime = DateTime.local()
 
 const optionDefinitions = [
   { name: 'source', alias: 's', type: String },
   { name: 'clean', alias: 'c', type: Boolean },
+  { name: 'bigquery', alias: 'b', type: Boolean },
+  { name: 'volunteers', alias: 'v', type: Boolean },
 ]
 
 const options = commandLineArgs(optionDefinitions)
@@ -22,6 +26,14 @@ if (options.clean) {
 fs.ensureDirSync(config.outputPath)
 
 const run = () => {
+  if (!options.volunteers) {
+    bigQueryRunner(config, (result) => {
+      reporter.addDataLine('BigQuery tables written', result.length)
+    })
+  }
+  if (options.bigquery) {
+    return
+  }
   runner(
     sources(options),
     (result) => {
