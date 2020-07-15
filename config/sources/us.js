@@ -75,7 +75,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Individuals with confirmed or probable COVID-19 per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+        'Individuals with confirmed or probable COVID-19 per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -104,7 +104,7 @@ module.exports = {
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Individuals who are currently hospitalized with COVID-19. Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+      description: 'Individuals who are currently hospitalized with COVID-19. Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -114,7 +114,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of individuals who have ever been hospitalized with COVID-19.  Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+        'Total number of individuals who have ever been hospitalized with COVID-19.  Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -124,7 +124,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Individuals who are currently hospitalized in the Intensive Care Unit with COVID-19. Definitions vary by state / territory. Where possible, we report patients in the ICU with confirmed or probable COVID-19 cases per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+        'Individuals who are currently hospitalized in the Intensive Care Unit with COVID-19. Definitions vary by state / territory. Where possible, we report patients in the ICU with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -134,7 +134,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of individuals who have ever been hospitalized in the Intensive Care Unit with COVID-19. Definitions vary by state / territory. Where possible, we report patients in the ICU with confirmed or probable COVID-19 cases per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+        'Total number of individuals who have ever been hospitalized in the Intensive Care Unit with COVID-19. Definitions vary by state / territory. Where possible, we report patients in the ICU with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -144,7 +144,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Individuals who are currently hospitalized under advanced ventilation with COVID-19. Definitions vary by state / territory. Where possible, we report patients on ventilation with confirmed or probable COVID-19 cases per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+        'Individuals who are currently hospitalized under advanced ventilation with COVID-19. Definitions vary by state / territory. Where possible, we report patients on ventilation with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -154,7 +154,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of individuals who have ever been hospitalized under advanced ventilation with COVID-19. Definitions vary by state / territory. Where possible, we report patients on ventilation with confirmed or probable COVID-19 cases per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+        'Total number of individuals who have ever been hospitalized under advanced ventilation with COVID-19. Definitions vary by state / territory. Where possible, we report patients on ventilation with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -186,7 +186,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Fatalities classified as confirmed or probable COVID-19 deaths per the expanded CSTE case definition of April 5th, 2020 approved by the CDC.',
+        'Total fatalities with confirmed OR probable COVID-19 case diagnosis (per the expanded [CSTE case definition](https:\/\/cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https:\/\/wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/)). In states where the information is available, it only tracks fatalities with confirmed OR probable COVID-19 case diagnosis where COVID-19 is an underlying cause of death according to the death certificate based on [WHO guidelines](https:\/\/www.who.int/classifications/icd/Guidelines_Cause_of_Death_COVID-19.pdf?ua=1).',
       nullable: true,
       example: 50,
     },
