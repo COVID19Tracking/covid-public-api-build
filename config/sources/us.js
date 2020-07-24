@@ -214,7 +214,7 @@ module.exports = {
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Computed by adding *positive* and *negative* values to work around reporting lags between positives and total tests and because some states do not report totals.',
+      description: 'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding positive and negative values because some states do not report totals and to work around different reporting cadences for cases and tests.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => item.positive + item.negative,
