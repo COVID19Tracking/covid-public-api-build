@@ -10,11 +10,11 @@ module.exports = {
     },
     servers: [
       {
-        url: 'https://covidtracking.com',
+        url: 'https://api.covidtracking.com',
       },
     ],
   },
-  openApiPathPrefix: '/api/v1/',
+  openApiPathPrefix: '/v1/',
   openApiBaseParameters: [
     {
       name: 'format',
