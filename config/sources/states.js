@@ -647,7 +647,7 @@ module.exports = {
     },
     {
       source: 'Total PCR Tests (People)',
-      target: 'postiveTestsViralPeople',
+      target: 'totalTestsViralPeople',
       type: 'integer',
       graphQlType: 'Int',
       description: 'Completed viral tests of individuals (not samples).',
