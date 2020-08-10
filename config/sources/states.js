@@ -15,8 +15,7 @@ const stateParameter = {
     type: 'string',
     example: 'ca',
   },
-  description:
-    'Two-letter abbreviation for the state or territory.',
+  description: 'Two-letter abbreviation for the state or territory.',
 }
 
 module.exports = {
@@ -95,7 +94,8 @@ module.exports = {
       target: 'date',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Date on which data was collected by The COVID Tracking Project.',
+      description:
+        'Date on which data was collected by The COVID Tracking Project.',
       nullable: false,
       example: 20200501,
       metadata: {
@@ -119,7 +119,8 @@ module.exports = {
       target: 'fips',
       type: 'string',
       graphQlType: 'String',
-      description: 'Federal Information Processing Standards (FIPS) code for the state or territory.',
+      description:
+        'Federal Information Processing Standards (FIPS) code for the state or territory.',
       nullable: true,
       example: '',
       metadata: {
@@ -151,7 +152,8 @@ module.exports = {
       target: 'positiveIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Increase in *positive* computed by subtracting the value of *positive* from the previous day from the value of *positive* for the current day.',
+      description:
+        'Increase in *positive* computed by subtracting the value of *positive* from the previous day from the value of *positive* for the current day.',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
@@ -225,7 +227,8 @@ module.exports = {
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding _positive_ and _negative_ values because some states do not report totals and to work around different reporting cadences for cases and tests. ',
+      description:
+        'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding _positive_ and _negative_ values because some states do not report totals and to work around different reporting cadences for cases and tests. ',
       nullable: true,
       example: '',
       sourceFunction: (item) => item.positive + item.negative,
@@ -246,7 +249,7 @@ module.exports = {
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote:
-          "Increase in *totalTestResults* computed by subtracting the value of *totalTestResults* for the previous day from the value of *totalTestResults* for the current day.",
+          'Increase in *totalTestResults* computed by subtracting the value of *totalTestResults* for the previous day from the value of *totalTestResults* for the current day.',
       },
     },
     {
@@ -270,7 +273,8 @@ module.exports = {
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Individuals who are currently hospitalized with COVID-19. Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
+      description:
+        'Individuals who are currently hospitalized with COVID-19. Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -373,7 +377,8 @@ module.exports = {
       target: 'lastUpdateEt',
       type: 'string',
       graphQlType: 'String',
-      description: "Date and time in Eastern time the state or territory last updated the data.",
+      description:
+        'Date and time in Eastern time the state or territory last updated the data.',
       nullable: true,
       example: '',
       metadata: {
@@ -447,7 +452,7 @@ module.exports = {
       metadata: {
         sheetColumn: 'Deaths',
         internalNote:
-          "Increase in *death* computed by subtracting the value of *death* for the previous day from the value of *death* for the current day.",
+          'Increase in *death* computed by subtracting the value of *death* for the previous day from the value of *death* for the current day.',
       },
     },
     {
@@ -632,11 +637,24 @@ module.exports = {
       target: 'positiveCasesViral',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Individuals with a completed viral test that returned a positive result.',
+      description:
+        'Individuals with a completed viral test that returned a positive result.',
       nullable: true,
       example: '',
       metadata: {
         sheetColumn: 'Positive Cases (PCR)',
+      },
+    },
+    {
+      source: 'Total PCR Tests (People)',
+      target: 'postiveTestsViralPeople',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Completed viral tests of individuals (not samples).',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total PCR Tests (People)',
       },
     },
     {
