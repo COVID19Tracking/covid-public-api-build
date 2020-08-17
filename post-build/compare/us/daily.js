@@ -4,7 +4,7 @@ const ignoredFields = ['notes']
 describe('US daily', () => {
   it('has the same fields', async () => {
     const v1 = await fetch(
-      'https://covidtracking.com/api/v1/us/daily.json'
+      'https://api.covidtracking.com/v1/us/daily.json'
     ).then((response) => response.json())
     const v2 = fs.readJsonSync('./_api/v1/us/daily.json')
     expect(v2).toHaveLength(v1.length)
@@ -17,7 +17,7 @@ describe('US daily', () => {
 
   it('created individual US daily files', async () => {
     const v1 = await fetch(
-      'https://covidtracking.com/api/v1/us/daily.json'
+      'https://api.covidtracking.com/v1/us/daily.json'
     ).then((response) => response.json())
     v1.forEach((day) => {
       expect(fs.existsSync(`./_api/v1/us/${day.date}.json`)).toBeTruthy()

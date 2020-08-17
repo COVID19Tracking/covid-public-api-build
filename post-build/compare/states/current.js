@@ -5,7 +5,7 @@ const ignoredFields = ['notes']
 describe('States current', () => {
   it('has the same fields', async () => {
     const v1 = await fetch(
-      'https://covidtracking.com/api/v1/states/current.json'
+      'https://api.covidtracking.com/v1/states/current.json'
     ).then((response) => response.json())
     const v2 = fs.readJsonSync('./_api/v1/states/current.json')
     expect(v2).toHaveLength(v1.length)
@@ -22,7 +22,7 @@ describe('States current', () => {
 
   it('created state date files', async () => {
     const v1 = await fetch(
-      'https://covidtracking.com/api/v1/states/current.json'
+      'https://api.covidtracking.com/v1/states/current.json'
     ).then((response) => response.json())
     v1.forEach((state) => {
       expect(
