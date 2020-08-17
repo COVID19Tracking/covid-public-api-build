@@ -232,7 +232,7 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: (item) => {
-        if (item.state === 'CO') {
+        if (['RI', 'CO'].indexOf(item.state) > -1) {
           return item.totalTestEncountersViral
         }
         return item.positive + item.negative
