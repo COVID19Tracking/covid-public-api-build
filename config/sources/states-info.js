@@ -8,7 +8,7 @@ module.exports = {
   description: `Basic information about states, including notes about our methodology and the websites we use to check for data.`,
   xPublicSourceUrl:
     'https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vRwAqp96T9sYYq2-i7Tj0pvTf6XVHjDSMIKBdZHXiCGGdNC0ypEU9NbngS8mxea55JuCFuua1MUeOj5/pubhtml#',
-  sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
+  sheetId: '12r_DOvl2MOoWIwlRcwlJb084App4gipYWXU6a4Do80c',
   worksheetId: '1983833656',
   subDefinitions: [
     {

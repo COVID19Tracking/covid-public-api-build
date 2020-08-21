@@ -26,7 +26,7 @@ module.exports = {
   description:
     'Lists all COVID data available for every state since tracking started.',
   xPublicSourceUrl,
-  sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
+  sheetId: '12r_DOvl2MOoWIwlRcwlJb084App4gipYWXU6a4Do80c',
   worksheetId: '916628299',
   subDefinitions: [
     {
