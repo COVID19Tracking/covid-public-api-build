@@ -223,6 +223,22 @@ module.exports = {
       },
     },
     {
+      source: 'totalTestResultsSource',
+      target: 'totalTestResultsSource',
+      type: 'integer',
+      graphQlType: 'Int',
+      description:
+        'Indicates which field is being used for total test results. If it is posNeg, then it is calculated by adding all positive and negative values.',
+      nullable: true,
+      example: 'posNeg',
+      sourceFunction: (item) => {
+        if (['RI', 'CO'].indexOf(item.state) > -1) {
+          return 'totalTestEncountersViral'
+        }
+        return 'posNeg'
+      },
+    },
+    {
       source: 'totalTestResults',
       target: 'totalTestResults',
       type: 'integer',
