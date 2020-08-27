@@ -1,7 +1,6 @@
 const config = require('../../config')
 
 const sources = {
-  press: require('./press'),
   screenshots: require('./screenshots'),
   us: require('./us'),
   raceCombined: require('./race-combined'),
