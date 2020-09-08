@@ -438,7 +438,7 @@ module.exports = {
       example: '',
       format: (date) =>
         date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm', {zone: 'UTC'})
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm', { zone: 'UTC' })
               .setZone('America/New_York')
               .toFormat(`LL/dd HH:mm`)
           : null,
@@ -514,7 +514,11 @@ module.exports = {
       nullable: true,
       example: '',
       format: (date) =>
-        date ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm').toFormat(`yyyy-LL-dd'T'TT'Z'`) : null,
+        date
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm').toFormat(
+              `yyyy-LL-dd'T'TT'Z'`
+            )
+          : null,
 
       metadata: {
         deprecated: true,
@@ -665,7 +669,7 @@ module.exports = {
       },
     },
     {
-      source: 'Deaths (confirmed)',
+      source: 'deathConfirmed',
       target: 'deathConfirmed',
       type: 'integer',
       graphQlType: 'Int',
@@ -678,7 +682,7 @@ module.exports = {
       },
     },
     {
-      source: 'Deaths (probable)',
+      source: 'deathProbable',
       target: 'deathProbable',
       type: 'integer',
       graphQlType: 'Int',
@@ -691,7 +695,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Test Encounters (PCR)',
+      source: 'totalTestEncountersViral',
       target: 'totalTestEncountersViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -703,7 +707,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total PCR Tests (People)',
+      source: 'totalTestsPeopleViral',
       target: 'totalTestsPeopleViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -715,7 +719,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antibody Tests',
+      source: 'totalTestsAntibody',
       target: 'totalTestsAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -727,7 +731,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antibody Tests',
+      source: 'positiveTestsAntibody',
       target: 'positiveTestsAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -739,7 +743,7 @@ module.exports = {
       },
     },
     {
-      source: 'Negative Antibody Tests',
+      source: 'negativeTestsAntibody',
       target: 'negativeTestsAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -751,7 +755,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antibody Tests (People)',
+      source: 'totalTestsPeopleAntibody',
       target: 'totalTestsPeopleAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -763,7 +767,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antibody Tests (People)',
+      source: 'positiveTestsPeopleAntibody',
       target: 'positiveTestsPeopleAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -775,7 +779,7 @@ module.exports = {
       },
     },
     {
-      source: 'Negative Antibody Tests (People)',
+      source: 'negativeTestsPeopleAntibody',
       target: 'negativeTestsPeopleAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -787,7 +791,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antigen Tests (People)',
+      source: 'totalTestsPeopleAntigen',
       target: 'totalTestsPeopleAntigen',
       type: 'integer',
       graphQlType: 'Int',
@@ -799,7 +803,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antigen Tests (People)',
+      source: 'positiveTestsPeopleAntigen',
       target: 'positiveTestsPeopleAntigen',
       type: 'integer',
       graphQlType: 'Int',
@@ -811,7 +815,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antigen Tests',
+      source: 'totalTestsAntigen',
       target: 'totalTestsAntigen',
       type: 'integer',
       graphQlType: 'Int',
@@ -823,7 +827,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antigen Tests',
+      source: 'positiveTestsAntigen',
       target: 'positiveTestsAntigen',
       type: 'integer',
       graphQlType: 'Int',
