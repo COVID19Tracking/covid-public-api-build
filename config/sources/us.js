@@ -12,7 +12,7 @@ module.exports = {
   summary: 'Historic US values',
   description: 'All COVID data for the US.',
   xPublicSourceUrl,
-  endpoint: 'http://internalapi.covidtracking.com/api/v1/public/us/daily',
+  endpoint: 'https://internalapi.covidtracking.com/api/v1/public/us/daily',
   subDefinitions: [
     {
       key: 'usCurrent',
@@ -55,7 +55,8 @@ module.exports = {
       target: 'date',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Date on which data was collected by The COVID Tracking Project.',
+      description:
+        'Date on which data was collected by The COVID Tracking Project.',
       nullable: false,
       example: 20200501,
     },
@@ -64,7 +65,8 @@ module.exports = {
       target: 'states',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Number of states and territories included in the US dataset for this day.',
+      description:
+        'Number of states and territories included in the US dataset for this day.',
       nullable: false,
       example: 50,
     },
@@ -103,7 +105,8 @@ module.exports = {
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Individuals who are currently hospitalized with COVID-19. Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
+      description:
+        'Individuals who are currently hospitalized with COVID-19. Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: 50,
     },
@@ -303,7 +306,8 @@ module.exports = {
       target: 'total',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated. Computed by adding *positive*, *negative*, and *pending* values.',
+      description:
+        'Deprecated. Computed by adding *positive*, *negative*, and *pending* values.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => item.positive + item.negative + item.pending,
@@ -313,7 +317,8 @@ module.exports = {
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding positive and negative values because some states do not report totals and to work around different reporting cadences for cases and tests.',
+      description:
+        'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding positive and negative values because some states do not report totals and to work around different reporting cadences for cases and tests.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => item.positive + item.negative,
@@ -323,7 +328,8 @@ module.exports = {
       target: 'posNeg',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated. Computed by adding *positive* and *negative* values.',
+      description:
+        'Deprecated. Computed by adding *positive* and *negative* values.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => item.positive + item.negative,
@@ -333,7 +339,8 @@ module.exports = {
       target: 'deathIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Increase in *death* computed by subtracting the value of *death* for the previous day from the value of *death* for the current day.',
+      description:
+        'Increase in *death* computed by subtracting the value of *death* for the previous day from the value of *death* for the current day.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => 0,
@@ -343,7 +350,8 @@ module.exports = {
       target: 'hospitalizedIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Increase in *hospitalizedCumulative* computed by subtracting the value of *hospitalizedCumulative* for the previous day from the value of *hospitalizedCumulative* for the current day.',
+      description:
+        'Increase in *hospitalizedCumulative* computed by subtracting the value of *hospitalizedCumulative* for the previous day from the value of *hospitalizedCumulative* for the current day.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => 0,
@@ -353,7 +361,8 @@ module.exports = {
       target: 'negativeIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Increase in *negative* computed by subtracting the value of *negative* for the previous day from the value for *negative* from the current day.',
+      description:
+        'Increase in *negative* computed by subtracting the value of *negative* for the previous day from the value for *negative* from the current day.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => 0,
@@ -363,7 +372,8 @@ module.exports = {
       target: 'positiveIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Increase in *positive* computed by subtracting the value of *positive* from the previous day from the value of *positive* for the current day.',
+      description:
+        'Increase in *positive* computed by subtracting the value of *positive* from the previous day from the value of *positive* for the current day.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => 0,
@@ -373,7 +383,8 @@ module.exports = {
       target: 'totalTestResultsIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Deprecated. Increase in *totalTestResults* computed by subtracting the value of *totalTestResults* for the previous day from the value of *totalTestResults* for the current day.',
+      description:
+        'Deprecated. Increase in *totalTestResults* computed by subtracting the value of *totalTestResults* for the previous day from the value of *totalTestResults* for the current day.',
       nullable: true,
       example: 50,
       sourceFunction: (item) => 0,
