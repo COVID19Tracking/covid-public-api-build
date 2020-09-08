@@ -7,7 +7,7 @@ const ignoreFieldValues = ['pum', 'pui']
 describe('States info', () => {
   it('has the same fields', async () => {
     const v1 = await fetch(
-      'https://covidtracking.com/api/v1/states/info.json'
+      'https://api.covidtracking.com/v1/states/info.json'
     ).then((response) => response.json())
     const v2 = fs.readJsonSync('./_api/v1/states/info.json')
     expect(v2).toHaveLength(v2.length)
@@ -20,7 +20,7 @@ describe('States info', () => {
 
   it('generated individual state info pages', async () => {
     const v1 = await fetch(
-      'https://covidtracking.com/api/v1/states/info.json'
+      'https://api.covidtracking.com/v1/states/info.json'
     ).then((response) => response.json())
     v1.forEach((state) => {
       expect(

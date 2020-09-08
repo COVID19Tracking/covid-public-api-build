@@ -1,9 +1,7 @@
 const config = require('../../config')
 
 const sources = {
-  press: require('./press'),
   screenshots: require('./screenshots'),
-  volunteers: require('./volunteers'),
   us: require('./us'),
   raceCombined: require('./race-combined'),
   raceSeparate: require('./race-separate'),
@@ -15,6 +13,9 @@ const sources = {
 
 module.exports = (options) => {
   const allSources = []
+  if (options.volunteers) {
+    sources.volunteers = require('./volunteers')
+  }
   if (options.source) {
     allSources.push(sources[options.source](config).fetch())
     return allSources

@@ -30,7 +30,7 @@ jest.mock('google-spreadsheet', () => {
   }
 })
 
-describe('Sources: Press', () => {
+describe('Sources: Race combined', () => {
   it('maps fields', () => {
     const { formatData } = raceCombinedSource(config)
 

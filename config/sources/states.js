@@ -15,8 +15,7 @@ const stateParameter = {
     type: 'string',
     example: 'ca',
   },
-  description:
-    'Use the lower-case two-letter state code to select the current value for a single state.',
+  description: 'Two-letter abbreviation for the state or territory.',
 }
 
 module.exports = {
@@ -94,7 +93,8 @@ module.exports = {
       target: 'date',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Date for which the daily totals were collected.',
+      description:
+        'Date on which data was collected by The COVID Tracking Project.',
       nullable: false,
       example: 20200501,
       format: (date) =>
@@ -108,7 +108,7 @@ module.exports = {
       target: 'state',
       type: 'string',
       graphQlType: 'String',
-      description: 'Two-letter code for the state.',
+      description: 'Two-letter abbreviation for the state or territory.',
       nullable: false,
       example: '',
       metadata: {
@@ -120,7 +120,8 @@ module.exports = {
       target: 'fips',
       type: 'string',
       graphQlType: 'String',
-      description: 'Census FIPS code for the state.',
+      description:
+        'Federal Information Processing Standards (FIPS) code for the state or territory.',
       nullable: true,
       example: '',
       metadata: {
@@ -138,7 +139,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people who have tested positive for COVID-19 so far.',
+        'Individuals with confirmed or probable COVID-19 per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -152,14 +153,15 @@ module.exports = {
       target: 'positiveIncrease',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Daily Difference in positive',
+      description:
+        'Increase in *positive* computed by subtracting the value of *positive* from the previous day from the value of *positive* for the current day.',
       nullable: true,
       example: '',
       sourceFunction: (item) => 0,
       metadata: {
         sheetColumn: 'Positive',
         internalNote:
-          "This field is computed by subtracting the proir date's value for positive from the current date",
+          "This field is computed by subtracting the prior date's value for positive from the current date",
       },
     },
     {
@@ -168,7 +170,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people who have tested negative for COVID-19 so far.',
+        'Individuals with a completed viral test that returned a negative result. For states / territories that do not report this number directly, we compute it using one of several methods, depending on which data points the state provides.',
       nullable: true,
       example: '',
       metadata: {
@@ -189,7 +191,7 @@ module.exports = {
       metadata: {
         sheetColumn: 'Negative',
         internalNote:
-          "This field is computed by subtracting the proir date's value for negative from the current date",
+          "This field is computed by subtracting the prior date's value for negative from the current date",
       },
     },
     {
@@ -197,7 +199,7 @@ module.exports = {
       target: 'pending',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Number of tests whose results have yet to be determined.',
+      description: 'Tests whose results have not yet been reported.',
       nullable: true,
       example: '',
       metadata: {
@@ -218,7 +220,23 @@ module.exports = {
         sheetColumn: '"Positive", "Negative" & "Pending"',
         deprecated: true,
         internalNote:
-          'This is a deprecated that adds up Positive, Negative, and Pending spreadsheet fields.',
+          'This is a deprecated field that adds up Positive, Negative, and Pending spreadsheet fields.',
+      },
+    },
+    {
+      source: 'totalTestResultsSource',
+      target: 'totalTestResultsSource',
+      type: 'integer',
+      graphQlType: 'Int',
+      description:
+        'Indicates which field is being used for total test results. If it is posNeg, then it is calculated by adding all positive and negative values.',
+      nullable: true,
+      example: 'posNeg',
+      sourceFunction: (item) => {
+        if (['RI', 'CO'].indexOf(item.state) > -1) {
+          return 'totalTestEncountersViral'
+        }
+        return 'posNeg'
       },
     },
     {
@@ -226,10 +244,16 @@ module.exports = {
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Total Test Results Provided by the State',
+      description:
+        'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding _positive_ and _negative_ values because some states do not report totals and to work around different reporting cadences for cases and tests. ',
       nullable: true,
       example: '',
-      sourceFunction: (item) => item.positive + item.negative,
+      sourceFunction: (item) => {
+        if (['RI', 'CO'].indexOf(item.state) > -1) {
+          return item.totalTestEncountersViral
+        }
+        return item.positive + item.negative
+      },
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote: 'Adds up Positive and Negative spreadsheet fields.',
@@ -247,7 +271,7 @@ module.exports = {
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote:
-          "This field is computed by subtracting the proir date's value for `totalTestResults` from the current date",
+          'Increase in *totalTestResults* computed by subtracting the value of *totalTestResults* for the previous day from the value of *totalTestResults* for the current day.',
       },
     },
     {
@@ -271,7 +295,8 @@ module.exports = {
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Number of people in hospital for COVID-19 on this day.',
+      description:
+        'Individuals who are currently hospitalized with COVID-19. Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -284,7 +309,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people who have gone to the hospital for COVID-19 so far, including those who have since recovered or died.',
+        'Total number of individuals who have ever been hospitalized with COVID-19.  Definitions vary by state / territory. Where possible, we report hospitalizations with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -297,7 +322,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people in the ICU for COVID-19 on this day.',
+        'Individuals who are currently hospitalized in the Intensive Care Unit with COVID-19. Definitions vary by state / territory. Where possible, we report patients in the ICU with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -310,7 +335,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people who have gone to the ICU for COVID-19 so far, including those who have since recovered or died.',
+        'Total number of individuals who have ever been hospitalized in the Intensive Care Unit with COVID-19. Definitions vary by state / territory. Where possible, we report patients in the ICU with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -323,7 +348,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Number of people using a ventilator for COVID-19 on this day.',
+        'Individuals who are currently hospitalized under advanced ventilation with COVID-19. Definitions vary by state / territory. Where possible, we report patients on ventilation with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -336,7 +361,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people who have used a ventilator for COVID-19 so far, including those who have since recovered or died.',
+        'Total number of individuals who have ever been hospitalized under advanced ventilation with COVID-19. Definitions vary by state / territory. Where possible, we report patients on ventilation with confirmed or probable COVID-19 cases per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/).',
       nullable: true,
       example: '',
       metadata: {
@@ -349,7 +374,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people who have recovered from COVID-19 so far.',
+        'Individuals who have recovered from COVID-19. Definitions vary by state / territory.',
       nullable: true,
       example: '',
       metadata: {
@@ -362,7 +387,7 @@ module.exports = {
       type: 'string',
       graphQlType: 'String',
       description:
-        'Grade assigned to the state based on the quality of their data reporting.',
+        'The COVID Tracking Project grade of the completeness of the data reporting by a  state.',
       nullable: true,
       example: '',
       metadata: {
@@ -374,7 +399,8 @@ module.exports = {
       target: 'lastUpdateEt',
       type: 'string',
       graphQlType: 'String',
-      description: "Last time the day's data was updated.",
+      description:
+        'Date and time in Eastern time the state or territory last updated the data.',
       nullable: true,
       example: '',
       metadata: {
@@ -429,7 +455,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Total number of people who have died as a result of COVID-19 so far.',
+        'Total fatalities with confirmed OR probable COVID-19 case diagnosis (per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/)). In states where the information is available, it only tracks fatalities with confirmed OR probable COVID-19 case diagnosis where COVID-19 is an underlying cause of death according to the death certificate based on [WHO guidelines](https://www.who.int/classifications/icd/Guidelines_Cause_of_Death_COVID-19.pdf?ua=1).',
       nullable: true,
       example: '',
       metadata: {
@@ -448,7 +474,7 @@ module.exports = {
       metadata: {
         sheetColumn: 'Deaths',
         internalNote:
-          "This field is computed by subtracting the proir date's value for `death` from the current date",
+          'Increase in *death* computed by subtracting the value of *death* for the previous day from the value of *death* for the current day.',
       },
     },
     {
@@ -476,7 +502,7 @@ module.exports = {
       metadata: {
         deprecated: true,
         internalNote:
-          'An increase compuation for the old label for hospitalized.',
+          'Increase in *hospitalized* computed by subtracting the value of *hospitalizedCumulative* for the previous day from the value of *hospitalizedCumulative* for the current day.',
       },
     },
     {
@@ -594,7 +620,7 @@ module.exports = {
       target: 'totalTestsViral',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Total number of PCR tests performed.',
+      description: 'Completed viral tests.',
       nullable: true,
       example: '',
       metadata: {
@@ -606,7 +632,7 @@ module.exports = {
       target: 'positiveTestsViral',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Total number of positive PCR tests.',
+      description: 'Completed viral tests that returned positive results.',
       nullable: true,
       example: '',
       metadata: {
@@ -618,7 +644,7 @@ module.exports = {
       target: 'negativeTestsViral',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Total number of negative PCR tests.',
+      description: 'Completed viral tests that returned negative results.',
       nullable: true,
       example: '',
       metadata: {
@@ -630,11 +656,182 @@ module.exports = {
       target: 'positiveCasesViral',
       type: 'integer',
       graphQlType: 'Int',
-      description: 'Total number of positive cases measured with PCR tests.',
+      description:
+        'Individuals with a completed viral test that returned a positive result.',
       nullable: true,
       example: '',
       metadata: {
         sheetColumn: 'Positive Cases (PCR)',
+      },
+    },
+    {
+      source: 'Deaths (confirmed)',
+      target: 'deathConfirmed',
+      type: 'integer',
+      graphQlType: 'Int',
+      description:
+        'Total fatalities with confirmed COVID-19 case diagnosis (per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/)). In states where the information is available, it only tracks fatalities with confirmed COVID-19 case diagnosis where COVID-19 is an underlying cause of death according to the death certificate based on [WHO guidelines](https://www.who.int/classifications/icd/Guidelines_Cause_of_Death_COVID-19.pdf?ua=1).',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Deaths (confirmed)',
+      },
+    },
+    {
+      source: 'Deaths (probable)',
+      target: 'deathProbable',
+      type: 'integer',
+      graphQlType: 'Int',
+      description:
+        'Total fatalities with probable COVID-19 case diagnosis (per the expanded [CSTE case definition](https://cdn.ymaws.com/www.cste.org/resource/resmgr/2020ps/Interim-20-ID-01_COVID-19.pdf) of April 5th, 2020 [approved by the CDC](https://wwwn.cdc.gov/nndss/conditions/coronavirus-disease-2019-covid-19/case-definition/2020/). In states where the information is available, it only tracks fatalities with probable COVID-19 case diagnosis where COVID-19 is an underlying cause of death according to the death certificate based on [WHO guidelines](https://www.who.int/classifications/icd/Guidelines_Cause_of_Death_COVID-19.pdf?ua=1).',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Deaths (probable)',
+      },
+    },
+    {
+      source: 'Total Test Encounters (PCR)',
+      target: 'totalTestEncountersViral',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total Test Encounters (PCR)',
+      },
+    },
+    {
+      source: 'Total PCR Tests (People)',
+      target: 'totalTestsPeopleViral',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total PCR Tests (People)',
+      },
+    },
+    {
+      source: 'Total Antibody Tests',
+      target: 'totalTestsAntibody',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total Antibody Tests',
+      },
+    },
+    {
+      source: 'Positive Antibody Tests',
+      target: 'positiveTestsAntibody',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Positive Antibody Tests',
+      },
+    },
+    {
+      source: 'Negative Antibody Tests',
+      target: 'negativeTestsAntibody',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Negative Antibody Tests',
+      },
+    },
+    {
+      source: 'Total Antibody Tests (People)',
+      target: 'totalTestsPeopleAntibody',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total Antibody Tests (People)',
+      },
+    },
+    {
+      source: 'Positive Antibody Tests (People)',
+      target: 'positiveTestsPeopleAntibody',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Positive Antibody Tests (People)',
+      },
+    },
+    {
+      source: 'Negative Antibody Tests (People)',
+      target: 'negativeTestsPeopleAntibody',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Negative Antibody Tests (People)',
+      },
+    },
+    {
+      source: 'Total Antigen Tests (People)',
+      target: 'totalTestsPeopleAntigen',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total Antigen Tests (People)',
+      },
+    },
+    {
+      source: 'Positive Antigen Tests (People)',
+      target: 'positiveTestsPeopleAntigen',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Positive Antigen Tests (People)',
+      },
+    },
+    {
+      source: 'Total Antigen Tests',
+      target: 'totalTestsAntigen',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Total Antigen Tests',
+      },
+    },
+    {
+      source: 'Positive Antigen Tests',
+      target: 'positiveTestsAntigen',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: '',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Positive Antigen Tests',
       },
     },
   ],

@@ -34,7 +34,6 @@ module.exports = ({ source, data, subDefinitionOutput }, outputPath) => {
 
   if (source.subDefinitions) {
     source.subDefinitions.forEach((subDefinition) => {
-      console.log(subDefinitionOutput)
       if (typeof subDefinitionOutput[subDefinition.key] === 'undefined') {
         return
       }

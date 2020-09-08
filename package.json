@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node index.js",
+    "build:volunteers": "node index.js -s volunteers --volunteers",
     "webhook": "node trigger-webhook.js",
     "test": "jest",
     "test:lint": "eslint ./src",
@@ -15,6 +16,7 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
+    "@google-cloud/bigquery": "^5.0.0",
     "@slack/web-api": "^5.8.1",
     "@slack/webhook": "^5.0.3",
     "chalk": "^4.0.0",

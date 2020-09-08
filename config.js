@@ -10,11 +10,11 @@ module.exports = {
     },
     servers: [
       {
-        url: 'https://covidtracking.com',
+        url: 'https://api.covidtracking.com',
       },
     ],
   },
-  openApiPathPrefix: '/api/v1/',
+  openApiPathPrefix: '/v1/',
   openApiBaseParameters: [
     {
       name: 'format',
@@ -30,8 +30,10 @@ module.exports = {
         "Use 'json' to return JSON arrays or object. Use 'csv' to return a CSV file.",
     },
   ],
+  bigQuery: {
+    dataset: 'covid_api_export',
+  },
   sources: {
-    press: require('./config/sources/press'),
     screenshots: require('./config/sources/screenshots'),
     volunteers: require('./config/sources/volunteers'),
     us: require('./config/sources/us'),

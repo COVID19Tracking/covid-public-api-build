@@ -1,12 +1,7 @@
-name: API build
+name: Volunteers
 on:
-  push:
-    branches:
-      - feature/internal-endpoints
-  # schedule:
-  #   - cron: '15 * * * *'
-  # repository_dispatch:
-  #   types: [api-build]
+  schedule:
+    - cron: '45 * * * *'
 
 jobs:
   build-api:
@@ -20,7 +15,7 @@ jobs:
       - name: Checkout data repo
         uses: actions/checkout@v2
         with:
-          ref: test/internal-endpoints
+          ref: master
           repository: 'COVID19Tracking/covid-public-api'
           token: ${{ secrets.API_DEPLOY_TOKEN }}
           path: ./_api
@@ -48,29 +43,13 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           BIGQUERY_CREDENTIALS: ${{ secrets.BIGQUERY_CREDENTIALS }}
         run: |
-          npm run build
+          npm run build:volunteers
           npm run test:post-build
-
-      - name: Send webhook
-        env:
-          SITE_BUILD_WEBHOOK: ${{ secrets.SITE_BUILD_WEBHOOK }}
-        run: npm run webhook
 
       - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
         with:
-          commit_message: Update API data
+          commit_message: Update volunteer data
           repository: ./_api
           file_pattern: ./**
           commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>
-
-      - name: Prepare artifacts
-        run: |
-          rm -rf ./_api/.git
-          tar -czvf api-files.tar.gz ./_api
-
-      - name: Upload API artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: api-files
-          path: ./api-files.tar.gz
