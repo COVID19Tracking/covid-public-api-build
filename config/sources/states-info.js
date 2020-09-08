@@ -124,7 +124,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID Tracking Project preferred total test units',
+      source: 'covidTrackingProjectPreferredTotalTestUnits',
       target: 'covidTrackingProjectPreferredTotalTestUnits',
       type: 'string',
       graphQlType: 'String',
@@ -133,7 +133,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'COVID Tracking Project preferred total test field',
+      source: 'covidTrackingProjectPreferredTotalTestField',
       target: 'covidTrackingProjectPreferredTotalTestField',
       type: 'string',
       graphQlType: 'String',
