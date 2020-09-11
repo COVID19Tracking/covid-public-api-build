@@ -232,8 +232,11 @@ module.exports = {
       nullable: true,
       example: 'posNeg',
       sourceFunction: (item) => {
-        if (['RI', 'CO'].indexOf(item.state) > -1) {
+        if (['RI', 'CO', 'ND'].indexOf(item.state) > -1) {
           return 'totalTestEncountersViral'
+        }
+        if (['MA'].indexOf(item.state) > -1) {
+          return 'totalTestsViral'
         }
         return 'posNeg'
       },
@@ -248,8 +251,11 @@ module.exports = {
       nullable: true,
       example: '',
       sourceFunction: (item) => {
-        if (['RI', 'CO'].indexOf(item.state) > -1) {
+        if (['RI', 'CO', 'ND'].indexOf(item.state) > -1) {
           return item.totalTestEncountersViral
+        }
+        if (['MA'].indexOf(item.state) > -1) {
+          return item.totalTestsViral
         }
         return item.positive + item.negative
       },
