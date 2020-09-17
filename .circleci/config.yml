@@ -44,7 +44,7 @@ jobs:
           command: 'npm run build'
       - run:
           name: compare
-          command: 'npm run test:compare'
+          command: 'npm run test:post-build'
       - run:
           name: compress api files
           command: 'tar -czvf api-files.tar.gz ./_api'
