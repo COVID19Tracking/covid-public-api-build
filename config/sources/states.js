@@ -242,7 +242,7 @@ module.exports = {
       },
     },
     {
-      source: 'totalTestResults',
+      source: 'Total Test Results',
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
@@ -250,15 +250,6 @@ module.exports = {
         'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding _positive_ and _negative_ values because some states do not report totals and to work around different reporting cadences for cases and tests. ',
       nullable: true,
       example: '',
-      sourceFunction: (item) => {
-        if (['RI', 'CO', 'ND'].indexOf(item.state) > -1) {
-          return item.totalTestEncountersViral
-        }
-        if (['MA'].indexOf(item.state) > -1) {
-          return item.totalTestsViral
-        }
-        return item.positive + item.negative
-      },
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote: 'Adds up Positive and Negative spreadsheet fields.',
