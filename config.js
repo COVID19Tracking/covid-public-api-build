@@ -1,5 +1,3 @@
-const { DateTime } = require('luxon')
-
 module.exports = {
   outputPath: '_api/v1/',
   openApiFrontmatter: {
