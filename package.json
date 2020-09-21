@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "node index.js",
-    "build:volunteers": "node index.js -s volunteers --volunteers",
     "webhook": "node trigger-webhook.js",
     "test": "jest",
     "test:lint": "eslint ./src",

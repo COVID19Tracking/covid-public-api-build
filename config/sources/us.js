@@ -310,10 +310,10 @@ module.exports = {
         'Deprecated. Computed by adding *positive*, *negative*, and *pending* values.',
       nullable: true,
       example: 50,
-      sourceFunction: (item) => item.positive + item.negative + item.pending,
+      sourceFunction: () => 0,
     },
     {
-      source: 'totalTestResults',
+      source: 'Total Test Results',
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
@@ -321,7 +321,6 @@ module.exports = {
         'Where possible, we report total tests in units of people tested, rather than units of specimens tested. Currently computed by adding positive and negative values because some states do not report totals and to work around different reporting cadences for cases and tests.',
       nullable: true,
       example: 50,
-      sourceFunction: (item) => item.positive + item.negative,
     },
     {
       source: 'posNeg',
@@ -332,7 +331,7 @@ module.exports = {
         'Deprecated. Computed by adding *positive* and *negative* values.',
       nullable: true,
       example: 50,
-      sourceFunction: (item) => item.positive + item.negative,
+      sourceFunction: () => 0,
     },
     {
       source: 'deathIncrease',

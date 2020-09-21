@@ -142,6 +142,15 @@ module.exports = {
       example: '',
     },
     {
+      source: 'totalTestResultsField',
+      target: 'totalTestResultsField',
+      type: 'string',
+      graphQlType: 'String',
+      description: 'Source field for total test results.',
+      nullable: true,
+      example: '',
+    },
+    {
       source: 'pui',
       target: 'pui',
       type: 'string',
