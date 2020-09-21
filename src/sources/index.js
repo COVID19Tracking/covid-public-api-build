@@ -1,11 +1,7 @@
 const config = require('../../config')
 
 const sources = {
-  screenshots: require('./screenshots'),
   us: require('./us'),
-  raceCombined: require('./race-combined'),
-  raceSeparate: require('./race-separate'),
-  raceHomepage: require('./race-homepage'),
   statesInfo: require('./states-info'),
   states: require('./states'),
   status: require('./status'),
