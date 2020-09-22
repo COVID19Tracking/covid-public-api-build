@@ -100,7 +100,6 @@ module.exports = (config) => {
   }
 
   const statesIndividualByDate = (data, definition, writeFile) => {
-    const states = {}
     data.forEach((row) => {
       writeFile(
         definition.path
