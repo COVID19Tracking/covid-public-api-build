@@ -232,18 +232,9 @@ module.exports = {
         'Indicates which field is being used for total test results. If it is posNeg, then it is calculated by adding all positive and negative values.',
       nullable: true,
       example: 'posNeg',
-      sourceFunction: (item) => {
-        if (['RI', 'CO', 'ND'].indexOf(item.state) > -1) {
-          return 'totalTestEncountersViral'
-        }
-        if (['MA'].indexOf(item.state) > -1) {
-          return 'totalTestsViral'
-        }
-        return 'posNeg'
-      },
     },
     {
-      source: 'Total Test Results',
+      source: 'totalTestResults',
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
@@ -264,7 +255,6 @@ module.exports = {
       description: 'Daily Difference in totalTestResults',
       nullable: true,
       example: '',
-      sourceFunction: (item) => 0,
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote:
