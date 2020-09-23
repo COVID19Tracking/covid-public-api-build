@@ -16,6 +16,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@slack/webhook": "^5.0.3",
+    "bl": "^1.2.3",
     "chalk": "^4.0.0",
     "command-line-args": "^5.1.1",
     "csv-parser": "^2.3.2",
