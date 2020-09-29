@@ -106,7 +106,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID-19 site (quaternary)',
+      source: 'covid19SiteQuaternary',
       target: 'covid19SiteQuaternary',
       type: 'string',
       graphQlType: 'String',
@@ -115,7 +115,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID-19 site (quinary)',
+      source: 'covid19SiteQuinary',
       target: 'covid19SiteQuinary',
       type: 'string',
       graphQlType: 'String',
