@@ -227,8 +227,7 @@ module.exports = {
       target: 'totalTestResultsSource',
       type: 'integer',
       graphQlType: 'Int',
-      description:
-        'Indicates which field is being used for total test results. If it is posNeg, then it is calculated by adding all positive and negative values.',
+      description: 'Deprecated field for total test results source',
       nullable: true,
       example: 'posNeg',
       sourceFunction: (item) => {
@@ -239,6 +238,9 @@ module.exports = {
           return 'totalTestsViral'
         }
         return 'posNeg'
+      },
+      metadata: {
+        deprecated: true,
       },
     },
     {
