@@ -268,6 +268,7 @@ module.exports = {
       description: 'Daily Difference in totalTestResults',
       nullable: true,
       example: '',
+      sourceFunction: (item) => item.totalTestResultsIncrease ? item.totalTestResultsIncrease : 0,
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote:
