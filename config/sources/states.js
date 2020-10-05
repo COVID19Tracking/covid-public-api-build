@@ -165,6 +165,19 @@ module.exports = {
       },
     },
     {
+      source: 'probableCases',
+      target: 'probableCases',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Probable cases',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Probable Cases',
+        websiteLabel: 'Probable Cases',
+      },
+    },
+    {
       source: 'negative',
       target: 'negative',
       type: 'integer',
