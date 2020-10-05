@@ -146,7 +146,19 @@ module.exports = {
         websiteLabel: 'Cases',
       },
     },
-
+    {
+      source: 'Probable Cases',
+      target: 'probableCases',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Probable cases',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Probable Cases',
+        websiteLabel: 'Probable Cases',
+      },
+    },
     {
       source: 'positiveIncrease',
       target: 'positiveIncrease',
