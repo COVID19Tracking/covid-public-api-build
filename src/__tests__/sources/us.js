@@ -4,35 +4,12 @@ const sampleRecords = require('../../__mocks__/sources/us/daily.json')
 
 const usSource = require('../../sources/us')
 
-jest.mock('google-spreadsheet', () => {
-  const samples = require('../../__mocks__/sources/us/daily.json')
-  return {
-    GoogleSpreadsheet: jest.fn(() => ({
-      useApiKey: () => {},
-      loadInfo: () => {
-        return new Promise((resolve) => {
-          resolve([])
-        })
-      },
-      sheetsById: [
-        {
-          getRows: () => {
-            return new Promise((resolve) => {
-              resolve(samples)
-            })
-          },
-        },
-      ],
-    })),
-  }
-})
-
 describe('Sources: US Data', () => {
   it('fetches data', (done) => {
-    fetchMock.mockOnce(JSON.stringify(sampleRecords))
-    const { getWorksheetData } = usSource(config)
-    getWorksheetData().then((result) => {
-      expect(result).toHaveLength(3)
+    fetch.mockOnce(JSON.stringify(sampleRecords))
+    const { getData } = usSource(config)
+    getData().then((result) => {
+      expect(result).toHaveLength(5)
       done()
     })
   })
@@ -40,10 +17,13 @@ describe('Sources: US Data', () => {
   it('maps fields', () => {
     const { formatData } = usSource(config)
 
-    expect(formatData(sampleRecords).pop().date).toBe(20200509)
     expect(
-      formatData(sampleRecords).find((a) => a.date === 20200509).deathIncrease
-    ).toBe(1529)
+      formatData(sampleRecords).find((record) => record.date === 20200519).date
+    ).toBe(20200519)
+    expect(
+      formatData(sampleRecords).find((record) => record.date === 20200520)
+        .deathIncrease
+    ).toBe(88125 - 86743)
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
 

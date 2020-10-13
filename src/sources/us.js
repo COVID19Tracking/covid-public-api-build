@@ -1,21 +1,13 @@
 const logger = require('../utilities/logger')
 const reporter = require('../utilities/reporter')()
+const fetch = require('node-fetch')
 const mapFields = require('../utilities/map-fields')
-const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { sheetId, worksheetId, fieldDefinitions } = config.sources.us
+  const { endpoint, fieldDefinitions } = config.sources.us
 
-  const client = new GoogleSpreadsheet(sheetId)
-
-  const getWorksheetData = () => {
-    return client
-      .loadInfo()
-      .then(() => {
-        const sheet = client.sheetsById[worksheetId]
-        return sheet.getRows()
-      })
-      .then((rows) => rows)
+  const getData = () => {
+    return fetch(endpoint).then((result) => result.json())
   }
 
   const formatData = (data, writeFile) => {
@@ -58,15 +50,14 @@ module.exports = (config) => {
   }
 
   return {
-    getWorksheetData,
+    getData,
     formatData,
     usDates,
     fetch: () => {
       return new Promise((resolve) => {
-        logger.info('Fetching US totals from sheets')
-        client.useApiKey(process.env.GOOGLE_API_KEY)
+        logger.info('Fetching US totals from internal API')
 
-        getWorksheetData().then((data) => {
+        getData().then((data) => {
           reporter.addDataLine('US totals', data.length)
           resolve({
             source: config.sources.us,
