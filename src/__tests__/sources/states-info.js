@@ -1,39 +1,15 @@
 require('jest-fetch-mock').enableMocks()
 const config = require('../../__mocks__/config')
 const sampleRecords = require('../../__mocks__/sources/states-info/info.json')
-const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 const statesInfoSource = require('../../sources/states-info')
 
-jest.mock('google-spreadsheet', () => {
-  const samples = require('../../__mocks__/sources/states-info/info.json')
-  return {
-    GoogleSpreadsheet: jest.fn(() => ({
-      useApiKey: () => {},
-      loadInfo: () => {
-        return new Promise((resolve) => {
-          resolve([])
-        })
-      },
-      sheetsById: [
-        {
-          getRows: () => {
-            return new Promise((resolve) => {
-              resolve(samples)
-            })
-          },
-        },
-      ],
-    })),
-  }
-})
-
 describe('Sources: State information', () => {
   it('fetches data', (done) => {
-    const { getWorksheetData } = statesInfoSource(config)
+    const { getData } = statesInfoSource(config)
     fetch.mockOnce(JSON.stringify(sampleRecords))
-    getWorksheetData().then((result) => {
-      expect(result).toHaveLength(4)
+    getData().then((result) => {
+      expect(result).toHaveLength(7)
       done()
     })
   })
@@ -41,7 +17,7 @@ describe('Sources: State information', () => {
   it('maps fields', () => {
     const { formatData } = statesInfoSource(config)
 
-    expect(formatData(sampleRecords).pop().name).toBe('American Samoa')
+    expect(formatData(sampleRecords).pop().name).toBe('Virginia')
     expect(formatData([{ test: 'something' }])).toHaveLength(0)
   })
 
@@ -52,8 +28,8 @@ describe('Sources: State information', () => {
       formattedRecords,
       { path: 'test/{state}/info.{format}' },
       (path, data) => {
-        expect(path).toBe('test/ak/info.{format}')
-        expect(data.state).toBe('AK')
+        expect(path).toBe('test/me/info.{format}')
+        expect(data.state).toBe('ME')
         done()
       }
     )

@@ -1,33 +1,79 @@
 [
   {
-    "State": "AK",
-    "covid19SiteOld": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx",
-    "COVID-19 site": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/monitoring.aspx",
-    "COVID-19 site (secondary)": "http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.aspx",
-    "Twitter": "@Alaska_DHSS",
-    "Notes": "Total tests are taken from the annotations on the charts on the page. \nNegatives = (Totals – Positives)\nPositives occasionally update before totals do; do not revise negatives down, keep the last calculated negative.\nLast Updated (Local Time) = (today's date + time = 00:00)"
+    "covid19Site": "https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus.shtml",
+    "covid19SiteOld": "https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus.shtml",
+    "covid19SiteSecondary": "",
+    "name": ".Maine",
+    "notes": "Maine does not report total tests. Negative tests are updated weekly on Wednesdays, reflecting Maine CDC\u2019s weekly publishing schedule for negative results. As of April 27, Maine is reporting people tested.",
+    "pui": "Only positives",
+    "pum": false,
+    "state": "ME",
+    "twitter": "@mainedhhs"
   },
   {
-    "State": "AL",
-    "covid19SiteOld": "http://www.alabamapublichealth.gov/infectiousdiseases/2019-coronavirus.html",
-    "COVID-19 site": "https://alpublichealth.maps.arcgis.com/apps/opsdashboard/index.html#/6d2771faa9da4a2786a509d82c8cf0f7",
-    "COVID-19 site (secondary)": "https://dph1.adph.state.al.us/covid-19/",
-    "Twitter": "@alpublichealth",
-    "Notes": "Negatives = (Totals - Positives) \nPositives occasionally update before totals do; do not revise negatives down, keep the last calculated negative.\nLast Updated (Local Time) = (current date + time = 00:00)"
+    "covid19Site": "https://cvprovider.nmhealth.org/public-dashboard.html",
+    "covid19SiteOld": "https://cv.nmhealth.org/",
+    "covid19SiteSecondary": "",
+    "name": ".New Mexico",
+    "notes": "[Hospitalization from NMDH](https://cv.nmhealth.org/newsroom/). Hospitalization count is people in New Mexico hospitals: it includes people who tested positive out of state but are hospitalized in New Mexico, and excludes New Mexicans who tested positive in state and transferred to a hospital out of state. As of April 27, New Mexico is reporting people tested.",
+    "pui": "All data",
+    "pum": false,
+    "state": "NM",
+    "twitter": "@NMDOH"
   },
   {
-    "State": "AR",
-    "covid19SiteOld": "https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus",
-    "COVID-19 site": "https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus",
-    "COVID-19 site (secondary)": "https://adem.maps.arcgis.com/apps/opsdashboard/index.html#/f533ac8a8b6040e5896b05b47b17a647",
-    "Twitter": "@adhpio"
+    "covid19Site": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/",
+    "covid19SiteOld": "https://odh.ohio.gov/wps/portal/gov/odh/know-our-programs/Novel-Coronavirus/welcome/",
+    "covid19SiteSecondary": "https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards/key-metrics/cases",
+    "name": ".Ohio",
+    "notes": "Ohio now publishes detailed [Key Metrics](https://coronavirus.ohio.gov/wps/portal/gov/covid-19/dashboards/key-metrics/cases)",
+    "pui": "All data",
+    "pum": false,
+    "state": "OH",
+    "twitter": "@OHdeptofhealth"
   },
   {
-    "State": "AS",
-    "covid19SiteOld": "http://www.samoagovt.ws/2020/03/ministry-of-health-coronavirus-covid-19-update-14-march-2020/",
-    "COVID-19 site": "https://www.americansamoa.gov/covid-19-advisories",
-    "COVID-19 site (secondary)": "https://www.facebook.com/amsamgov/",
-    "Twitter": null,
-    "Notes": "Our data comes from a press release [from 5/1](https://6fe16cc8-c42f-411f-9950-4abb1763c703.filesusr.com/ugd/4bfff9_54e0ecfd113444029f54b7ebbcc92972.pdf)"
+    "covid19Site": "https://www.tn.gov/health/cedep/ncov.html",
+    "covid19SiteOld": "https://www.tn.gov/health/cedep/ncov.html",
+    "covid19SiteSecondary": "https://apps.health.tn.gov/AEM_embed/TDH-2019-Novel-Coronavirus-Epi-and-Surveillance.pdf#toolbar=0",
+    "name": ".Tennessee",
+    "notes": "Tennessee now provides positive and negative test results from all laboratories. On April 5, the state reported a decline in recoveries. As of April 27, Tennessee is reporting people tested.",
+    "pui": "Only positives",
+    "pum": false,
+    "state": "TN",
+    "twitter": "@TNDeptofHealth"
+  },
+  {
+    "covid19Site": "https://txdshs.maps.arcgis.com/apps/opsdashboard/index.html#/ed483ecd702b4298ab01e8b9cafc8b83",
+    "covid19SiteOld": "https://dshs.texas.gov/coronavirus/",
+    "covid19SiteSecondary": "https://dshs.texas.gov/news/updates.shtm#coronavirus",
+    "name": ".Texas",
+    "notes": "",
+    "pui": "Only positives",
+    "pum": false,
+    "state": "TX",
+    "twitter": "@TexasDSHS"
+  },
+  {
+    "covid19Site": "https://coronavirus-dashboard.utah.gov/",
+    "covid19SiteOld": "https://health.utah.gov/coronavirus",
+    "covid19SiteSecondary": "https://coronavirus-dashboard.utah.gov/#hospitalizations",
+    "name": ".Utah",
+    "notes": "Positive count includes non-Utah residents. Negative = Total - Positive. According to the state, negative test results may lag for up to 72 hours, and recovered persons is estimated by cases whose first positive laboratory test was reported at least 21 days ago, excluding deaths. As of April 27, Utah is reporting people tested.",
+    "pui": "Only positives",
+    "pum": false,
+    "state": "UT",
+    "twitter": "@utahdepofhealth"
+  },
+  {
+    "covid19Site": "https://public.tableau.com/views/VirginiaCOVID-19Dashboard/VirginiaCOVID-19Dashboard?:embed=yes&:display_count=yes&:showVizHome=no&:toolbar=no",
+    "covid19SiteOld": "http://www.vdh.virginia.gov/surveillance-and-investigation/novel-coronavirus/",
+    "covid19SiteSecondary": "https://www.vhha.com/communications/virginia-hospital-covid-19-data-dashboard/",
+    "name": ".Virginia",
+    "notes": "Virginia hospitalization statistics from [Hospital dashboard](https://www.vhha.com/communications/virginia-hospital-covid-19-data-dashboard/)  We assume the count \"hospitalized in the ICU\" includes the count \"currently on a ventilator.\" Cumulative Hospitalized is computed from currently hospitalized + discharged on the Virginia Hospitals dashboard. As of April 27, Virginia is reporting people tested.",
+    "pui": "Positives + Negatives",
+    "pum": true,
+    "state": "VA",
+    "twitter": "@vdhgov"
   }
 ]
