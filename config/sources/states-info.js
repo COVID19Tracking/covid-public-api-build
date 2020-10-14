@@ -4,12 +4,11 @@ module.exports = {
   schema: 'StatesInfo',
   path: 'states/info.{format}',
   tags: ['States Current and Historical Data'],
+  endpoint: 'http://internalapi.covidtracking.com/api/v1/public/states/info',
   summary: 'State metadata',
   description: `Basic information about states, including notes about our methodology and the websites we use to check for data.`,
   xPublicSourceUrl:
     'https://docs.google.com/spreadsheets/u/2/d/e/2PACX-1vRwAqp96T9sYYq2-i7Tj0pvTf6XVHjDSMIKBdZHXiCGGdNC0ypEU9NbngS8mxea55JuCFuua1MUeOj5/pubhtml#',
-  sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
-  worksheetId: '1983833656',
   subDefinitions: [
     {
       key: 'statesIndividualInfo',
@@ -36,7 +35,7 @@ module.exports = {
   ],
   fieldDefinitions: [
     {
-      source: 'State',
+      source: 'state',
       target: 'state',
       type: 'string',
       graphQlType: 'String',
@@ -71,7 +70,7 @@ module.exports = {
           : 0,
     },
     {
-      source: 'Notes',
+      source: 'notes',
       target: 'notes',
       type: 'string',
       graphQlType: 'String',
@@ -80,7 +79,7 @@ module.exports = {
       example: 'This state reports data correctly.',
     },
     {
-      source: 'COVID-19 site',
+      source: 'covid19Site',
       target: 'covid19Site',
       type: 'string',
       graphQlType: 'String',
@@ -89,7 +88,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID-19 site (secondary)',
+      source: 'covid19SiteSecondary',
       target: 'covid19SiteSecondary',
       type: 'string',
       graphQlType: 'String',
@@ -98,7 +97,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID-19 site (tertiary)',
+      source: 'covid19SiteTertiary',
       target: 'covid19SiteTertiary',
       type: 'string',
       graphQlType: 'String',
@@ -107,7 +106,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID-19 site (quaternary)',
+      source: 'covid19SiteQuaternary',
       target: 'covid19SiteQuaternary',
       type: 'string',
       graphQlType: 'String',
@@ -116,7 +115,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID-19 site (quinary)',
+      source: 'covid19SiteQuinary',
       target: 'covid19SiteQuinary',
       type: 'string',
       graphQlType: 'String',
@@ -125,7 +124,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'Twitter',
+      source: 'twitter',
       target: 'twitter',
       type: 'string',
       graphQlType: 'String',
@@ -134,7 +133,7 @@ module.exports = {
       example: '@Alaska_DHSS',
     },
     {
-      source: 'COVID-19 site (OLD)',
+      source: 'covid19SiteOld',
       target: 'covid19SiteOld',
       type: 'string',
       graphQlType: 'String',
@@ -143,7 +142,7 @@ module.exports = {
       example: 'http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/default.asp',
     },
     {
-      source: 'COVID Tracking Project preferred total test units',
+      source: 'covidTrackingProjectPreferredTotalTestUnits',
       target: 'covidTrackingProjectPreferredTotalTestUnits',
       type: 'string',
       graphQlType: 'String',
@@ -152,7 +151,7 @@ module.exports = {
       example: '',
     },
     {
-      source: 'COVID Tracking Project preferred total test field',
+      source: 'covidTrackingProjectPreferredTotalTestField',
       target: 'covidTrackingProjectPreferredTotalTestField',
       type: 'string',
       graphQlType: 'String',
@@ -177,7 +176,6 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      sourceFunction: () => '',
     },
     {
       source: 'pum',
@@ -187,7 +185,6 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      sourceFunction: () => false,
     },
   ],
 }
