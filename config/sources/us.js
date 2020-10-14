@@ -313,7 +313,7 @@ module.exports = {
       sourceFunction: () => 0,
     },
     {
-      source: 'Total Test Results',
+      source: 'totalTestResults',
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
