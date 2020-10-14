@@ -18,7 +18,7 @@ module.exports = (config) => {
         records.push(result)
       }
     })
-    return records
+    return records.sort((a, b) => (a.state < b.state ? -1 : 1))
   }
 
   const statesIndividualInfo = (data, definition, writeFile) => {
