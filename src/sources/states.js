@@ -113,7 +113,7 @@ module.exports = (config) => {
     statesIndividualByDate,
     fetch: () => {
       return new Promise((resolve) => {
-        logger.info('Fetching state totals from sheets')
+        logger.info('Fetching daily totals from internal API')
 
         getData().then((data) => {
           reporter.addDataLine('State daily records', data.length)

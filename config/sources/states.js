@@ -239,8 +239,8 @@ module.exports = {
     {
       source: 'totalTestResultsSource',
       target: 'totalTestResultsSource',
-      type: 'integer',
-      graphQlType: 'Int',
+      type: 'string',
+      graphQlType: 'String',
       description:
         'Indicates which field is being used for total test results. If it is posNeg, then it is calculated by adding all positive and negative values.',
       nullable: true,
