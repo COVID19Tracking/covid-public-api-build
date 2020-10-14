@@ -44,32 +44,6 @@ module.exports = {
       example: 'CA',
     },
     {
-      source: 'name',
-      target: 'name',
-      type: 'string',
-      graphQlType: 'String',
-      description: 'The name of the state',
-      nullable: false,
-      example: 'California',
-      sourceFunction: (item) =>
-        typeof stateNames[item.state] !== 'undefined'
-          ? stateNames[item.state].name
-          : 0,
-    },
-    {
-      source: 'fips',
-      target: 'fips',
-      type: 'string',
-      graphQlType: 'String',
-      description: 'The census FIPS code',
-      nullable: false,
-      example: '09',
-      sourceFunction: (item) =>
-        typeof stateNames[item.state] !== 'undefined'
-          ? stateNames[item.state].fips
-          : 0,
-    },
-    {
       source: 'notes',
       target: 'notes',
       type: 'string',
@@ -167,6 +141,32 @@ module.exports = {
       description: 'Source field for total test results.',
       nullable: true,
       example: '',
+    },
+    {
+      source: 'name',
+      target: 'name',
+      type: 'string',
+      graphQlType: 'String',
+      description: 'The name of the state',
+      nullable: false,
+      example: 'California',
+      sourceFunction: (item) =>
+        typeof stateNames[item.state] !== 'undefined'
+          ? stateNames[item.state].name
+          : 0,
+    },
+    {
+      source: 'fips',
+      target: 'fips',
+      type: 'string',
+      graphQlType: 'String',
+      description: 'The census FIPS code',
+      nullable: false,
+      example: '09',
+      sourceFunction: (item) =>
+        typeof stateNames[item.state] !== 'undefined'
+          ? stateNames[item.state].fips
+          : 0,
     },
     {
       source: 'pui',
