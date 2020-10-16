@@ -22,12 +22,11 @@ module.exports = {
   schema: 'States',
   path: 'states/daily.{format}',
   tags: ['States Current and Historical Data'],
+  endpoint: 'https://internalapi.covidtracking.com/api/v1/public/states/daily',
   summary: 'Historic values for all states',
   description:
     'Lists all COVID data available for every state since tracking started.',
   xPublicSourceUrl,
-  sheetId: '18oVRrHj3c183mHmq3m89_163yuYltLNlOmPerQ18E8w',
-  worksheetId: '916628299',
   subDefinitions: [
     {
       key: 'statesCurrent',
@@ -90,7 +89,7 @@ module.exports = {
   ],
   fieldDefinitions: [
     {
-      source: 'Date',
+      source: 'date',
       target: 'date',
       type: 'integer',
       graphQlType: 'Int',
@@ -98,12 +97,14 @@ module.exports = {
         'Date on which data was collected by The COVID Tracking Project.',
       nullable: false,
       example: 20200501,
+      format: (date) =>
+        parseInt(DateTime.fromISO(date).toFormat('yyyyLLdd'), 10),
       metadata: {
         sheetColumn: 'Date',
       },
     },
     {
-      source: 'State',
+      source: 'state',
       target: 'state',
       type: 'string',
       graphQlType: 'String',
@@ -133,7 +134,7 @@ module.exports = {
           : 0,
     },
     {
-      source: 'Positive',
+      source: 'positive',
       target: 'positive',
       type: 'integer',
       graphQlType: 'Int',
@@ -146,19 +147,7 @@ module.exports = {
         websiteLabel: 'Cases',
       },
     },
-    {
-      source: 'Probable Cases',
-      target: 'probableCases',
-      type: 'integer',
-      graphQlType: 'Int',
-      description: 'Probable cases',
-      nullable: true,
-      example: '',
-      metadata: {
-        sheetColumn: 'Probable Cases',
-        websiteLabel: 'Probable Cases',
-      },
-    },
+
     {
       source: 'positiveIncrease',
       target: 'positiveIncrease',
@@ -176,7 +165,20 @@ module.exports = {
       },
     },
     {
-      source: 'Negative',
+      source: 'probableCases',
+      target: 'probableCases',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Probable cases',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Probable Cases',
+        websiteLabel: 'Probable Cases',
+      },
+    },
+    {
+      source: 'negative',
       target: 'negative',
       type: 'integer',
       graphQlType: 'Int',
@@ -206,7 +208,7 @@ module.exports = {
       },
     },
     {
-      source: 'Pending',
+      source: 'pending',
       target: 'pending',
       type: 'integer',
       graphQlType: 'Int',
@@ -237,26 +239,15 @@ module.exports = {
     {
       source: 'totalTestResultsSource',
       target: 'totalTestResultsSource',
-      type: 'integer',
-      graphQlType: 'Int',
-      description: 'Deprecated field for total test results source',
+      type: 'string',
+      graphQlType: 'String',
+      description:
+        'Indicates which field is being used for total test results. If it is posNeg, then it is calculated by adding all positive and negative values.',
       nullable: true,
       example: 'posNeg',
-      sourceFunction: (item) => {
-        if (['RI', 'CO', 'ND'].indexOf(item.state) > -1) {
-          return 'totalTestEncountersViral'
-        }
-        if (['MA'].indexOf(item.state) > -1) {
-          return 'totalTestsViral'
-        }
-        return 'posNeg'
-      },
-      metadata: {
-        deprecated: true,
-      },
     },
     {
-      source: 'Total Test Results',
+      source: 'totalTestResults',
       target: 'totalTestResults',
       type: 'integer',
       graphQlType: 'Int',
@@ -277,7 +268,8 @@ module.exports = {
       description: 'Daily Difference in totalTestResults',
       nullable: true,
       example: '',
-      sourceFunction: (item) => 0,
+      sourceFunction: (item) =>
+        item.totalTestResultsIncrease ? item.totalTestResultsIncrease : 0,
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         internalNote:
@@ -301,7 +293,7 @@ module.exports = {
     },
 
     {
-      source: 'Hospitalized – Currently',
+      source: 'hospitalizedCurrently',
       target: 'hospitalizedCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -310,11 +302,11 @@ module.exports = {
       nullable: true,
       example: '',
       metadata: {
-        sheetColumn: 'Hospitalized – Currently',
+        sheetColumn: 'Hospitalized – Currently',
       },
     },
     {
-      source: 'Hospitalized – Cumulative',
+      source: 'hospitalizedCumulative',
       target: 'hospitalizedCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -327,7 +319,7 @@ module.exports = {
       },
     },
     {
-      source: 'In ICU – Currently',
+      source: 'inIcuCurrently',
       target: 'inIcuCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -336,11 +328,11 @@ module.exports = {
       nullable: true,
       example: '',
       metadata: {
-        sheetColumn: 'In ICU – Currently',
+        sheetColumn: 'In ICU – Currently',
       },
     },
     {
-      source: 'In ICU – Cumulative',
+      source: 'inIcuCumulative',
       target: 'inIcuCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -349,11 +341,11 @@ module.exports = {
       nullable: true,
       example: '',
       metadata: {
-        sheetColumn: 'In ICU – Cumulative',
+        sheetColumn: 'In ICU – Cumulative',
       },
     },
     {
-      source: 'On Ventilator – Currently',
+      source: 'onVentilatorCurrently',
       target: 'onVentilatorCurrently',
       type: 'integer',
       graphQlType: 'Int',
@@ -362,11 +354,11 @@ module.exports = {
       nullable: true,
       example: '',
       metadata: {
-        sheetColumn: 'On Ventilator – Currently',
+        sheetColumn: 'On Ventilator – Currently',
       },
     },
     {
-      source: 'On Ventilator – Cumulative',
+      source: 'onVentilatorCumulative',
       target: 'onVentilatorCumulative',
       type: 'integer',
       graphQlType: 'Int',
@@ -375,11 +367,11 @@ module.exports = {
       nullable: true,
       example: '',
       metadata: {
-        sheetColumn: 'On Ventilator – Cumulative',
+        sheetColumn: 'On Ventilator – Cumulative',
       },
     },
     {
-      source: 'Recovered',
+      source: 'recovered',
       target: 'recovered',
       type: 'integer',
       graphQlType: 'Int',
@@ -392,7 +384,7 @@ module.exports = {
       },
     },
     {
-      source: 'Data Quality Grade',
+      source: 'dataQualityGrade',
       target: 'dataQualityGrade',
       type: 'string',
       graphQlType: 'String',
@@ -405,7 +397,7 @@ module.exports = {
       },
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'lastUpdateEt',
       type: 'string',
       graphQlType: 'String',
@@ -418,7 +410,7 @@ module.exports = {
       },
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'dateModified',
       type: 'string',
       graphQlType: 'String',
@@ -428,7 +420,7 @@ module.exports = {
       format: (date) =>
         date
           ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
-              .setZone('UTC')
+              .setZone('UTC', { keepLocalTime: true })
               .toFormat(`yyyy-LL-dd'T'TT'Z'`)
           : null,
       metadata: {
@@ -439,7 +431,7 @@ module.exports = {
       },
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'checkTimeEt',
       type: 'string',
       graphQlType: 'String',
@@ -448,7 +440,7 @@ module.exports = {
       example: '',
       format: (date) =>
         date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
+          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm', { zone: 'UTC' })
               .setZone('America/New_York')
               .toFormat(`LL/dd HH:mm`)
           : null,
@@ -460,7 +452,7 @@ module.exports = {
       },
     },
     {
-      source: 'Deaths',
+      source: 'death',
       target: 'death',
       type: 'integer',
       graphQlType: 'Int',
@@ -488,7 +480,7 @@ module.exports = {
       },
     },
     {
-      source: 'Hospitalized – Cumulative',
+      source: 'hospitalizedCumulative',
       target: 'hospitalized',
       type: 'integer',
       graphQlType: 'Int',
@@ -516,7 +508,7 @@ module.exports = {
       },
     },
     {
-      source: 'Last Update ET',
+      source: 'lastUpdateEt',
       target: 'dateChecked',
       type: 'string',
       graphQlType: 'String',
@@ -529,6 +521,7 @@ module.exports = {
               `yyyy-LL-dd'T'TT'Z'`
             )
           : null,
+
       metadata: {
         deprecated: true,
         internalNote: 'This is an old label for "Last Update ET".',
@@ -629,7 +622,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Tests (PCR)',
+      source: 'totalTestsViral',
       target: 'totalTestsViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -641,7 +634,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Tests (PCR)',
+      source: 'positiveTestsViral',
       target: 'positiveTestsViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -653,7 +646,7 @@ module.exports = {
       },
     },
     {
-      source: 'Negative Tests (PCR)',
+      source: 'negativeTestsViral',
       target: 'negativeTestsViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -665,7 +658,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Cases (PCR)',
+      source: 'positiveCasesViral',
       target: 'positiveCasesViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -678,7 +671,7 @@ module.exports = {
       },
     },
     {
-      source: 'Deaths (confirmed)',
+      source: 'deathConfirmed',
       target: 'deathConfirmed',
       type: 'integer',
       graphQlType: 'Int',
@@ -691,7 +684,7 @@ module.exports = {
       },
     },
     {
-      source: 'Deaths (probable)',
+      source: 'deathProbable',
       target: 'deathProbable',
       type: 'integer',
       graphQlType: 'Int',
@@ -704,7 +697,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Test Encounters (PCR)',
+      source: 'totalTestEncountersViral',
       target: 'totalTestEncountersViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -716,7 +709,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total PCR Tests (People)',
+      source: 'totalTestsPeopleViral',
       target: 'totalTestsPeopleViral',
       type: 'integer',
       graphQlType: 'Int',
@@ -728,7 +721,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antibody Tests',
+      source: 'totalTestsAntibody',
       target: 'totalTestsAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -740,7 +733,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antibody Tests',
+      source: 'positiveTestsAntibody',
       target: 'positiveTestsAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -752,7 +745,7 @@ module.exports = {
       },
     },
     {
-      source: 'Negative Antibody Tests',
+      source: 'negativeTestsAntibody',
       target: 'negativeTestsAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -764,7 +757,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antibody Tests (People)',
+      source: 'totalTestsPeopleAntibody',
       target: 'totalTestsPeopleAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -776,7 +769,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antibody Tests (People)',
+      source: 'positiveTestsPeopleAntibody',
       target: 'positiveTestsPeopleAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -788,7 +781,7 @@ module.exports = {
       },
     },
     {
-      source: 'Negative Antibody Tests (People)',
+      source: 'negativeTestsPeopleAntibody',
       target: 'negativeTestsPeopleAntibody',
       type: 'integer',
       graphQlType: 'Int',
@@ -800,7 +793,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antigen Tests (People)',
+      source: 'totalTestsPeopleAntigen',
       target: 'totalTestsPeopleAntigen',
       type: 'integer',
       graphQlType: 'Int',
@@ -812,7 +805,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antigen Tests (People)',
+      source: 'positiveTestsPeopleAntigen',
       target: 'positiveTestsPeopleAntigen',
       type: 'integer',
       graphQlType: 'Int',
@@ -824,7 +817,7 @@ module.exports = {
       },
     },
     {
-      source: 'Total Antigen Tests',
+      source: 'totalTestsAntigen',
       target: 'totalTestsAntigen',
       type: 'integer',
       graphQlType: 'Int',
@@ -836,7 +829,7 @@ module.exports = {
       },
     },
     {
-      source: 'Positive Antigen Tests',
+      source: 'positiveTestsAntigen',
       target: 'positiveTestsAntigen',
       type: 'integer',
       graphQlType: 'Int',

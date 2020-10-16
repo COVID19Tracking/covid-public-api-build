@@ -1,21 +1,13 @@
+const fetch = require('node-fetch')
 const logger = require('../utilities/logger')
 const reporter = require('../utilities/reporter')()
 const mapFields = require('../utilities/map-fields')
-const { GoogleSpreadsheet } = require('google-spreadsheet')
 
 module.exports = (config) => {
-  const { sheetId, worksheetId, fieldDefinitions } = config.sources.states
+  const { endpoint, fieldDefinitions } = config.sources.states
 
-  const client = new GoogleSpreadsheet(sheetId)
-
-  const getWorksheetData = () => {
-    return client
-      .loadInfo()
-      .then(() => {
-        const sheet = client.sheetsById[worksheetId]
-        return sheet.getRows()
-      })
-      .then((rows) => rows)
+  const getData = () => {
+    return fetch(endpoint).then((result) => result.json())
   }
 
   const addIncrease = (data) => {
@@ -111,7 +103,7 @@ module.exports = (config) => {
   }
 
   return {
-    getWorksheetData,
+    getData,
     formatData,
     statesCurrent,
     addIncrease,
@@ -120,10 +112,9 @@ module.exports = (config) => {
     statesIndividualByDate,
     fetch: () => {
       return new Promise((resolve) => {
-        logger.info('Fetching state totals from sheets')
+        logger.info('Fetching daily totals from internal API')
 
-        client.useApiKey(process.env.GOOGLE_API_KEY)
-        getWorksheetData().then((data) => {
+        getData().then((data) => {
           reporter.addDataLine('State daily records', data.length)
           resolve({
             source: config.sources.states,
