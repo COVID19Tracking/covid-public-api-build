@@ -147,7 +147,19 @@ module.exports = {
         websiteLabel: 'Cases',
       },
     },
-
+    {
+      source: 'probableCases',
+      target: 'probableCases',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Probable cases',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Probable Cases',
+        websiteLabel: 'Probable Cases',
+      },
+    },
     {
       source: 'positiveIncrease',
       target: 'positiveIncrease',
@@ -162,19 +174,6 @@ module.exports = {
         sheetColumn: 'Positive',
         internalNote:
           "This field is computed by subtracting the prior date's value for positive from the current date",
-      },
-    },
-    {
-      source: 'probableCases',
-      target: 'probableCases',
-      type: 'integer',
-      graphQlType: 'Int',
-      description: 'Probable cases',
-      nullable: true,
-      example: '',
-      metadata: {
-        sheetColumn: 'Probable Cases',
-        websiteLabel: 'Probable Cases',
       },
     },
     {
