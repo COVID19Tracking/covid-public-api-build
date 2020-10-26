@@ -22,7 +22,7 @@ module.exports = {
   schema: 'States',
   path: 'states/daily.{format}',
   tags: ['States Current and Historical Data'],
-  endpoint: 'https://internalapi.covidtracking.com/api/v1/public/states/daily',
+  endpoint: `https://${process.env.INTERNAL_API_HOST}/api/v1/public/states/daily`,
   summary: 'Historic values for all states',
   description:
     'Lists all COVID data available for every state since tracking started.',

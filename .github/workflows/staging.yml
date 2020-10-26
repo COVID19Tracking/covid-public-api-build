@@ -16,7 +16,7 @@ jobs:
       - name: Checkout data repo
         uses: actions/checkout@v2
         with:
-          ref: test/internal-endpoints
+          ref: staging
           repository: 'COVID19Tracking/covid-public-api'
           token: ${{ secrets.API_DEPLOY_TOKEN }}
           path: ./_api
@@ -39,9 +39,9 @@ jobs:
 
       - name: Build API files
         env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          INTERNAL_API_HOST: internalapi-stage.covidtracking.com
         run: |
           npm run build
           npm run test:post-build
