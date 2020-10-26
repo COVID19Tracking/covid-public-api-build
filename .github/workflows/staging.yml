@@ -10,7 +10,6 @@ jobs:
       - name: Checkout build repo
         uses: actions/checkout@v2
         with:
-          ref: feature/internal-endpoints
           path: ./
 
       - name: Checkout data repo
