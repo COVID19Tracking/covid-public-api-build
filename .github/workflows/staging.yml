@@ -54,6 +54,11 @@ jobs:
           file_pattern: ./**
           commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>
 
+      - name: Trigger staging site build
+        env:
+          STAGING_SITE_WEBHOOK: ${{ secrets.STAGING_SITE_WEBHOOK }}
+        run: curl -X POST -d {} $STAGING_SITE_WEBHOOK
+
       - name: Prepare artifacts
         run: |
           rm -rf ./_api/.git
