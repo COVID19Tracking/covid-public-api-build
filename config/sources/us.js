@@ -12,7 +12,7 @@ module.exports = {
   summary: 'Historic US values',
   description: 'All COVID data for the US.',
   xPublicSourceUrl,
-  endpoint: 'https://internalapi.covidtracking.com/api/v1/public/us/daily',
+  endpoint: `https://${process.env.INTERNAL_API_HOST}/api/v1/public/us/daily`,
   subDefinitions: [
     {
       key: 'usCurrent',
