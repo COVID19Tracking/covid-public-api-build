@@ -415,12 +415,7 @@ module.exports = {
       description: 'Deprecated, use lastUpdateEt instead',
       nullable: true,
       example: '',
-      format: (date) =>
-        date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm')
-              .setZone('UTC', { keepLocalTime: true })
-              .toFormat(`yyyy-LL-dd'T'TT'Z'`)
-          : null,
+      sourceFunction: (item) => null,
       metadata: {
         deprecated: true,
         sheetColumn: 'Last Update ET',
