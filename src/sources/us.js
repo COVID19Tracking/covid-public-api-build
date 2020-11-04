@@ -30,8 +30,7 @@ module.exports = (config) => {
           lastItem = row
           return row
         }
-        row.hospitalizedIncrease =
-          row.hospitalizedCumulative - lastItem.hospitalizedCumulative
+        row.hospitalizedIncrease = 0
         row.deathIncrease = row.death - lastItem.death
         row.negativeIncrease = row.negative - lastItem.negative
         row.positiveIncrease = row.positive - lastItem.positive

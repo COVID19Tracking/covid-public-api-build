@@ -19,9 +19,7 @@ module.exports = (config) => {
           lastItems[row.state] = row
           return row
         }
-        row.hospitalizedIncrease =
-          row.hospitalizedCumulative -
-          lastItems[row.state].hospitalizedCumulative
+        row.hospitalizedIncrease = 0
         row.deathIncrease = row.death - lastItems[row.state].death
         row.negativeIncrease = row.negative - lastItems[row.state].negative
         row.positiveIncrease = row.positive - lastItems[row.state].positive
