@@ -172,6 +172,19 @@ module.exports = {
       example: 50,
     },
     {
+      source: 'lastUpdateEt',
+      target: 'lastUpdateEt',
+      type: 'string',
+      graphQlType: 'String',
+      description:
+        'Date and time in Eastern time the state or territory last updated the data.',
+      nullable: true,
+      example: '',
+      metadata: {
+        sheetColumn: 'Last Update ET',
+      },
+    },
+    {
       source: 'dateChecked',
       target: 'dateChecked',
       type: 'string',
@@ -179,8 +192,7 @@ module.exports = {
       description: 'Deprecated. This is an old label for *lastUpdateEt*.',
       nullable: true,
       example: 50,
-      format: (date) =>
-        DateTime.fromISO(date).setZone('UTC').toFormat(`yyyy-LL-dd'T'TT'Z'`),
+      sourceFunction: (item) => null,
     },
     {
       source: 'death',
@@ -297,8 +309,7 @@ module.exports = {
       description: 'Deprecated. Old label for lastUpdateET.',
       nullable: false,
       example: '2020-05-27T12:18:23.392Z',
-      format: (date) =>
-        DateTime.fromISO(date).setZone('UTC').toFormat(`yyyy-LL-dd'T'TT'Z'`),
+      sourceFunction: (item) => null,
     },
     {
       source: 'hash',
