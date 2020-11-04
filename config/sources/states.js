@@ -1,5 +1,4 @@
 const { DateTime } = require('luxon')
-const objectHash = require('object-hash')
 const stateNames = require('../state-names')
 
 const xPublicSourceUrl =
