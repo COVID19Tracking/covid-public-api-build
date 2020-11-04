@@ -226,8 +226,7 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      sourceFunction: (item) =>
-        (item.positive || 0) + (item.negative || 0) + (item.pending || 0),
+      sourceFunction: (item) => 0,
       metadata: {
         sheetColumn: '"Positive", "Negative" & "Pending"',
         deprecated: true,
@@ -283,7 +282,7 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      sourceFunction: (item) => item.positive + item.negative,
+      sourceFunction: (item) => 0,
       metadata: {
         sheetColumn: '"Positive" & "Negative"',
         deprecated: true,
@@ -437,12 +436,7 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      format: (date) =>
-        date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm', { zone: 'UTC' })
-              .setZone('America/New_York')
-              .toFormat(`LL/dd HH:mm`)
-          : null,
+      sourceFunction: (item) => null,
       metadata: {
         deprecated: true,
         sheetColumn: 'Last Update ET',
@@ -514,12 +508,7 @@ module.exports = {
       description: 'Deprecated',
       nullable: true,
       example: '',
-      format: (date) =>
-        date
-          ? DateTime.fromFormat(date, 'M/d/yyyy HH:mm').toFormat(
-              `yyyy-LL-dd'T'TT'Z'`
-            )
-          : null,
+      sourceFunction: (item) => null,
 
       metadata: {
         deprecated: true,
@@ -535,7 +524,7 @@ module.exports = {
       description: 'Deprecated - A hash of the current record.',
       nullable: true,
       example: '',
-      sourceFunction: (item) => objectHash(item),
+      sourceFunction: (item) => null,
       metadata: {
         deprecated: true,
         internalNote:

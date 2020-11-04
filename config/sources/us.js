@@ -308,7 +308,7 @@ module.exports = {
       description: 'A hash for this record',
       nullable: false,
       example: 50,
-      sourceFunction: (item) => objectHash(item),
+      sourceFunction: (item) => null,
     },
   ],
 }
