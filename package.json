@@ -23,7 +23,7 @@
     "fs-extra": "^9.0.0",
     "graphql": "^15.0.0",
     "graphql-compose": "^7.15.0",
-    "luxon": "^1.24.1",
+    "luxon": "^1.25.0",
     "markdown-table": "^2.0.0",
     "nodegit": "^0.27.0",
     "oas-normalize": "^2.1.0",
