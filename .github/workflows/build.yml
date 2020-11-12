@@ -25,8 +25,8 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
+          # yarn cache files are stored in `~/.yarn` on Linux/macOS
+          path: ~/.yarn
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build API files
         env:
@@ -42,13 +42,13 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           INTERNAL_API_HOST: internalapi.covidtracking.com
         run: |
-          npm run build
-          npm run test:post-build
+          yarn run build
+          yarn run test:post-build
 
       - name: Send webhook
         env:
           SITE_BUILD_WEBHOOK: ${{ secrets.SITE_BUILD_WEBHOOK }}
-        run: npm run webhook
+        run: yarn run webhook
 
       - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
