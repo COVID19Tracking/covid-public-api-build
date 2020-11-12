@@ -27,7 +27,7 @@ module.exports = (config) => {
         description: source.description,
         'x-public-source-url': source.xPublicSourceUrl || false,
         responses: {
-          '200': {
+          200: {
             description: 'OK',
             content,
           },
