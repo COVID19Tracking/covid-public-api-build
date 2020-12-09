@@ -97,7 +97,7 @@ module.exports = () => {
       'https://internalapi.covidtracking.com/api/v2/public/states'
     ).then((response) => response.json())
     statesInfo.meta.field_definitions = endpointFields(['states'], [])
-    await fs.outputJson('./_api/v2/states/info.json', statesInfo)
+    await fs.outputJson('./_api/v2/states.json', statesInfo)
 
     statesInfo.data.forEach(async (row) => {
       const dateData = { meta: statesInfo.meta, data: row }
