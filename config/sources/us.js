@@ -170,6 +170,7 @@ module.exports = {
         'Deprecated: Individuals who have recovered from COVID-19. Definitions vary by state / territory.',
       nullable: true,
       example: 50,
+      sourceFunction: () => null,
     },
     {
       source: 'dateChecked',
