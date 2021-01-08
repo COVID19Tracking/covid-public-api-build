@@ -167,7 +167,7 @@ module.exports = {
       type: 'integer',
       graphQlType: 'Int',
       description:
-        'Individuals who have recovered from COVID-19. Definitions vary by state / territory.',
+        'Deprecated: Individuals who have recovered from COVID-19. Definitions vary by state / territory.',
       nullable: true,
       example: 50,
     },
