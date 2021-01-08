@@ -36,14 +36,14 @@ module.exports = () => {
       'https://internalapi.covidtracking.com/api/v2/public/us/daily'
     ).then((response) => response.json())
     daily.meta.field_definitions = endpointFields(
-      ['us-daily'],
+      ['states-daily'],
       ['states', 'date']
     )
     await fs.outputJson('./_api/v2/us/daily.json', daily)
 
     daily.data.forEach(async (row) => {
       const dateData = { meta: daily.meta, data: row }
-      await fs.outputJson(`./_api/v2/us/daily/${row.date}/index.json`, dateData)
+      await fs.outputJson(`./_api/v2/us/daily/${row.date}.json`, dateData)
     })
 
     const simple = await fetch(
@@ -73,7 +73,7 @@ module.exports = () => {
       await fs.outputJson(
         `./_api/v2/states/daily/${row.state.toLowerCase()}/${
           row.date
-        }/index.json`,
+        }.json`,
         dateData
       )
     })
