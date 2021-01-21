@@ -18,6 +18,7 @@ jobs:
           ref: master
           repository: 'COVID19Tracking/covid-public-api'
           token: ${{ secrets.API_DEPLOY_TOKEN }}
+          ref: api-2
           path: ./_api
 
       - name: Cache node modules
@@ -41,6 +42,8 @@ jobs:
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           INTERNAL_API_HOST: internalapi.covidtracking.com
+          CONTENTFUL_SPACE: ${{ secrets.CONTENTFUL_SPACE }}
+          CONTENTFUL_TOKEN: ${{ secrets.CONTENTFUL_TOKEN }}
         run: |
           yarn run build
           yarn run test:post-build

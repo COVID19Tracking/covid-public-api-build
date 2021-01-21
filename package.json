@@ -14,10 +14,11 @@
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@slack/webhook": "^5.0.3",
+    "@slack/webhook": "^6.0.0",
     "bl": "^2.2.1",
     "chalk": "^4.0.0",
     "command-line-args": "^5.1.1",
+    "contentful": "^8.0.1",
     "csv-parser": "^2.3.2",
     "csv-writer": "^1.6.0",
     "fs-extra": "^9.0.0",
