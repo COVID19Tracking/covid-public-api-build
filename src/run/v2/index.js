@@ -33,7 +33,7 @@ module.exports = () => {
         }))
 
     const daily = await fetch(
-      'https://internalapi.covidtracking.com/api/v2beta/public/us/daily'
+      'https://internalapi.covidtracking.com/api/v2/public/us/daily'
     ).then((response) => response.json())
     daily.meta.field_definitions = endpointFields(
       ['states-daily'],
@@ -47,7 +47,7 @@ module.exports = () => {
     })
 
     const simple = await fetch(
-      'https://internalapi.covidtracking.com/api/v2beta/public/us/daily/simple'
+      'https://internalapi.covidtracking.com/api/v2/public/us/daily/simple'
     ).then((response) => response.json())
     await fs.outputJson('./_api/v2beta/us/daily/simple.json', simple)
 
@@ -60,7 +60,7 @@ module.exports = () => {
     })
 
     const statesDaily = await fetch(
-      'https://internalapi.covidtracking.com/api/v2beta/public/states/daily'
+      'https://internalapi.covidtracking.com/api/v2/public/states/daily'
     ).then((response) => response.json())
     statesDaily.meta.field_definitions = endpointFields(
       ['states-daily'],
@@ -79,7 +79,7 @@ module.exports = () => {
     })
 
     const statesDailySimple = await fetch(
-      'https://internalapi.covidtracking.com/api/v2beta/public/states/daily/simple'
+      'https://internalapi.covidtracking.com/api/v2/public/states/daily/simple'
     ).then((response) => response.json())
     await fs.outputJson(
       './_api/v2beta/states/daily/simple.json',
@@ -97,7 +97,7 @@ module.exports = () => {
     })
 
     const statesInfo = await fetch(
-      'https://internalapi.covidtracking.com/api/v2beta/public/states'
+      'https://internalapi.covidtracking.com/api/v2/public/states'
     ).then((response) => response.json())
     statesInfo.meta.field_definitions = endpointFields(['states'], [])
     await fs.outputJson('./_api/v2beta/states.json', statesInfo)
