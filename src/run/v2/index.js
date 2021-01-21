@@ -33,45 +33,45 @@ module.exports = () => {
         }))
 
     const daily = await fetch(
-      'https://internalapi.covidtracking.com/api/v2/public/us/daily'
+      'https://internalapi.covidtracking.com/api/v2beta/public/us/daily'
     ).then((response) => response.json())
     daily.meta.field_definitions = endpointFields(
       ['states-daily'],
       ['states', 'date']
     )
-    await fs.outputJson('./_api/v2/us/daily.json', daily)
+    await fs.outputJson('./_api/v2beta/us/daily.json', daily)
 
     daily.data.forEach(async (row) => {
       const dateData = { meta: daily.meta, data: row }
-      await fs.outputJson(`./_api/v2/us/daily/${row.date}.json`, dateData)
+      await fs.outputJson(`./_api/v2beta/us/daily/${row.date}.json`, dateData)
     })
 
     const simple = await fetch(
-      'https://internalapi.covidtracking.com/api/v2/public/us/daily/simple'
+      'https://internalapi.covidtracking.com/api/v2beta/public/us/daily/simple'
     ).then((response) => response.json())
-    await fs.outputJson('./_api/v2/us/daily/simple.json', simple)
+    await fs.outputJson('./_api/v2beta/us/daily/simple.json', simple)
 
     simple.data.forEach(async (row) => {
       const dateData = { meta: simple.meta, data: row }
       await fs.outputJson(
-        `./_api/v2/us/daily/${row.date}/simple.json`,
+        `./_api/v2beta/us/daily/${row.date}/simple.json`,
         dateData
       )
     })
 
     const statesDaily = await fetch(
-      'https://internalapi.covidtracking.com/api/v2/public/states/daily'
+      'https://internalapi.covidtracking.com/api/v2beta/public/states/daily'
     ).then((response) => response.json())
     statesDaily.meta.field_definitions = endpointFields(
       ['states-daily'],
       ['date']
     )
-    await fs.outputJson('./_api/v2/states/daily.json', statesDaily)
+    await fs.outputJson('./_api/v2beta/states/daily.json', statesDaily)
 
     statesDaily.data.forEach(async (row) => {
       const dateData = { meta: statesDaily.meta, data: row }
       await fs.outputJson(
-        `./_api/v2/states/daily/${row.state.toLowerCase()}/${
+        `./_api/v2beta/states/daily/${row.state.toLowerCase()}/${
           row.date
         }.json`,
         dateData
@@ -79,14 +79,17 @@ module.exports = () => {
     })
 
     const statesDailySimple = await fetch(
-      'https://internalapi.covidtracking.com/api/v2/public/states/daily/simple'
+      'https://internalapi.covidtracking.com/api/v2beta/public/states/daily/simple'
     ).then((response) => response.json())
-    await fs.outputJson('./_api/v2/states/daily/simple.json', statesDailySimple)
+    await fs.outputJson(
+      './_api/v2beta/states/daily/simple.json',
+      statesDailySimple
+    )
 
     statesDailySimple.data.forEach(async (row) => {
       const dateData = { meta: statesDailySimple.meta, data: row }
       await fs.outputJson(
-        `./_api/v2/states/daily/${row.state.toLowerCase()}/${
+        `./_api/v2beta/states/daily/${row.state.toLowerCase()}/${
           row.date
         }/simple.json`,
         dateData
@@ -94,15 +97,15 @@ module.exports = () => {
     })
 
     const statesInfo = await fetch(
-      'https://internalapi.covidtracking.com/api/v2/public/states'
+      'https://internalapi.covidtracking.com/api/v2beta/public/states'
     ).then((response) => response.json())
     statesInfo.meta.field_definitions = endpointFields(['states'], [])
-    await fs.outputJson('./_api/v2/states.json', statesInfo)
+    await fs.outputJson('./_api/v2beta/states.json', statesInfo)
 
     statesInfo.data.forEach(async (row) => {
       const dateData = { meta: statesInfo.meta, data: row }
       await fs.outputJson(
-        `./_api/v2/states/${row.state_code.toLowerCase()}.json`,
+        `./_api/v2beta/states/${row.state_code.toLowerCase()}.json`,
         dateData
       )
     })
