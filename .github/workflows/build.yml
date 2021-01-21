@@ -18,7 +18,6 @@ jobs:
           ref: master
           repository: 'COVID19Tracking/covid-public-api'
           token: ${{ secrets.API_DEPLOY_TOKEN }}
-          ref: api-2
           path: ./_api
 
       - name: Cache node modules
