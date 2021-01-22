@@ -66,7 +66,7 @@ module.exports = () => {
       ['states-daily'],
       ['date']
     )
-    await fs.outputJson('./_api/v2beta/states/daily.json', statesDaily)
+    // await fs.outputJson('./_api/v2beta/states/daily.json', statesDaily)
 
     const allStates = {}
     statesDaily.data.forEach((row) => {
@@ -95,10 +95,11 @@ module.exports = () => {
     const statesDailySimple = await fetch(
       'https://internalapi.covidtracking.com/api/v2/public/states/daily/simple'
     ).then((response) => response.json())
-    await fs.outputJson(
+    /* await fs.outputJson(
       './_api/v2beta/states/daily/simple.json',
       statesDailySimple
     )
+    */
 
     statesDailySimple.data.forEach(async (row) => {
       const dateData = { meta: statesDailySimple.meta, data: row }
