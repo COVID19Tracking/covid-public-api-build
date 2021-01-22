@@ -68,12 +68,26 @@ module.exports = () => {
     )
     await fs.outputJson('./_api/v2beta/states/daily.json', statesDaily)
 
+    const allStates = {}
+    statesDaily.data.forEach((row) => {
+      if (typeof allStates[row.state] === 'undefined') {
+        allStates[row.state] = []
+      }
+      allStates[row.state].push(row)
+    })
+
+    Object.keys(allStates).forEach(async (key) => {
+      const dateData = { meta: statesDaily.meta, data: allStates[key] }
+      await fs.outputJson(
+        `./_api/v2beta/states/${key.toLowerCase()}/daily.json`,
+        dateData
+      )
+    })
+
     statesDaily.data.forEach(async (row) => {
       const dateData = { meta: statesDaily.meta, data: row }
       await fs.outputJson(
-        `./_api/v2beta/states/daily/${row.state.toLowerCase()}/${
-          row.date
-        }.json`,
+        `./_api/v2beta/states/${row.state.toLowerCase()}/${row.date}.json`,
         dateData
       )
     })
@@ -89,9 +103,28 @@ module.exports = () => {
     statesDailySimple.data.forEach(async (row) => {
       const dateData = { meta: statesDailySimple.meta, data: row }
       await fs.outputJson(
-        `./_api/v2beta/states/daily/${row.state.toLowerCase()}/${
+        `./_api/v2beta/states/${row.state.toLowerCase()}/${
           row.date
         }/simple.json`,
+        dateData
+      )
+    })
+
+    const allStatesSimple = {}
+    statesDailySimple.data.forEach((row) => {
+      if (typeof allStatesSimple[row.state] === 'undefined') {
+        allStatesSimple[row.state] = []
+      }
+      allStatesSimple[row.state].push(row)
+    })
+
+    Object.keys(allStatesSimple).forEach(async (key) => {
+      const dateData = {
+        meta: statesDailySimple.meta,
+        data: allStatesSimple[key],
+      }
+      await fs.outputJson(
+        `./_api/v2beta/states/${key.toLowerCase()}/daily/simple.json`,
         dateData
       )
     })
