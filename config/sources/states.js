@@ -393,6 +393,7 @@ module.exports = {
       example: '',
       metadata: {
         sheetColumn: 'Data Quality Grade',
+        deprecated: true,
       },
     },
     {
