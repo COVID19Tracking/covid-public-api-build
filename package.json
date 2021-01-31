@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "node index.js",
-    "webhook": "node trigger-webhook.js",
+    "webhook-check": "node scripts/check-webhook.js",
+    "webhook-trigger": "node scripts/trigger-webhook.js",
     "test": "jest",
     "test:lint": "eslint ./src",
     "test:coverage": "jest --coverage --maxWorkers 1",

@@ -47,10 +47,8 @@ jobs:
           yarn run build
           yarn run test:post-build
 
-      - name: Send webhook
-        env:
-          SITE_BUILD_WEBHOOK: ${{ secrets.SITE_BUILD_WEBHOOK }}
-        run: yarn run webhook
+      - name: Prepare webhook
+        run: yarn run webhook-check
 
       - name: Commit API files
         uses: stefanzweifel/git-auto-commit-action@v4.1.2
@@ -59,6 +57,11 @@ jobs:
           repository: ./_api
           file_pattern: ./**
           commit_author: COVID Tracking Project API Builder <accounts@covidtracking.com>
+
+      - name: Send webhook
+        env:
+          SITE_BUILD_WEBHOOK: ${{ secrets.SITE_BUILD_WEBHOOK }}
+        run: yarn run webhook-trigger
 
       - name: Prepare artifacts
         run: |
