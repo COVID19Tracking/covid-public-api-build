@@ -391,6 +391,7 @@ module.exports = {
         'The COVID Tracking Project grade of the completeness of the data reporting by a  state.',
       nullable: true,
       example: '',
+      sourceFunction: (item) => null,
       metadata: {
         sheetColumn: 'Data Quality Grade',
         deprecated: true,
