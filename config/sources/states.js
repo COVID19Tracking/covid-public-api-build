@@ -494,6 +494,18 @@ module.exports = {
       },
     },
     {
+      source: 'hospitalizedDischarged',
+      target: 'hospitalizedDischarged',
+      type: 'integer',
+      graphQlType: 'Int',
+      description: 'Total number of discharged hospitalizations',
+      nullable: true,
+      example: '',
+      metadata: {
+        deprecated: false,
+      },
+    },
+    {
       source: 'hospitalizedIncrease',
       target: 'hospitalizedIncrease',
       type: 'integer',
