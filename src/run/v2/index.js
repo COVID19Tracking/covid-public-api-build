@@ -39,22 +39,22 @@ module.exports = () => {
       ['states-daily'],
       ['states', 'date']
     )
-    await fs.outputJson('./_api/v2beta/us/daily.json', daily)
+    await fs.outputJson('./_api/v2/us/daily.json', daily)
 
     daily.data.forEach(async (row) => {
       const dateData = { meta: daily.meta, data: row }
-      await fs.outputJson(`./_api/v2beta/us/daily/${row.date}.json`, dateData)
+      await fs.outputJson(`./_api/v2/us/daily/${row.date}.json`, dateData)
     })
 
     const simple = await fetch(
       'https://internalapi.covidtracking.com/api/v2/public/us/daily/simple'
     ).then((response) => response.json())
-    await fs.outputJson('./_api/v2beta/us/daily/simple.json', simple)
+    await fs.outputJson('./_api/v2/us/daily/simple.json', simple)
 
     simple.data.forEach(async (row) => {
       const dateData = { meta: simple.meta, data: row }
       await fs.outputJson(
-        `./_api/v2beta/us/daily/${row.date}/simple.json`,
+        `./_api/v2/us/daily/${row.date}/simple.json`,
         dateData
       )
     })
@@ -66,7 +66,7 @@ module.exports = () => {
       ['states-daily'],
       ['date']
     )
-    // await fs.outputJson('./_api/v2beta/states/daily.json', statesDaily)
+    // await fs.outputJson('./_api/v2/states/daily.json', statesDaily)
 
     const allStates = {}
     statesDaily.data.forEach((row) => {
@@ -79,7 +79,7 @@ module.exports = () => {
     Object.keys(allStates).forEach(async (key) => {
       const dateData = { meta: statesDaily.meta, data: allStates[key] }
       await fs.outputJson(
-        `./_api/v2beta/states/${key.toLowerCase()}/daily.json`,
+        `./_api/v2/states/${key.toLowerCase()}/daily.json`,
         dateData
       )
     })
@@ -87,7 +87,7 @@ module.exports = () => {
     statesDaily.data.forEach(async (row) => {
       const dateData = { meta: statesDaily.meta, data: row }
       await fs.outputJson(
-        `./_api/v2beta/states/${row.state.toLowerCase()}/${row.date}.json`,
+        `./_api/v2/states/${row.state.toLowerCase()}/${row.date}.json`,
         dateData
       )
     })
@@ -96,7 +96,7 @@ module.exports = () => {
       'https://internalapi.covidtracking.com/api/v2/public/states/daily/simple'
     ).then((response) => response.json())
     /* await fs.outputJson(
-      './_api/v2beta/states/daily/simple.json',
+      './_api/v2/states/daily/simple.json',
       statesDailySimple
     )
     */
@@ -104,9 +104,7 @@ module.exports = () => {
     statesDailySimple.data.forEach(async (row) => {
       const dateData = { meta: statesDailySimple.meta, data: row }
       await fs.outputJson(
-        `./_api/v2beta/states/${row.state.toLowerCase()}/${
-          row.date
-        }/simple.json`,
+        `./_api/v2/states/${row.state.toLowerCase()}/${row.date}/simple.json`,
         dateData
       )
     })
@@ -125,7 +123,7 @@ module.exports = () => {
         data: allStatesSimple[key],
       }
       await fs.outputJson(
-        `./_api/v2beta/states/${key.toLowerCase()}/daily/simple.json`,
+        `./_api/v2/states/${key.toLowerCase()}/daily/simple.json`,
         dateData
       )
     })
@@ -134,12 +132,12 @@ module.exports = () => {
       'https://internalapi.covidtracking.com/api/v2/public/states'
     ).then((response) => response.json())
     statesInfo.meta.field_definitions = endpointFields(['states'], [])
-    await fs.outputJson('./_api/v2beta/states.json', statesInfo)
+    await fs.outputJson('./_api/v2/states.json', statesInfo)
 
     statesInfo.data.forEach(async (row) => {
       const dateData = { meta: statesInfo.meta, data: row }
       await fs.outputJson(
-        `./_api/v2beta/states/${row.state_code.toLowerCase()}.json`,
+        `./_api/v2/states/${row.state_code.toLowerCase()}.json`,
         dateData
       )
     })
