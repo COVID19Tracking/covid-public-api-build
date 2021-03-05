@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/COVID19Tracking/covid-public-api-build.svg?style=svg)](https://circleci.com/gh/COVID19Tracking/covid-public-api-build) [![Coverage Status](https://coveralls.io/repos/github/COVID19Tracking/covid-public-api-build/badge.svg?branch=master)](https://coveralls.io/github/COVID19Tracking/covid-public-api-build?branch=master) ![API build](https://github.com/COVID19Tracking/covid-public-api-build/workflows/API%20build/badge.svg)
-
 # Public API builder
 
 This is a Node.js application that builds the static files that powers the [COVID Tracking Project API](https://covidtracking.com/api/). It is built to run on Github Actions, but can be run anywhere.
