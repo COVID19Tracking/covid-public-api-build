@@ -1,7 +1,7 @@
 name: API build
 on:
   repository_dispatch:
-    types: [api-build]
+    types: [api-build-manual]
 
 jobs:
   build-api:
